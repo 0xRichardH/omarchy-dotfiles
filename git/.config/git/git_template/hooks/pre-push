@@ -1,0 +1,31 @@
+#!/bin/bash
+
+local_hook="$HOME"/.git_template.local/hooks/pre-push
+
+if [ -f "$local_hook" ]; then
+	. "$local_hook"
+fi
+
+# git config --local hooks.skipCogCheck true
+if [ "$(git config hooks.skipCogCheck)" = "true" ]; then
+    echo "Skipping pre-push hook."
+else
+  if ! cog check; then
+    echo "Invalid commits were found, skip `cog check` with 'git config --local hooks.skipCogCheck true'"
+    exit 1
+  fi
+fi
+
+# Get the current branch name
+branch_name=$(git branch --show-current)
+# Prompt for confirmation with branch name
+read -p "Are you sure you want to push the '$branch_name' branch? (y/n) " -n 1 -r < /dev/tty
+echo    # (optional) move to a new line
+echo "You responded with '$REPLY'"
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Pushing the '$branch_name' branch"
+    exit 0 # push will execute
+else
+    echo "Push aborted"
+    exit 1
+fi

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+local_hook="$HOME"/.git_template.local/hooks/pre-commit
+
+if [ -f "$local_hook" ]; then
+  . "$local_hook"
+fi
+
+# add git-secrets hooks
+git_secret_hook="$HOME"/.git_template/git-secrets/hooks/pre-commit
+if [ -f "$git_secret_hook" ]; then
+  . "$git_secret_hook"
+fi
