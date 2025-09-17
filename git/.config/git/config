@@ -1,14 +1,57 @@
-[alias]
-	co = checkout
-	br = branch
-	ci = commit
-	st = status
-[pull]
-	rebase = true
 [init]
-	defaultBranch = main
-[user]
-	name = Richard Hao
-	email = richard@0xdev.dev
+  defaultBranch = main
+  templatedir = ~/.config/git/git_template
+[push]
+  default = current
+[color]
+  ui = auto
+[alias]
+  aa = add --all
+  ap = add --patch
+  branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
+  ci = commit -v
+  co = checkout
+  l = log --pretty=colored
+  pf = push --force-with-lease
+  st = status
+[core]
+  excludesfile = ~/.config/git/gitignore
+  autocrlf = input
+  pager = delta
+  editor = nvim
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  light = true      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+  side-by-side = true
+  line-numbers = true
+[merge]
+  ff = only
+  conflictstyle = zdiff3
+[commit]
+  template = ~/.config/git/gitmessage
 [fetch]
-	prune = true
+  prune = true
+[rebase]
+  autosquash = true
+[include]
+  path = ~/.config/git/gitconfig.local
+[diff]
+  colorMoved = default
+  algorithm = histogram
+[pull]
+  rebase = true
+[branch]
+  sort = -committerdate
+[log]
+  date = iso
+[pretty]
+  colored = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
+[secrets]
+	providers = git secrets --aws-provider
+	patterns = (A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}
+	patterns = (\"|')?(AWS|aws|Aws)?_?(SECRET|secret|Secret)?_?(ACCESS|access|Access)?_?(KEY|key|Key)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=]{40}(\"|')?
+	patterns = (\"|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?(\"|')?\\s*(:|=>|=)\\s*(\"|')?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}(\"|')?
+	allowed = AKIAIOSFODNN7EXAMPLE
+	allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
