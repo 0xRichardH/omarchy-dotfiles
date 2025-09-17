@@ -1,0 +1,12 @@
+[user]
+  name = Richard Hao
+  email = richard@0xdev.dev
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPi+G13tX5FA4z28a8j8R/cjYe51usv7hiAI8ipx3bG1
+[gpg]
+  format = ssh
+[commit]
+  gpgsign = true
+[url "git@github.com:"]
+  insteadOf = "https://github.com/"
+[includeIf "gitdir:~/feedmob/"]
+  path = "~/feedmob/.gitconfig"
