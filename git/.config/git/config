@@ -1,0 +1,14 @@
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
+[user]
+	name = Richard Hao
+	email = richard@0xdev.dev
+[fetch]
+	prune = true
