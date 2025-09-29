@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+#
+# Attach or create tmux session named the same as current directory.
+
+PATH_NAME="$PWD"
+
+# Git
+GIT_ROOT=$(git -C $PATH_NAME rev-parse --show-toplevel 2>/dev/null) && echo $GIT_ROOT >/dev/null
+if [[ $? -ne 0 ]]; then # not inside git repository
+  SESSION_NAME=$(basename "$PATH_NAME" | tr ' .:' '_')
+else # is in git repository
+  BASENAME=$(basename $GIT_ROOT)
+  RELATIVE_PATH=${PATH_NAME#$GIT_ROOT}
+
+  # git worktree
+  if [ "$(git -C $PATH_NAME rev-parse --is-inside-work-tree)" == "true" ] && [ -f "$PATH_NAME/.git" ]; then # is inside git worktree
+    GIT_WORKTREE_ROOT=$(git -C $PATH_NAME rev-parse --git-common-dir | sed 's/\/.bare$//' 2>/dev/null)
+    BASENAME=$(basename $GIT_WORKTREE_ROOT)
+    RELATIVE_PATH=${PATH_NAME#$GIT_WORKTREE_ROOT}
+  fi
+
+  SEPARATOR="/"
+  FORMATTED_PATH="${RELATIVE_PATH//\//$SEPARATOR}"
+  SESSION_NAME=$(echo $BASENAME$FORMATTED_PATH | tr ' .:' '_')
+fi
+
+not_in_tmux() {
+  [ -z "$TMUX" ]
+}
+
+session_exists() {
+  tmux has-session -t "=$SESSION_NAME"
+}
+
+create_detached_session() {
+  (TMUX='' tmux new-session -Ad -s "$SESSION_NAME")
+}
+
+create_if_needed_and_attach() {
+  if not_in_tmux; then
+    tmux new-session -As "$SESSION_NAME"
+  else
+    if ! session_exists; then
+      create_detached_session
+    fi
+    tmux switch-client -t "$SESSION_NAME"
+  fi
+}
+
+create_if_needed_and_attach
