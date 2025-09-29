@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# This script is used to update docker images and restart the service
+# $1 is the name of the service to restart (optional)
+
+docker compose pull $1
+docker compose up -d --remove-orphans $1
+yes | docker image prune
