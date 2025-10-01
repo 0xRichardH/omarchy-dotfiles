@@ -51,12 +51,17 @@ sudo usermod -aG input "$USER"
 ```
 
 ## Packages
-- `alacritty`: terminal configuration.
-- `hypr`: Hyprland compositor files split by focus area.
-- `nvim`: LazyVim-based Neovim configuration and custom Lua modules.
-- `git`: shared Git config, ignore patterns, and commit message template.
-- `bw`: helper scripts such as `bw_add_sshkeys` for Bitwarden vault access.
-- `ssh`, `xremap`: additional workstation tooling.
+
+-   `alacritty`: Fast, cross-platform, OpenGL terminal emulator configuration.
+-   `bash`: Shell configuration with custom scripts for Docker, fonts, and tmux.
+-   `bw`: Helper scripts for Bitwarden, such as `bw_add_sshkeys`.
+-   `git`: Shared Git config, ignore patterns, and commit message template.
+-   `hypr`: Hyprland compositor with custom bindings and settings.
+-   `nvim`: LazyVim-based Neovim configuration with UI enhancements and AI completions.
+-   `ssh`: SSH client configuration and service for managing ssh-agent.
+-   `starship`: Cross-shell prompt configuration.
+-   `xremap`: Key remapping tool configuration.
+-   `yazi`: Terminal file manager configuration.
 
 ## Contributing
 Follow the workflow, style rules, and validation steps outlined in [`AGENTS.md`](AGENTS.md).
