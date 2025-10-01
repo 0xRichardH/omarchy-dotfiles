@@ -74,11 +74,11 @@ end
 vim.g.autoformat = false -- globally
 vim.b.autoformat = false -- buffer-local
 
--- Disable AI cmp
-vim.g.ai_cmp = false
+--AI cmp
+vim.g.ai_cmp = true
 
--- Disable all animations
-vim.g.snacks_animate = false
+-- animations
+vim.g.snacks_animate = true
 
 -- Cursorline highlighting control
 --  Only have it on in the active buffer
