@@ -1,40 +1,24 @@
 {
   "mcpServers": {
-    "chrome-devteools": {
-      "type": "local",
+    "chrome-devtools": {
       "command": "bunx",
-      "tools": [
-        "*"
-      ],
       "args": [
         "chrome-devtools-mcp@latest"
       ]
     },
     "exa": {
-      "type": "http",
       "url": "https://mcp.exa.ai/mcp",
-      "headers": {},
-      "tools": [
-        "*"
-      ]
+      "headers": {}
     },
     "context7": {
-      "type": "local",
       "command": "bunx",
-      "tools": [
-        "*"
-      ],
       "args": [
         "-y",
         "@upstash/context7-mcp"
       ]
     },
-    "sequential_thinking": {
-      "type": "local",
+    "sequential-thinking": {
       "command": "bunx",
-      "tools": [
-        "*"
-      ],
       "args": [
         "-y",
         "@modelcontextprotocol/server-sequential-thinking"
