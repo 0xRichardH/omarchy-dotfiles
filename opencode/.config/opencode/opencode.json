@@ -17,12 +17,12 @@
     },
     "context7": {
       "type": "local",
-      "command": ["npx", "-y", "@upstash/context7-mcp"],
+      "command": ["bunx", "-y", "@upstash/context7-mcp"],
       "enabled": true
     },
     "sequential-thinking": {
       "type": "local",
-      "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "command": ["bunx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
       "enabled": true
     }
   }
