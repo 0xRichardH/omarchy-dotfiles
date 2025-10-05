@@ -55,9 +55,13 @@ sudo usermod -aG input "$USER"
 -   `alacritty`: Fast, cross-platform, OpenGL terminal emulator configuration.
 -   `bash`: Shell configuration with custom scripts for Docker, fonts, and tmux.
 -   `bw`: Helper scripts for Bitwarden, such as `bw_add_sshkeys`.
--   `git`: Shared Git config, ignore patterns, and commit message template.
+-   `copilot`: GitHub Copilot MCP server configuration.
+-   `gemini`: Gemini AI configuration with MCP servers.
+-   `ghostty`: Ghostty terminal emulator configuration.
+-   `git`: Shared Git config, ignore patterns, commit message template, and custom commands.
 -   `hypr`: Hyprland compositor with custom bindings and settings.
--   `nvim`: LazyVim-based Neovim configuration with UI enhancements and AI completions.
+-   `nvim`: LazyVim-based Neovim configuration with language support for Rust, Ruby, TypeScript, and Python.
+-   `opencode`: OpenCode editor configuration and agent guidelines.
 -   `ssh`: SSH client configuration and service for managing ssh-agent.
 -   `starship`: Cross-shell prompt configuration.
 -   `xremap`: Key remapping tool configuration.
