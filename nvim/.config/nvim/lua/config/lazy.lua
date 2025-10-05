@@ -23,7 +23,6 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.ruby" },
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.coding.yanky" },
-    { import = "lazyvim.plugins.extras.coding.blink" },
     { import = "lazyvim.plugins.extras.ai.sidekick" },
     -- import/override with your plugins
     { import = "plugins" },
