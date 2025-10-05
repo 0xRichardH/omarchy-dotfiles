@@ -56,6 +56,7 @@ sudo usermod -aG input "$USER"
 -   `bash`: Shell configuration with custom scripts for Docker, fonts, and tmux.
 -   `bw`: Helper scripts for Bitwarden, such as `bw_add_sshkeys`.
 -   `copilot`: GitHub Copilot MCP server configuration.
+-   `cursor`: Cursor AI editor configuration with MCP servers.
 -   `gemini`: Gemini AI configuration with MCP servers.
 -   `ghostty`: Ghostty terminal emulator configuration.
 -   `git`: Shared Git config, ignore patterns, commit message template, and custom commands.
