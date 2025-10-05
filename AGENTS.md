@@ -4,27 +4,32 @@
 Each top-level directory is a GNU Stow package for a specific tool. Key paths:
 - `alacritty/.config/alacritty/alacritty.toml` for terminal defaults.
 - `hypr/.config/hypr/*.conf` split by concern (bindings, input, monitors, etc.).
-- `nvim/.config/nvim` contains the LazyVim-based setup plus custom Lua modules in `lua/`.
-- `git/.config/git` centralizes Git templates and ignores.
-- `bw/.bin/bw_add_sshkeys` houses the Bitwarden helper script.
-Symlink everything into `$HOME` with `stow <package>`; avoid editing the live dotfiles in place.
+- `nvim/.config/nvim` contains LazyVim-based setup plus custom Lua modules in `lua/config/` and `lua/plugins/`.
+- `git/.config/git` centralizes Git templates and ignores; `git/.bin` holds custom git commands.
+- `bash/.bin` and `bw/.bin` house utility scripts.
+Symlink everything into `$HOME` with `stow <package>`; avoid editing live dotfiles in place.
 
 ## Build, Test, and Development Commands
-- `stow --target=$HOME <package>`: restows a single package after edits.
-- `stow --target=$HOME --restow hypr`: refreshes an updated package without manual cleanup.
-- `stow --target=$HOME --simulate nvim`: dry-run to preview symlink changes.
-- `nvim --headless "+checkhealth" +qa`: quick sanity check for the Neovim setup.
-- `hyprctl reload`: apply Hyprland config changes after restowing.
-Place new scripts under `bw/.bin` and mark them executable.
+- **Apply changes**: `stow --target=$HOME --restow <package>` (e.g., `hypr`, `nvim`, `git`)
+- **Dry-run test**: `stow --target=$HOME --simulate <package>` to preview symlink changes
+- **Neovim health check**: `nvim --headless "+checkhealth" +qa`
+- **Neovim sync plugins**: `nvim --headless "+Lazy sync" +qa`
+- **Reload Hyprland**: `hyprctl reload` after config changes
+- **Check Hyprland logs**: `journalctl --user -u hyprland`
+- **Format Lua files**: Use stylua with config at `nvim/.config/nvim/stylua.toml`
 
 ## Coding Style & Naming Conventions
-Lua files follow `stylua.toml` (spaces, width 2, max column 120). Keep module names snake_case and group related functions under `lua/plugins/` or `lua/config/`. Hyprland fragments use lowercase `*.conf` names that match their domain. YAML stays two-space indented. TOML tables are lowercase with dashed keys when needed. Configs should remain ASCII unless upstream requires otherwise.
+- **Lua**: Follow `stylua.toml` (2 spaces, max column 120). Use snake_case for modules/functions. Group plugins under `lua/plugins/`, config under `lua/config/`. No comments unless documenting complex logic.
+- **Shell scripts**: Use `#!/usr/bin/env bash` shebang. Place in `<package>/.bin/` and mark executable (`chmod +x`). Follow existing patterns (see `bash/.bin/tat`, `git/.bin/commit`).
+- **Hyprland**: Lowercase `*.conf` files named by domain (bindings.conf, monitors.conf, etc.).
+- **TOML/YAML**: 2-space indent. TOML uses lowercase with dashed keys. Keep configs ASCII-only unless required.
+- **Formatting**: Nvim uses tabstop=2, softtabstop=2, shiftwidth=2, expandtab=true.
 
 ## Testing Guidelines
-Use `stow --simulate` before touching the real home directory. For Neovim plugins, run `nvim --headless "+Lazy sync" +qa` to ensure dependencies resolve. Re-source Hyprland with `hyprctl reload` and watch the logs (`journalctl --user -u hyprland`) for errors. When updating shell or Git scripts, run them against a non-production profile first.
+Always use `stow --simulate` before applying changes. For Neovim, run `nvim --headless "+Lazy sync" +qa` to verify plugins. Reload Hyprland with `hyprctl reload` and check logs. Test shell scripts in a non-production environment first.
 
 ## Commit & Pull Request Guidelines
-Follow Conventional Commit syntax seen in history (`feat(git): add git config`). Include a scope when changing a single package. Keep bodies short but note migration steps (e.g., “restow hypr”). PRs should list affected packages, manual validation steps, and any screenshots for visual tweaks. Link related issues or discussions when available.
+Follow Conventional Commits: `type(scope): description`. Types: feat, fix, docs, style, refactor, test, chore, revert. Scope should be the package name (git, nvim, hypr, etc.). Keep bodies short but note migration steps. Example: `feat(git): add custom merge-branch command`.
 
 ## Security & Secrets
-Do not commit tokens, SSH material, or Bitwarden exports. The `bw_add_sshkeys` script expects secrets to stay in the vault—update instructions, not credentials. Review diffs for accidental absolute paths before submitting.
+Never commit tokens, SSH keys, or Bitwarden exports. The `bw_add_sshkeys` script expects secrets in vault. Review diffs for accidental absolute paths or credentials before committing.
