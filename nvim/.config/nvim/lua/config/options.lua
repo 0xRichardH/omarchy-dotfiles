@@ -66,10 +66,6 @@ for k, v in pairs(vimOptions) do
   vim.opt[k] = v
 end
 
-if vim.fn.has("nvim-0.10") == 1 then
-  vim.opt.smoothscroll = true
-end
-
 -- Disable auto-formatting
 vim.g.autoformat = false -- globally
 vim.b.autoformat = false -- buffer-local
