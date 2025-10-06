@@ -1,5 +1,5 @@
 [init]
-  defaultBranch = main
+  defaultBranch = master
   templatedir = ~/.config/git/git_template
 [push]
   default = current
