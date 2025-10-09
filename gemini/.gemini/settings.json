@@ -4,6 +4,7 @@
       "selectedType": "oauth-personal"
     }
   },
+  "contextFileName": "AGENTS.md",
   "mcpServers": {
     "exa": {
       "httpUrl": "https://mcp.exa.ai/mcp",
