@@ -1,6 +1,7 @@
 alias gs='git status -sb'
 alias vim='nvim'
 alias e='${EDITOR}'
+alias cl='clear'
 
 
 # Use eza instead of ls
