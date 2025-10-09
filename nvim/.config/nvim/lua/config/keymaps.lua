@@ -57,8 +57,8 @@ map("n", "<ESC>", "<CMD>update<CR><ESC>", defaultOptsWithDesc("Save File"))
 map("n", "gl", vim.diagnostic.open_float, defaultOptsWithDesc("Show Diagnostics"))
 
 -- use tab to navigate buffers
-map("n", "<Tab>", ":bnext<CR>", defaultOptsWithDesc("Next Buffer"))
-map("n", "<S-Tab>", ":bprevious<CR>", defaultOptsWithDesc("Previous Buffer"))
+-- map("n", "<Tab>", ":bnext<CR>", defaultOptsWithDesc("Next Buffer"))
+-- map("n", "<S-Tab>", ":bprevious<CR>", defaultOptsWithDesc("Previous Buffer"))
 
 -- Copy relative path or absolute path of the current file
 map("n", "<leader>fy", ":CopyRelPath<CR>", defaultOptsWithDesc("Copy Relative Path"))
