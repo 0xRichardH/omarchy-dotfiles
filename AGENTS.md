@@ -7,6 +7,8 @@ Each top-level directory is a GNU Stow package for a specific tool. Key paths:
 - `nvim/.config/nvim` contains LazyVim-based setup plus custom Lua modules in `lua/config/` and `lua/plugins/`.
 - `git/.config/git` centralizes Git templates and ignores; `git/.bin` holds custom git commands.
 - `bash/.bin` and `bw/.bin` house utility scripts.
+- `tmux/.config/tmux/tmux.conf` manages multiplexer defaults and key bindings.
+- `sesh/.config/sesh/sesh.toml` defines reusable tmux session templates.
 Symlink everything into `$HOME` with `stow <package>`; avoid editing live dotfiles in place.
 
 ## Build, Test, and Development Commands
