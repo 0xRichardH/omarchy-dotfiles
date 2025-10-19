@@ -8,6 +8,8 @@ Opinionated configuration bundles for development and daily use, managed with GN
    ```bash
    stow --target="$HOME" nvim
    stow --target="$HOME" hypr
+   stow --target="$HOME" tmux
+   stow --target="$HOME" sesh
    ```
 3. Use `stow --target="$HOME" --restow <package>` after you make changes.
 4. Run `stow --target="$HOME" --simulate <package>` to preview symlink updates before applying them.
@@ -63,8 +65,10 @@ sudo usermod -aG input "$USER"
 -   `hypr`: Hyprland compositor with custom bindings and settings.
 -   `nvim`: LazyVim-based Neovim configuration with language support for Rust, Ruby, TypeScript, and Python.
 -   `opencode`: OpenCode editor configuration and agent guidelines.
+-   `sesh`: tmux session templates consumed by the `t` helper and popup picker.
 -   `ssh`: SSH client configuration and service for managing ssh-agent.
 -   `starship`: Cross-shell prompt configuration.
+-   `tmux`: Multiplexer configuration, including the `prefix` + `T` popup bound to `bash/.bin/t`.
 -   `xremap`: Key remapping tool configuration.
 -   `yazi`: Terminal file manager configuration.
 
