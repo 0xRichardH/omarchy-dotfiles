@@ -1,0 +1,19 @@
+import = ["~/.config/sesh/sesh_local.toml"]
+
+[default_session]
+startup_command = "pwd"
+
+[[session]]
+name = "Home 🏡"
+path = "~/"
+startup_command = "pwd"
+
+[[session]]
+name = "Downloads 📥"
+path = "~/Downloads"
+startup_command = "yazi"
+
+[[session]]
+name = "Beancount 📈"
+path = "~/workspace/beancount"
+startup_command = "just edit"
