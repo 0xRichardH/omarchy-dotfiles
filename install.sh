@@ -6,3 +6,4 @@ omarchy-install-tailscale
 ./scripts/enable-ssh-agent-service.sh
 ./scripts/install-xremap.sh
 ./scripts/install-yazi.sh
+./scripts/install-fcitx5.sh

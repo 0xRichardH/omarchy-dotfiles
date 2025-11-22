@@ -29,3 +29,6 @@ clipboard-read = "allow"
 clipboard-trim-trailing-spaces = true
 clipboard-write = "allow"
 copy-on-select = clipboard
+
+# Slowdown mouse scrolling
+mouse-scroll-multiplier = 0.95
