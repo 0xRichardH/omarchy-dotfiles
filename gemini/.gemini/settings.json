@@ -1,10 +1,7 @@
 {
-  "security": {
-    "auth": {
-      "selectedType": "oauth-personal"
-    }
+  "context": {
+    "fileName": "AGENTS.md"
   },
-  "contextFileName": "AGENTS.md",
   "mcpServers": {
     "exa": {
       "httpUrl": "https://mcp.exa.ai/mcp",
@@ -12,15 +9,28 @@
     },
     "chrome-devtools": {
       "command": "bunx",
-      "args": ["chrome-devtools-mcp@latest"]
+      "args": [
+        "chrome-devtools-mcp@latest"
+      ]
     },
     "context7": {
       "command": "bunx",
-      "args": ["-y", "@upstash/context7-mcp"]
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
     },
     "sequential_thinking": {
       "command": "bunx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    }
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
     }
   }
 }
