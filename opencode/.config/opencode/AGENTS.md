@@ -19,6 +19,7 @@ When planning to write code, you MUST respect the Single Responsibility Principl
 - **One responsibility per module/file** - Each file should have a clear, single purpose
 - **Extract when needed** - If a function or file is handling multiple concerns, refactor into separate units
 - **Think before coding** - Always plan the structure before implementation
+- **No backward compatibility** - Break old formats freely
 
 ### Decision Framework
 
