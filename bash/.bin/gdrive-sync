@@ -21,8 +21,66 @@ case "${1:-}" in
       --log-file "$HOME/.local/share/rclone-logseq.log" \
       --log-level INFO
     ;;
+  sync)
+    BISYNC_CACHE="$HOME/.cache/rclone/bisync"
+    BISYNC_PATH1="$BISYNC_CACHE/home_richard_Notes_gdrive-notes..gdrive_0xdev_Notes.path1.lst"
+    
+    # Check if bisync needs initialization
+    if [[ ! -f "$BISYNC_PATH1" ]]; then
+      echo "First-time bisync setup: initializing with --resync..."
+      rclone bisync "$GRAPH_LOCAL" "$GRAPH_REMOTE" \
+        --resync \
+        --drive-stop-on-upload-limit \
+        --log-file "$HOME/.local/share/rclone-logseq.log" \
+        --log-level INFO \
+        --create-empty-src-dirs
+    else
+      rclone bisync "$GRAPH_LOCAL" "$GRAPH_REMOTE" \
+        --drive-stop-on-upload-limit \
+        --backup-dir1 "$BACKUP_LOCAL/$(date +%F)" \
+        --backup-dir2 "$BACKUP_REMOTE/$(date +%F)" \
+        --log-file "$HOME/.local/share/rclone-logseq.log" \
+        --log-level INFO \
+        --resilient \
+        --recover \
+        --create-empty-src-dirs
+    fi
+    ;;
+  commit)
+    cd "$GRAPH_LOCAL"
+    if [[ -d .git ]]; then
+      if [[ -n "$(git status --porcelain)" ]]; then
+        git add -A
+        
+        # Try to generate commit message with gemini if available
+        if command -v gemini &> /dev/null; then
+          echo "Generating commit message with Gemini..."
+          DIFF_OUTPUT=$(git diff --cached --stat && echo -e "\n" && git diff --cached)
+          COMMIT_MSG=$(echo "$DIFF_OUTPUT" | gemini "Based on the following git diff, generate a concise commit message (max 72 chars) following conventional commits format. Only output the commit message, nothing else:" 2>/dev/null | head -n 1)
+          
+          if [[ -n "$COMMIT_MSG" ]]; then
+            git commit -m "$COMMIT_MSG"
+            echo "Changes committed with AI-generated message: $COMMIT_MSG"
+          else
+            # Fallback if gemini fails
+            git commit -m "chore: auto-commit notes $(date +%F\ %T)"
+            echo "Changes committed with default message"
+          fi
+        else
+          # Fallback if gemini not available
+          git commit -m "chore: auto-commit notes $(date +%F\ %T)"
+          echo "Changes committed (gemini not available, using default message)"
+        fi
+      else
+        echo "No changes to commit"
+      fi
+    else
+      echo "Error: $GRAPH_LOCAL is not a git repository" >&2
+      exit 1
+    fi
+    ;;
   *)
-    echo "usage: gdrive-sync [push|pull]" >&2
+    echo "usage: gdrive-sync [push|pull|sync|commit]" >&2
     exit 1
     ;;
 esac
