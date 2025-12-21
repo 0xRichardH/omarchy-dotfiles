@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+GRAPH_LOCAL="$HOME/Notes/gdrive-notes"
+GRAPH_REMOTE="gdrive:0xdev/Notes"
+BACKUP_REMOTE="gdrive:0xdev/Notes-archive"
+BACKUP_LOCAL="$HOME/Notes/gdrive-notes-archive"
+
+case "${1:-}" in
+  push)
+    rclone sync "$GRAPH_LOCAL" "$GRAPH_REMOTE" \
+      --drive-stop-on-upload-limit \
+      --backup-dir "$BACKUP_REMOTE/$(date +%F)" \
+      --log-file "$HOME/.local/share/rclone-logseq.log" \
+      --log-level INFO
+    ;;
+  pull)
+    rclone sync "$GRAPH_REMOTE" "$GRAPH_LOCAL" \
+      --drive-stop-on-upload-limit \
+      --backup-dir "$BACKUP_LOCAL/$(date +%F)" \
+      --log-file "$HOME/.local/share/rclone-logseq.log" \
+      --log-level INFO
+    ;;
+  *)
+    echo "usage: gdrive-sync [push|pull]" >&2
+    exit 1
+    ;;
+esac
