@@ -31,7 +31,7 @@ fi
 
 # Run initial sync if not already initialized
 BISYNC_CACHE="$HOME/.cache/rclone/bisync"
-LOCAL_NORMALIZED=$(echo "$HOME/Notes/gdrive-notes" | tr '/' '_' | tr -d '~' | tr ':' '_')
+LOCAL_NORMALIZED=$(echo "$HOME/Notes/gdrive-notes" | sed 's|^/||' | tr '/' '_' | tr ':' '_')
 REMOTE_NORMALIZED=$(echo "gdrive:0xdev/Notes" | tr '/' '_' | tr ':' '_')
 BISYNC_PATH1="$BISYNC_CACHE/${LOCAL_NORMALIZED}..${REMOTE_NORMALIZED}.path1.lst"
 
