@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Notes-specific sync script
+# Wraps gdrive-sync with predefined paths for notes
+
+GRAPH_LOCAL="$HOME/Notes/gdrive-notes"
+GRAPH_REMOTE="gdrive:0xdev/Notes"
+BACKUP_REMOTE="gdrive:0xdev/Notes-archive"
+BACKUP_LOCAL="$HOME/Notes/gdrive-notes-archive"
+LOG_FILE="$HOME/.local/share/rclone-logseq.log"
+
+case "${1:-}" in
+  push)
+    gdrive-sync push "$GRAPH_LOCAL" "$GRAPH_REMOTE" "" "$BACKUP_REMOTE" "$LOG_FILE"
+    ;;
+    
+  pull)
+    gdrive-sync pull "$GRAPH_LOCAL" "$GRAPH_REMOTE" "$BACKUP_LOCAL" "" "$LOG_FILE"
+    ;;
+    
+  sync)
+    gdrive-sync sync "$GRAPH_LOCAL" "$GRAPH_REMOTE" "$BACKUP_LOCAL" "$BACKUP_REMOTE" "$LOG_FILE"
+    ;;
+    
+  commit)
+    cd "$GRAPH_LOCAL"
+    if [[ -d .git ]]; then
+      if [[ -n "$(git status --porcelain)" ]]; then
+        git add -A
+        
+        # Try to generate commit message with gemini if available
+        if command -v gemini &> /dev/null; then
+          echo "Generating commit message with Gemini..."
+          DIFF_OUTPUT=$(git diff --cached --stat && echo -e "\n" && git diff --cached)
+          COMMIT_MSG=$(echo "$DIFF_OUTPUT" | gemini "Based on the following git diff, generate a concise commit message (max 72 chars) following conventional commits format. Only output the commit message, nothing else:" 2>/dev/null | head -n 1)
+          
+          if [[ -n "$COMMIT_MSG" ]]; then
+            git commit -m "$COMMIT_MSG"
+            echo "Changes committed with AI-generated message: $COMMIT_MSG"
+          else
+            # Fallback if gemini fails
+            git commit -m "chore: auto-commit notes $(date +%F\ %T)"
+            echo "Changes committed with default message"
+          fi
+        else
+          # Fallback if gemini not available
+          git commit -m "chore: auto-commit notes $(date +%F\ %T)"
+          echo "Changes committed (gemini not available, using default message)"
+        fi
+      else
+        echo "No changes to commit"
+      fi
+    else
+      echo "Error: $GRAPH_LOCAL is not a git repository" >&2
+      exit 1
+    fi
+    ;;
+    
+  *)
+    echo "usage: notes-sync [push|pull|sync|commit]" >&2
+    exit 1
+    ;;
+esac
