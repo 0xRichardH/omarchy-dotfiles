@@ -4,6 +4,7 @@ set -euo pipefail
 # Notes-specific sync script
 # Wraps gdrive-sync with predefined paths for notes
 
+GDRIVE_SYNC="$HOME/.bin/gdrive-sync"
 GRAPH_LOCAL="$HOME/Notes/gdrive-notes"
 GRAPH_REMOTE="gdrive:0xdev/Notes"
 BACKUP_REMOTE="gdrive:0xdev/Notes-archive"
@@ -12,15 +13,15 @@ LOG_FILE="$HOME/.local/share/rclone-logseq.log"
 
 case "${1:-}" in
   push)
-    gdrive-sync push "$GRAPH_LOCAL" "$GRAPH_REMOTE" "" "$BACKUP_REMOTE" "$LOG_FILE"
+    "$GDRIVE_SYNC" push "$GRAPH_LOCAL" "$GRAPH_REMOTE" "" "$BACKUP_REMOTE" "$LOG_FILE"
     ;;
     
   pull)
-    gdrive-sync pull "$GRAPH_LOCAL" "$GRAPH_REMOTE" "$BACKUP_LOCAL" "" "$LOG_FILE"
+    "$GDRIVE_SYNC" pull "$GRAPH_LOCAL" "$GRAPH_REMOTE" "$BACKUP_LOCAL" "" "$LOG_FILE"
     ;;
     
   sync)
-    gdrive-sync sync "$GRAPH_LOCAL" "$GRAPH_REMOTE" "$BACKUP_LOCAL" "$BACKUP_REMOTE" "$LOG_FILE"
+    "$GDRIVE_SYNC" sync "$GRAPH_LOCAL" "$GRAPH_REMOTE" "$BACKUP_LOCAL" "$BACKUP_REMOTE" "$LOG_FILE"
     ;;
     
   commit)
