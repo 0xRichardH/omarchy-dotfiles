@@ -71,7 +71,9 @@ case "$COMMAND" in
     
   sync)
     # Generate bisync cache path based on local and remote paths
-    LOCAL_NORMALIZED=$(echo "$LOCAL_PATH" | tr '/' '_' | tr -d '~' | tr ':' '_')
+    # Expand paths first, then normalize
+    LOCAL_EXPANDED=$(eval echo "$LOCAL_PATH")
+    LOCAL_NORMALIZED=$(echo "$LOCAL_EXPANDED" | sed 's|^/||' | tr '/' '_' | tr ':' '_')
     REMOTE_NORMALIZED=$(echo "$REMOTE_PATH" | tr '/' '_' | tr ':' '_')
     BISYNC_CACHE="$HOME/.cache/rclone/bisync"
     BISYNC_PATH1="$BISYNC_CACHE/${LOCAL_NORMALIZED}..${REMOTE_NORMALIZED}.path1.lst"
