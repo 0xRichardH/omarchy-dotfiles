@@ -31,18 +31,20 @@ fi
 
 # Run initial sync if not already initialized
 BISYNC_CACHE="$HOME/.cache/rclone/bisync"
-BISYNC_PATH1="$BISYNC_CACHE/home_richard_Notes_gdrive-notes..gdrive_0xdev_Notes.path1.lst"
+LOCAL_NORMALIZED=$(echo "$HOME/Notes/gdrive-notes" | tr '/' '_' | tr -d '~' | tr ':' '_')
+REMOTE_NORMALIZED=$(echo "gdrive:0xdev/Notes" | tr '/' '_' | tr ':' '_')
+BISYNC_PATH1="$BISYNC_CACHE/${LOCAL_NORMALIZED}..${REMOTE_NORMALIZED}.path1.lst"
 
-if command -v gdrive-sync &> /dev/null; then
+if command -v notes-sync &> /dev/null; then
   if [[ -f "$BISYNC_PATH1" ]]; then
     echo "Bisync already initialized, skipping initial sync"
   else
     echo "Running initial sync..."
-    gdrive-sync sync
+    notes-sync sync
     echo "Initial sync completed!"
   fi
 else
-  echo "Warning: gdrive-sync command not found. Please ensure bash/.bin is in your PATH."
+  echo "Warning: notes-sync command not found. Please ensure bash/.bin is in your PATH."
 fi
 
 # Create cron job for periodic sync
@@ -50,15 +52,15 @@ if ! command -v crontab &> /dev/null; then
   echo "Warning: crontab not found. Please run ./scripts/install-cronie.sh first"
   echo "Skipping cron job creation..."
 else
-  CRON_CMD="*/15 * * * * $HOME/.bin/gdrive-sync sync >> $HOME/.local/share/rclone-sync-cron.log 2>&1"
+  CRON_CMD="*/15 * * * * $HOME/.bin/notes-sync sync >> $HOME/.local/share/rclone-sync-cron.log 2>&1"
   CRON_TEMP=$(mktemp)
 
   # Get existing crontab (ignore error if no crontab exists)
   crontab -l > "$CRON_TEMP" 2>/dev/null || true
 
   # Check if cron job already exists
-  if grep -q "gdrive-sync sync" "$CRON_TEMP"; then
-    echo "Cron job for gdrive-sync already exists"
+  if grep -q "notes-sync sync" "$CRON_TEMP"; then
+    echo "Cron job for notes-sync already exists"
   else
     echo "$CRON_CMD" >> "$CRON_TEMP"
     crontab "$CRON_TEMP"
@@ -72,7 +74,7 @@ fi
 echo ""
 echo "Setup complete!"
 echo "You can manually run:"
-echo "  gdrive-sync sync   - Bidirectional sync"
-echo "  gdrive-sync commit - Auto-commit changes with AI-generated message"
-echo "  gdrive-sync push   - Push local to remote"
-echo "  gdrive-sync pull   - Pull remote to local"
+echo "  notes-sync sync   - Bidirectional sync"
+echo "  notes-sync commit - Auto-commit changes with AI-generated message"
+echo "  notes-sync push   - Push local to remote"
+echo "  notes-sync pull   - Pull remote to local"

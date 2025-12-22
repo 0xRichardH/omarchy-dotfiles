@@ -1,86 +1,115 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-GRAPH_LOCAL="$HOME/Notes/gdrive-notes"
-GRAPH_REMOTE="gdrive:0xdev/Notes"
-BACKUP_REMOTE="gdrive:0xdev/Notes-archive"
-BACKUP_LOCAL="$HOME/Notes/gdrive-notes-archive"
+# General-purpose rclone sync script for Google Drive
+# Usage: gdrive-sync <command> <local_path> <remote_path> [backup_local] [backup_remote] [log_file]
 
-case "${1:-}" in
+show_usage() {
+  cat << EOF
+Usage: gdrive-sync <command> <local_path> <remote_path> [backup_local] [backup_remote] [log_file]
+
+Commands:
+  push  - Sync from local to remote
+  pull  - Sync from remote to local
+  sync  - Bidirectional sync using bisync
+
+Arguments:
+  local_path     - Local directory path
+  remote_path    - Remote path (e.g., gdrive:folder/subfolder)
+  backup_local   - Local backup directory (optional, for sync command)
+  backup_remote  - Remote backup directory (optional, for push/sync commands)
+  log_file       - Log file path (optional, defaults to ~/.local/share/rclone-sync.log)
+
+Examples:
+  gdrive-sync push ~/Documents gdrive:backup/Documents
+  gdrive-sync pull gdrive:Photos ~/Pictures
+  gdrive-sync sync ~/Notes gdrive:Notes ~/Notes-backup gdrive:Notes-backup
+EOF
+}
+
+COMMAND="${1:-}"
+LOCAL_PATH="${2:-}"
+REMOTE_PATH="${3:-}"
+BACKUP_LOCAL="${4:-}"
+BACKUP_REMOTE="${5:-}"
+LOG_FILE="${6:-$HOME/.local/share/rclone-sync.log}"
+
+# Validate arguments
+if [[ -z "$COMMAND" || -z "$LOCAL_PATH" || -z "$REMOTE_PATH" ]]; then
+  show_usage
+  exit 1
+fi
+
+case "$COMMAND" in
   push)
-    rclone sync "$GRAPH_LOCAL" "$GRAPH_REMOTE" \
-      --drive-stop-on-upload-limit \
-      --backup-dir "$BACKUP_REMOTE/$(date +%F)" \
-      --log-file "$HOME/.local/share/rclone-logseq.log" \
+    PUSH_ARGS=(
+      --drive-stop-on-upload-limit
+      --log-file "$LOG_FILE"
       --log-level INFO
+    )
+    
+    if [[ -n "$BACKUP_REMOTE" ]]; then
+      PUSH_ARGS+=(--backup-dir "$BACKUP_REMOTE/$(date +%F)")
+    fi
+    
+    rclone sync "$LOCAL_PATH" "$REMOTE_PATH" "${PUSH_ARGS[@]}"
     ;;
+    
   pull)
-    rclone sync "$GRAPH_REMOTE" "$GRAPH_LOCAL" \
-      --drive-stop-on-upload-limit \
-      --backup-dir "$BACKUP_LOCAL/$(date +%F)" \
-      --log-file "$HOME/.local/share/rclone-logseq.log" \
+    PULL_ARGS=(
+      --drive-stop-on-upload-limit
+      --log-file "$LOG_FILE"
       --log-level INFO
+    )
+    
+    if [[ -n "$BACKUP_LOCAL" ]]; then
+      PULL_ARGS+=(--backup-dir "$BACKUP_LOCAL/$(date +%F)")
+    fi
+    
+    rclone sync "$REMOTE_PATH" "$LOCAL_PATH" "${PULL_ARGS[@]}"
     ;;
+    
   sync)
+    # Generate bisync cache path based on local and remote paths
+    LOCAL_NORMALIZED=$(echo "$LOCAL_PATH" | tr '/' '_' | tr -d '~' | tr ':' '_')
+    REMOTE_NORMALIZED=$(echo "$REMOTE_PATH" | tr '/' '_' | tr ':' '_')
     BISYNC_CACHE="$HOME/.cache/rclone/bisync"
-    BISYNC_PATH1="$BISYNC_CACHE/home_richard_Notes_gdrive-notes..gdrive_0xdev_Notes.path1.lst"
+    BISYNC_PATH1="$BISYNC_CACHE/${LOCAL_NORMALIZED}..${REMOTE_NORMALIZED}.path1.lst"
     
     # Check if bisync needs initialization
     if [[ ! -f "$BISYNC_PATH1" ]]; then
       echo "First-time bisync setup: initializing with --resync..."
-      rclone bisync "$GRAPH_LOCAL" "$GRAPH_REMOTE" \
+      rclone bisync "$LOCAL_PATH" "$REMOTE_PATH" \
         --resync \
         --drive-stop-on-upload-limit \
-        --log-file "$HOME/.local/share/rclone-logseq.log" \
+        --log-file "$LOG_FILE" \
         --log-level INFO \
         --create-empty-src-dirs
     else
-      rclone bisync "$GRAPH_LOCAL" "$GRAPH_REMOTE" \
-        --drive-stop-on-upload-limit \
-        --backup-dir1 "$BACKUP_LOCAL/$(date +%F)" \
-        --backup-dir2 "$BACKUP_REMOTE/$(date +%F)" \
-        --log-file "$HOME/.local/share/rclone-logseq.log" \
-        --log-level INFO \
-        --resilient \
-        --recover \
+      SYNC_ARGS=(
+        --drive-stop-on-upload-limit
+        --log-file "$LOG_FILE"
+        --log-level INFO
+        --resilient
+        --recover
         --create-empty-src-dirs
-    fi
-    ;;
-  commit)
-    cd "$GRAPH_LOCAL"
-    if [[ -d .git ]]; then
-      if [[ -n "$(git status --porcelain)" ]]; then
-        git add -A
-        
-        # Try to generate commit message with gemini if available
-        if command -v gemini &> /dev/null; then
-          echo "Generating commit message with Gemini..."
-          DIFF_OUTPUT=$(git diff --cached --stat && echo -e "\n" && git diff --cached)
-          COMMIT_MSG=$(echo "$DIFF_OUTPUT" | gemini "Based on the following git diff, generate a concise commit message (max 72 chars) following conventional commits format. Only output the commit message, nothing else:" 2>/dev/null | head -n 1)
-          
-          if [[ -n "$COMMIT_MSG" ]]; then
-            git commit -m "$COMMIT_MSG"
-            echo "Changes committed with AI-generated message: $COMMIT_MSG"
-          else
-            # Fallback if gemini fails
-            git commit -m "chore: auto-commit notes $(date +%F\ %T)"
-            echo "Changes committed with default message"
-          fi
-        else
-          # Fallback if gemini not available
-          git commit -m "chore: auto-commit notes $(date +%F\ %T)"
-          echo "Changes committed (gemini not available, using default message)"
-        fi
-      else
-        echo "No changes to commit"
+      )
+      
+      if [[ -n "$BACKUP_LOCAL" ]]; then
+        SYNC_ARGS+=(--backup-dir1 "$BACKUP_LOCAL/$(date +%F)")
       fi
-    else
-      echo "Error: $GRAPH_LOCAL is not a git repository" >&2
-      exit 1
+      
+      if [[ -n "$BACKUP_REMOTE" ]]; then
+        SYNC_ARGS+=(--backup-dir2 "$BACKUP_REMOTE/$(date +%F)")
+      fi
+      
+      rclone bisync "$LOCAL_PATH" "$REMOTE_PATH" "${SYNC_ARGS[@]}"
     fi
     ;;
+    
   *)
-    echo "usage: gdrive-sync [push|pull|sync|commit]" >&2
+    echo "Error: Unknown command '$COMMAND'" >&2
+    show_usage
     exit 1
     ;;
 esac
