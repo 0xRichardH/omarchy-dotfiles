@@ -1,0 +1,16 @@
+[settings]
+idiomatic_version_file_enable_tools = ["ruby"]
+
+[settings.ruby]
+
+[tools]
+bun = "latest"
+"github:sst/opencode" = "latest"
+go = "latest"
+node = "lts"
+"npm:@google/gemini-cli" = "latest"
+"npm:@openai/codex" = "latest"
+python = "system"
+ruby = "latest"
+zig = "latest"
+zls = "latest"
