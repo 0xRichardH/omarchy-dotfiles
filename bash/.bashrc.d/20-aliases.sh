@@ -2,7 +2,7 @@ alias gs='git status -sb'
 alias vim='nvim'
 alias e='${EDITOR}'
 alias cl='clear'
-alias ai='opencode'
+alias x='opencode'
 
 
 # Use eza instead of ls
