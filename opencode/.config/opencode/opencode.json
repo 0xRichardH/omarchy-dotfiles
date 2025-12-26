@@ -4,6 +4,9 @@
   "theme": "system",
   "autoupdate": true,
   "plugin": ["opencode-google-antigravity-auth", "opencode-openai-codex-auth@4.2.0"],
+  "keybinds": {
+    "leader": "ctrl+s"
+  },
   "provider": {
     "google": {
       "models": {
