@@ -3,7 +3,7 @@
   "instructions": ["CONTRIBUTING.md", "docs/guidelines.md", ".cursor/rules/*.md"],
   "theme": "system",
   "autoupdate": true,
-  "plugin": ["opencode-google-antigravity-auth", "opencode-openai-codex-auth@4.2.0"],
+  "plugin": ["opencode-google-antigravity-auth@0.2.11", "opencode-openai-codex-auth@4.2.0"],
   "keybinds": {
     "leader": "ctrl+s"
   },
@@ -489,12 +489,6 @@
       "command": ["bunx", "chrome-devtools-mcp@latest"],
       "enabled": true
     },
-    "exa": {
-      "type": "remote",
-      "url": "https://mcp.exa.ai/mcp",
-      "enabled": true,
-      "headers": {}
-    },
     "context7": {
       "type": "local",
       "command": ["bunx", "-y", "@upstash/context7-mcp"],
@@ -503,6 +497,11 @@
     "sequential-thinking": {
       "type": "local",
       "command": ["bunx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "enabled": true
+    },
+    "exa": {
+      "type": "local",
+      "command": ["bunx", "-y", "exa-mcp-server", "tools=get_code_context_exa"],
       "enabled": true
     }
   }
