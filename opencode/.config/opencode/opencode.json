@@ -3,7 +3,11 @@
   "instructions": ["CONTRIBUTING.md", "docs/guidelines.md", ".cursor/rules/*.md"],
   "theme": "system",
   "autoupdate": true,
-  "plugin": ["opencode-google-antigravity-auth@0.2.11", "opencode-openai-codex-auth@4.2.0"],
+  "plugin": [
+    "opencode-google-antigravity-auth@0.2.11", // https://github.com/shekohex/opencode-google-antigravity-auth
+    "opencode-openai-codex-auth@4.2.0", // https://github.com/numman-ali/opencode-openai-codex-auth
+    "opencode-supermemory@0.1.1", // https://github.com/supermemoryai/opencode-supermemory
+  ],
   "keybinds": {
     "leader": "ctrl+s"
   },
