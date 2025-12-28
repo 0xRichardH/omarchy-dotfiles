@@ -27,6 +27,11 @@ if [ -d "$BASHRC_D" ]; then
 fi
 
 
+# Load local overrides/secrets if present.
+if [ -f "$HOME/.bashrc.local" ]; then
+  . "$HOME/.bashrc.local"
+fi
+
 if [ -n "$SSH_CONNECTION" ]; then
     neofetch
 fi
