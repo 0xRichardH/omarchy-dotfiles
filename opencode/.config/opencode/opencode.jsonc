@@ -9,7 +9,7 @@
     "opencode-supermemory@0.1.1", // https://github.com/supermemoryai/opencode-supermemory
   ],
   "keybinds": {
-    "leader": "ctrl+s"
+    "leader": "ctrl+x"
   },
   "provider": {
     "google": {
