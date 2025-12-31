@@ -29,3 +29,7 @@ Before writing code, ask yourself:
 - Should this functionality be in its own file/module?
 
 If the answer is yes to any of these, refactor accordingly.
+
+## Git
+
+- Sign commits for all git changes
