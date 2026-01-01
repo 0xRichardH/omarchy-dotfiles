@@ -507,6 +507,11 @@
       "type": "local",
       "command": ["bunx", "-y", "exa-mcp-server", "tools=get_code_context_exa"],
       "enabled": true
+    },
+    "grep": {
+      "type": "remote",
+      "url": "https://mcp.grep.app",
+      "enabled": true
     }
   }
 }
