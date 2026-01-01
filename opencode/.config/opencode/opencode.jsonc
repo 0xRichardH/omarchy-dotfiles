@@ -4,9 +4,9 @@
   "theme": "system",
   "autoupdate": true,
   "plugin": [
-    "opencode-google-antigravity-auth@0.2.11", // https://github.com/shekohex/opencode-google-antigravity-auth
-    "opencode-openai-codex-auth@4.2.0", // https://github.com/numman-ali/opencode-openai-codex-auth
-    "opencode-supermemory@0.1.1", // https://github.com/supermemoryai/opencode-supermemory
+    "opencode-google-antigravity-auth@latest", // https://github.com/shekohex/opencode-google-antigravity-auth
+    "opencode-openai-codex-auth@latest", // https://github.com/numman-ali/opencode-openai-codex-auth
+    "opencode-supermemory@latest", // https://github.com/supermemoryai/opencode-supermemory
   ],
   "keybinds": {
     "leader": "ctrl+x"
@@ -505,7 +505,10 @@
     },
     "exa": {
       "type": "local",
-      "command": ["bunx", "-y", "exa-mcp-server", "tools=get_code_context_exa"],
+      "command": ["bunx", "-y", "exa-mcp-server", "tools=get_code_context_exa,web_search_exa"],
+      "environment": {
+        "EXA_API_KEY": "{env:EXA_API_KEY}"
+      },
       "enabled": true
     },
     "grep": {
