@@ -5,6 +5,7 @@ idiomatic_version_file_enable_tools = ["ruby"]
 
 [tools]
 bun = "latest"
+deno = "latest"
 "github:sst/opencode" = "latest"
 go = "latest"
 node = "lts"
