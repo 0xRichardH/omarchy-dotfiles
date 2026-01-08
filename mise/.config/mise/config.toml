@@ -6,7 +6,7 @@ idiomatic_version_file_enable_tools = ["ruby"]
 [tools]
 bun = "latest"
 deno = "latest"
-"github:sst/opencode" = "latest"
+"github:anomalyco/opencode" = "latest"
 go = "latest"
 node = "lts"
 "npm:@google/gemini-cli" = "latest"

@@ -3,6 +3,7 @@
   "instructions": ["CONTRIBUTING.md", "docs/guidelines.md", ".cursor/rules/*.md"],
   "theme": "system",
   "autoupdate": true,
+  "small_model": "opencode/grok-code",
   "plugin": [
     "opencode-google-antigravity-auth@latest", // https://github.com/shekohex/opencode-google-antigravity-auth
     "opencode-openai-codex-auth@latest", // https://github.com/numman-ali/opencode-openai-codex-auth
@@ -42,6 +43,14 @@
           "options": {
             "thinkingConfig": {
               "thinkingBudget": 32000,
+              "includeThoughts": true
+            }
+          }
+        },
+        "gemini-claude-sonnet-4-5-thinking": {
+          "options": {
+            "thinkingConfig": {
+              "thinkingBudget": 16000,
               "includeThoughts": true
             }
           }
