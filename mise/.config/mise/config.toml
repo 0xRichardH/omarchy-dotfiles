@@ -1,4 +1,5 @@
 [settings]
+npm.bun = true
 idiomatic_version_file_enable_tools = ["ruby"]
 
 [settings.ruby]
@@ -12,7 +13,7 @@ python = "latest"
 ruby = "latest"
 zig = "latest"
 zls = "latest"
-"github:anomalyco/opencode" = "latest"
+"npm:opencode-ai" = "latest"
 "npm:@google/gemini-cli" = "latest"
 "npm:@openai/codex" = "latest"
 "pipx:pgcli" = { version = "latest", extras = "sshtunnel", uvx_args = "--with 'paramiko<4'" }
