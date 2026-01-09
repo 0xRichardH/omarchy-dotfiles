@@ -6,12 +6,13 @@ idiomatic_version_file_enable_tools = ["ruby"]
 [tools]
 bun = "latest"
 deno = "latest"
-"github:anomalyco/opencode" = "latest"
 go = "latest"
 node = "lts"
-"npm:@google/gemini-cli" = "latest"
-"npm:@openai/codex" = "latest"
 python = "latest"
 ruby = "latest"
 zig = "latest"
 zls = "latest"
+"github:anomalyco/opencode" = "latest"
+"npm:@google/gemini-cli" = "latest"
+"npm:@openai/codex" = "latest"
+"pipx:pgcli" = { version = "latest", extras = "sshtunnel", uvx_args = "--with 'paramiko<4'" }
