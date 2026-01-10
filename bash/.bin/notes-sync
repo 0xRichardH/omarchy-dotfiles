@@ -30,25 +30,30 @@ case "${1:-}" in
       if [[ -n "$(git status --porcelain)" ]]; then
         git add -A
         
-        # Try to generate commit message with gemini if available
-        if command -v gemini &> /dev/null; then
-          echo "Generating commit message with Gemini..."
-          DIFF_OUTPUT=$(git diff --cached --stat && echo -e "\n" && git diff --cached)
-          COMMIT_MSG=$(echo "$DIFF_OUTPUT" | gemini "Based on the following git diff, generate a concise commit message (max 72 chars) following conventional commits format. Only output the commit message, nothing else:" 2>/dev/null | head -n 1)
-          
-          if [[ -n "$COMMIT_MSG" ]]; then
-            git commit -m "$COMMIT_MSG"
-            echo "Changes committed with AI-generated message: $COMMIT_MSG"
-          else
-            # Fallback if gemini fails
-            git commit -m "chore: auto-commit notes $(date +%F\ %T)"
-            echo "Changes committed with default message"
-          fi
-        else
-          # Fallback if gemini not available
-          git commit -m "chore: auto-commit notes $(date +%F\ %T)"
-          echo "Changes committed (gemini not available, using default message)"
+        # Generate commit message with OpenCode
+        if ! command -v opencode &>/dev/null; then
+          echo "Error: opencode is required but not installed" >&2
+          exit 1
         fi
+        echo "Generating commit message with OpenCode..."
+        DIFF_FILE=$(mktemp)
+        git diff --cached > "$DIFF_FILE"
+
+        COMMIT_MSG=$(opencode run \
+          "Generate a concise commit message (max 72 chars) following conventional commits format based on the attached diff. 
+          Output ONLY the raw text of the message. 
+          NO markdown blocks, NO quotes, NO preamble, NO explanations." \
+          --file "$DIFF_FILE" 2>/dev/null | grep . | tail -n 1 | sed 's/^`*//;s/`*$//;s/^"*//;s/"*$//')
+
+        rm -f "$DIFF_FILE"
+
+        if [[ -z "$COMMIT_MSG" ]]; then
+          echo "Error: Failed to generate commit message" >&2
+          exit 1
+        fi
+
+        git commit -S -m "$COMMIT_MSG"
+        echo "Changes committed: $COMMIT_MSG"
       else
         echo "No changes to commit"
       fi
