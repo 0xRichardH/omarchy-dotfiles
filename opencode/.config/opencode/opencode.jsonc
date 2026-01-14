@@ -7,9 +7,16 @@
   "plugin": [
     "opencode-antigravity-auth@beta", // https://github.com/NoeFabris/opencode-antigravity-auth
     "opencode-supermemory@latest", // https://github.com/supermemoryai/opencode-supermemory
+    "opencode-mystatus@latest", // https://github.com/vbgate/opencode-mystatus
   ],
   "keybinds": {
     "leader": "ctrl+x"
+  },
+  "command": {
+    "mystatus": {
+      "description": "Query quota usage for all AI accounts",
+      "template": "Use the mystatus tool to query quota usage. Return the result as-is without modification."
+    }
   },
   "provider": {
     "google": {
