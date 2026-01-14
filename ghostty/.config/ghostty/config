@@ -32,3 +32,6 @@ copy-on-select = clipboard
 
 # Slowdown mouse scrolling
 mouse-scroll-multiplier = 0.95
+
+# SSH session terminfo
+shell-integration-features = ssh-env
