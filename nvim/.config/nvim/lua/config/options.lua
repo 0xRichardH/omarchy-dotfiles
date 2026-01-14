@@ -106,6 +106,5 @@ vim.api.nvim_create_user_command("CopyPath", function()
   vim.notify('Copied "' .. absolute_path .. '" to the clipboard!')
 end, {})
 
-
 -- Enable this option to avoid conflicts with Prettier.
 vim.g.lazyvim_prettier_needs_config = true
