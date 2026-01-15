@@ -16,4 +16,5 @@ zls = "latest"
 "npm:opencode-ai" = "latest"
 "npm:@google/gemini-cli" = "latest"
 "npm:@openai/codex" = "latest"
+"npm:@anthropic-ai/claude-code" = "latest"
 "pipx:pgcli" = { version = "latest", extras = "sshtunnel", uvx_args = "--with 'paramiko<4'" }
