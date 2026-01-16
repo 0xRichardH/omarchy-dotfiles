@@ -3,11 +3,14 @@
   "instructions": ["CONTRIBUTING.md", "docs/guidelines.md", ".cursor/rules/*.md"],
   "theme": "system",
   "autoupdate": true,
-  "small_model": "opencode/grok-code",
+  "tui": {
+    "diff_style": "stacked"
+  },
   "plugin": [
     "opencode-antigravity-auth@beta", // https://github.com/NoeFabris/opencode-antigravity-auth
     "opencode-supermemory@latest", // https://github.com/supermemoryai/opencode-supermemory
     "opencode-mystatus@latest", // https://github.com/vbgate/opencode-mystatus
+    "opencode-crs-bedrock@1.0.7", // https://github.com/0xRichardH/opencode-crs-bedrock
   ],
   "keybinds": {
     "leader": "ctrl+x"
@@ -19,6 +22,28 @@
     }
   },
   "provider": {
+    "crs": {
+      "npm": "@ai-sdk/anthropic",
+      "models": {
+        "claude-opus-4-5": {
+          "name": "Claude Opus 4.5 [CRS]",
+          "limit": { "context": 200000, "output": 64000 },
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "variants": {
+            "low": { "thinkingConfig": { "thinkingBudget": 8192 } },
+            "max": { "thinkingConfig": { "thinkingBudget": 32768 } }
+          }
+        },
+        "claude-sonnet-4-5": {
+          "name": "Claude Sonnet 4.5 [CRS]",
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "variants": {
+            "low": { "thinkingConfig": { "thinkingBudget": 8192 } },
+            "max": { "thinkingConfig": { "thinkingBudget": 32768 } }
+          }
+        }
+      }
+    },
     "google": {
       "models": {
         "antigravity-gemini-3-pro": {
