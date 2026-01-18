@@ -10,7 +10,8 @@
     "opencode-antigravity-auth@beta", // https://github.com/NoeFabris/opencode-antigravity-auth
     "opencode-supermemory@latest", // https://github.com/supermemoryai/opencode-supermemory
     "opencode-mystatus@latest", // https://github.com/vbgate/opencode-mystatus
-    "opencode-crs-bedrock@1.0.7", // https://github.com/0xRichardH/opencode-crs-bedrock
+    "opencode-crs-bedrock@1.0.7", // https://github.com/0xRichardH/opencode-crs-bedrock,
+    "yet-another-opencode-cursor-auth@latest", // https://github.com/Yukaii/yet-another-opencode-cursor-auth/
   ],
   "keybinds": {
     "leader": "ctrl+x"
@@ -22,6 +23,9 @@
     }
   },
   "provider": {
+    "cursor": {
+      "name": "Cursor"
+    },
     "crs": {
       "npm": "@ai-sdk/anthropic",
       "models": {
