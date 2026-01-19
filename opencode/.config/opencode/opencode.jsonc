@@ -10,7 +10,6 @@
     "opencode-antigravity-auth@beta", // https://github.com/NoeFabris/opencode-antigravity-auth
     "opencode-supermemory@latest", // https://github.com/supermemoryai/opencode-supermemory
     "opencode-mystatus@latest", // https://github.com/vbgate/opencode-mystatus
-    "opencode-crs-bedrock@1.0.7", // https://github.com/0xRichardH/opencode-crs-bedrock
     "yet-another-opencode-cursor-auth@latest", // https://github.com/Yukaii/yet-another-opencode-cursor-auth/
   ],
   "keybinds": {
@@ -28,6 +27,10 @@
     },
     "crs": {
       "npm": "@ai-sdk/anthropic",
+      "options": {
+        "baseURL": "https://crs.tonob.net/api/v1",
+        "apiKey": "{env:ANTHROPIC_AUTH_TOKEN}",
+      },
       "models": {
         "claude-opus-4-5": {
           "name": "Claude Opus 4.5 [CRS]",
