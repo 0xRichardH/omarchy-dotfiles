@@ -29,7 +29,7 @@
       "npm": "@ai-sdk/anthropic",
       "options": {
         "baseURL": "https://crs.tonob.net/api/v1",
-        "apiKey": "{env:ANTHROPIC_AUTH_TOKEN}",
+        "apiKey": "{env:CRS_AUTH_TOKEN}",
       },
       "models": {
         "claude-opus-4-5": {
