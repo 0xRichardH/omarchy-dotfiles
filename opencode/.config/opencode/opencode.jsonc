@@ -120,11 +120,6 @@
     }
   },
   "mcp": {
-    "sequential-thinking": {
-      "type": "local",
-      "command": ["bunx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
-      "enabled": true
-    },
     "exa": {
       "type": "local",
       "command": ["bunx", "-y", "exa-mcp-server", "tools=get_code_context_exa,web_search_exa"],
