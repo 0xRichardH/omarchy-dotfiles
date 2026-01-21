@@ -120,16 +120,6 @@
     }
   },
   "mcp": {
-    "chrome-devtools": {
-      "type": "local",
-      "command": ["bunx", "chrome-devtools-mcp@latest"],
-      "enabled": true
-    },
-    "context7": {
-      "type": "local",
-      "command": ["bunx", "-y", "@upstash/context7-mcp"],
-      "enabled": true
-    },
     "sequential-thinking": {
       "type": "local",
       "command": ["bunx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
