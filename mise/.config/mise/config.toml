@@ -17,4 +17,5 @@ zls = "latest"
 "npm:@google/gemini-cli" = "latest"
 "npm:@openai/codex" = "latest"
 "npm:@anthropic-ai/claude-code" = "stable"
+"npm:critique" = "latest" # https://github.com/remorses/critique
 "pipx:pgcli" = { version = "latest", extras = "sshtunnel", uvx_args = "--with 'paramiko<4'" }
