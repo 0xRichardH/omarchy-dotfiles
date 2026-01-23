@@ -46,6 +46,17 @@ bunx add-skill vercel-labs/agent-skills
 ```
 **Description:** Additional agent skills from Vercel Labs
 
+### Supabase Postgres Best Practices
+**Source:** `supabase/agent-skills`  
+**Installation:**
+```bash
+bunx add-skill supabase/agent-skills
+```
+**Description:** Postgres performance optimization and best practices from Supabase
+
+**Skills Included:**
+- `supabase-postgres-best-practices` - Comprehensive Postgres optimization guide covering query performance, connection management, security & RLS, schema design, concurrency & locking, data access patterns, monitoring & diagnostics, and advanced features
+
 ## Upgrade Instructions
 
 To upgrade all skills to their latest versions:
@@ -65,6 +76,7 @@ To upgrade all skills to their latest versions:
    bunx add-skill anthropics/skills
    bunx add-skill vercel-labs/agent-browser
    bunx add-skill vercel-labs/agent-skills
+   bunx add-skill supabase/agent-skills
    ```
 
 ## Directory Structure
@@ -84,4 +96,4 @@ The skills directory is symlinked via GNU Stow from the dotfiles repository.
 
 ## Last Updated
 
-2026-01-21
+2026-01-23
