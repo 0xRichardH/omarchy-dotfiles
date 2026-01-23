@@ -106,5 +106,10 @@ vim.api.nvim_create_user_command("CopyPath", function()
   vim.notify('Copied "' .. absolute_path .. '" to the clipboard!')
 end, {})
 
+-- Add new commands
+vim.cmd([[command! -nargs=0 GoToCommand :FzfLua commands]])
+vim.cmd([[command! -nargs=0 GoToFile :FzfLua files]])
+vim.cmd([[command! -nargs=0 Grep :FzfLua grep]])
+
 -- Enable this option to avoid conflicts with Prettier.
 vim.g.lazyvim_prettier_needs_config = true
