@@ -22,6 +22,38 @@ shell-integration-features = no-cursor
 # Keyboard bindings
 keybind = f11=toggle_fullscreen
 
+# switch to window by index (1-based)
+keybind = alt+physical:one=text:\x131
+keybind = alt+physical:two=text:\x132
+keybind = alt+physical:three=text:\x133
+keybind = alt+physical:four=text:\x134
+keybind = alt+physical:five=text:\x135
+keybind = alt+physical:six=text:\x136
+keybind = alt+physical:seven=text:\x137
+keybind = alt+physical:eight=text:\x138
+keybind = alt+physical:nine=text:\x139
+
+# Change to tmux copy mode
+keybind = alt+c=text:\x13[
+# <prefix>+g (open lazygit window)
+keybind = alt+g=text:\x13\x67
+# <prefix>+j (open the session manager popup)
+keybind = alt+j=text:\x13\x54
+# <prefix>+l (switch to last session)
+keybind = alt+l=text:\x13\x4c
+# <prefix>+u (open url)
+keybind = alt+u=text:\x13\x75
+# :GotoFile
+keybind = alt+p=text:\x3a\x47\x6f\x54\x6f\x46\x69\x6c\x65\x0a
+# :Grep (find)
+keybind = alt+f=text:\x3a\x47\x72\x65\x70\x0a
+# :qa!
+keybind = alt+q=text:\x3a\x1b\x1b\x3a\x71\x61\x21\x0a
+# <prefix>+c (new window)
+keybind = alt+t=text:\x13\x63
+# <prefix>+x (close window)
+keybind = alt+w=text:\x13\x78
+
 ###############
 ## clipboard ##
 ###############
