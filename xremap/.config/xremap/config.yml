@@ -4,3 +4,11 @@ modmap:
       CapsLock:
         alone: Esc
         held: Ctrl_L
+
+keymap:
+  - name: Ctrl+HJKL as Arrow Keys
+    remap:
+      C-h: left
+      C-j: down
+      C-k: up
+      C-l: right
