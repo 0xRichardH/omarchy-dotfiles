@@ -1,5 +1,2 @@
 bash/.bashrc.d/90-local.sh
 tmux/.config/tmux/plugins/
-
-# Gemini CLI
-.gemini/

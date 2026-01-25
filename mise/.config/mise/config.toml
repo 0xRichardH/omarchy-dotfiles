@@ -14,7 +14,6 @@ ruby = "latest"
 zig = "latest"
 zls = "latest"
 "npm:opencode-ai" = "latest"
-"npm:@google/gemini-cli" = "latest"
 "npm:@openai/codex" = "latest"
 "npm:@anthropic-ai/claude-code" = "stable"
 "npm:critique" = "latest" # https://github.com/remorses/critique
