@@ -13,7 +13,8 @@
     "yet-another-opencode-cursor-auth@latest", // https://github.com/Yukaii/yet-another-opencode-cursor-auth/
   ],
   "keybinds": {
-    "leader": "ctrl+x"
+    "leader": "ctrl+x",
+    "input_newline": "shift+return",
   },
   "command": {
     "mystatus": {
