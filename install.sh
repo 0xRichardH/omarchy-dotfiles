@@ -10,3 +10,4 @@ omarchy-install-tailscale
 ./scripts/install-cronie.sh
 ./scripts/install-rclone.sh
 ./scripts/install-atuin.sh
+./scripts/install-fish.sh
