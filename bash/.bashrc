@@ -1,3 +1,6 @@
+# ble.sh must be sourced at the very top of .bashrc
+[[ $- == *i* ]] && source /usr/share/blesh/ble.sh --noattach
+
 # All the default Omarchy aliases and functions
 #
 # (don't mess with these directly, just overwrite them here!)
@@ -38,3 +41,6 @@ if [ -n "$SSH_CONNECTION" ]; then
 fi
 
 eval "$(atuin init bash)"
+
+# ble.sh attach at the end of .bashrc
+[[ ${BLE_VERSION-} ]] && ble-attach
