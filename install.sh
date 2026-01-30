@@ -9,3 +9,4 @@ omarchy-install-tailscale
 ./scripts/install-fcitx5.sh
 ./scripts/install-cronie.sh
 ./scripts/install-rclone.sh
+./scripts/install-atuin.sh
