@@ -30,6 +30,12 @@ Before writing code, ask yourself:
 
 If the answer is yes to any of these, refactor accordingly.
 
+## Testing Discipline
+
+- Use TDD for everything: bugs, refactors, and new features.
+- Start with a failing test that captures the expected behavior and edge cases.
+- Verify the test fails for the right reason before implementing; keep tests green incrementally
+
 ## Git
 
 - Sign commits for all git changes
