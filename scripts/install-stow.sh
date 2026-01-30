@@ -11,3 +11,4 @@ stow --target="$HOME" --adopt git
 stow --target="$HOME" --adopt bash
 stow --target="$HOME" --adopt bw
 stow --target="$HOME" --adopt ssh
+stow --target="$HOME" --adopt fish
