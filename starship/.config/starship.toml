@@ -1,6 +1,11 @@
 add_newline = true
 command_timeout = 200
-format = "[$directory$git_branch$git_status]($style)$character"
+format = "[$hostname](bold yellow)[$directory$git_branch$git_status]($style)$character"
+
+[hostname]
+ssh_only = true
+format = "[$hostname](bold yellow) "
+trim_at = "."
 
 [character]
 success_symbol = "🐶"
