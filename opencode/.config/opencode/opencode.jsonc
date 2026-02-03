@@ -30,7 +30,7 @@
       "npm": "@ai-sdk/anthropic",
       "options": {
         "baseURL": "https://crs.tonob.net/api/v1",
-        "apiKey": "{env:CRS_AUTH_TOKEN}",
+        "apiKey": "{file:~/.credentials/crs_auth_token}",
       },
       "models": {
         "claude-opus-4-5": {
@@ -134,7 +134,7 @@
       "type": "local",
       "command": ["bunx", "-y", "exa-mcp-server", "tools=get_code_context_exa,web_search_exa"],
       "environment": {
-        "EXA_API_KEY": "{env:EXA_API_KEY}"
+        "EXA_API_KEY": "{file:~/.credentials/exa_api_key}"
       },
       "enabled": true
     },
