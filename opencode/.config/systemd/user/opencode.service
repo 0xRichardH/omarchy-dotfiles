@@ -1,0 +1,18 @@
+[Unit]
+Description=OpenCode Server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/bin/sh -c 'OPENCODE_SERVER_PASSWORD=$(cat "$CREDENTIALS_DIRECTORY/opencode_password") exec /home/richard/.local/share/mise/shims/opencode serve --hostname 0.0.0.0 --port 4096'
+LoadCredential=opencode_password:/home/richard/.credentials/opencode_password
+Restart=on-failure
+RestartSec=10
+
+# Security hardening (optional but recommended)
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target
