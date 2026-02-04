@@ -20,7 +20,8 @@ abbr dtail "docker logs -tf --tail='50' " # Tail last 50 lines of docker logs
 
 abbr e nvim
 abbr x "OPENCODE_EXPERIMENTAL=1 opencode attach http://127.0.0.1:4096 --dir $PWD"
-abbr xa "OPENCODE_EXPERIMENTAL=1 opencode attach http://127.0.0.1:4096 --dir "
+abbr xa "OPENCODE_EXPERIMENTAL=1 opencode attach "
+abbr xad "OPENCODE_EXPERIMENTAL=1 opencode attach http://127.0.0.1:4096 --dir "
 
 abbr gs "git status -sb"
 abbr gw "git worktree"
