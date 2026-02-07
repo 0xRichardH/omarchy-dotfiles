@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Wrapper to export systemd credentials as environment variables
+# and start the opencode server.
+
+if [ -d "$CREDENTIALS_DIRECTORY" ]; then
+    for f in "$CREDENTIALS_DIRECTORY"/*; do
+        if [ -f "$f" ]; then
+            var_name=$(basename "$f")
+            export "$var_name"="$(cat "$f")"
+        fi
+    done
+fi
+
+exec "$HOME/.local/share/mise/shims/opencode" serve "$@"
