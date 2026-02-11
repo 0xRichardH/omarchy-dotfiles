@@ -33,6 +33,17 @@
         "apiKey": "{file:~/.credentials/crs_auth_token}",
       },
       "models": {
+        "kimi-k2.5": {
+          "name": "Kimi-K2.5 [CRS]",
+          "limit": { "context": 262144, "output": 16000 },
+          "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
+          "reasoning": true,
+          "interleaved": { "field": "reasoning_content" },
+          "variants": {
+            "low": { "thinkingBudget": 8192 },
+            "max": { "thinkingBudget": 32768 }
+          }
+        },
         "claude-opus-4-5": {
           "name": "Claude Opus 4.5 [CRS]",
           "limit": { "context": 200000, "output": 64000 },
