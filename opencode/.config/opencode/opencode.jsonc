@@ -70,6 +70,32 @@
           }
         }
       }
+    },
+    "ark": {
+      "name": "volcengine",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "https://ark.cn-beijing.volces.com/api/coding/v3",
+        "apiKey": "{file:~/.credentials/ark_api_key}"
+      },
+      "models": {
+        "glm-4.7": {
+          "name": "GLM-4.7",
+          "options": {
+            "thinking": {
+              "type": "enabled"
+            }
+          }
+        },
+        "kimi-k2.5": {
+          "name": "Kimi K2.5",
+          "options": {
+            "thinking": {
+              "type": "enabled"
+            }
+          }
+        }
+      }
     }
   },
   "mcp": {
