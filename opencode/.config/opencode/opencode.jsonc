@@ -81,6 +81,7 @@
       "models": {
         "glm-4.7": {
           "name": "GLM-4.7",
+          "limit": { "context": 200000, "output": 128000 },
           "options": {
             "thinking": {
               "type": "enabled"
@@ -89,6 +90,7 @@
         },
         "kimi-k2.5": {
           "name": "Kimi K2.5",
+          "limit": { "context": 262144, "output": 32768 },
           "options": {
             "thinking": {
               "type": "enabled"
