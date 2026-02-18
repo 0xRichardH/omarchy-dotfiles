@@ -1,7 +1,17 @@
 modmap:
-  - name: CapsLock as Ctrl/Esc
+  - name: Built-in CapsLock as Ctrl/Esc
+    device:
+      only: "AT Translated Set 2 keyboard"
     remap:
       CapsLock:
+        alone: Esc
+        held: Ctrl_L
+
+  - name: External Ctrl_L as Ctrl/Esc
+    device:
+      only: "Topre Corporation HHKB Professional"
+    remap:
+      Ctrl_L:
         alone: Esc
         held: Ctrl_L
 
