@@ -3,12 +3,11 @@ abbr aap "set -Ux SSH_ASKPASS_REQUIRE force" # add SSH_ASKPASS_REQUIRE environme
 abbr ba "bw_add_sshkeys -f ssh-agent -p passphrase"
 
 abbr cd z
-abbr c clear
+abbr c x # opencode
 abbr cl clear
 abbr claer clear
 abbr clera clear
 abbr code nvim
-abbr cx "chmod +x"
 
 abbr dc "docker compose"
 abbr dcp "docker compose -f ~/docker-compose.yaml" # Shorthand, customise docker-compose.yaml location as needed
@@ -19,7 +18,6 @@ abbr dps "docker ps --format 'table {{.Names}}\t{{.Status}}'"
 abbr dtail "docker logs -tf --tail='50' " # Tail last 50 lines of docker logs
 
 abbr e nvim
-abbr x "OPENCODE_EXPERIMENTAL=1 opencode attach http://127.0.0.1:4096 --dir $PWD"
 abbr xa "OPENCODE_EXPERIMENTAL=1 opencode attach "
 abbr xad "OPENCODE_EXPERIMENTAL=1 opencode attach http://127.0.0.1:4096 --dir "
 
