@@ -19,4 +19,5 @@ atuin = "latest"
 "npm:@anthropic-ai/claude-code" = "stable"
 "npm:critique" = "latest" # https://github.com/remorses/critique
 "npm:@railway/cli" = "latest"
+"npm:openclaw" = "latest"
 "pipx:pgcli" = { version = "latest", extras = "sshtunnel", uvx_args = "--with 'paramiko<4'" }
