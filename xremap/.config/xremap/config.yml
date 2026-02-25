@@ -6,6 +6,8 @@ modmap:
       CapsLock:
         alone: Esc
         held: Ctrl_L
+      Super_L: Alt_L
+      Alt_L: Super_L
 
   - name: External Ctrl_L as Ctrl/Esc
     device:
