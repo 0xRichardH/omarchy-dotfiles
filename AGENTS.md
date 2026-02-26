@@ -3,6 +3,7 @@
 ## Project Structure & Module Organization
 Each top-level directory is a GNU Stow package for a specific tool. Key paths:
 - `alacritty/.config/alacritty/alacritty.toml` for terminal defaults.
+- `agents/.agents` tracks OpenCode skill definitions, templates, and lock metadata.
 - `hypr/.config/hypr/*.conf` split by concern (bindings, input, monitors, etc.).
 - `nvim/.config/nvim` contains LazyVim-based setup plus custom Lua modules in `lua/config/` and `lua/plugins/`.
 - `git/.config/git` centralizes Git templates and ignores; `git/.bin` holds custom git commands.
@@ -13,6 +14,8 @@ Symlink everything into `$HOME` with `stow <package>`; avoid editing live dotfil
 
 ## Build, Test, and Development Commands
 - **Apply changes**: `stow --target=$HOME --restow <package>` (e.g., `hypr`, `nvim`, `git`)
+- **Agents package**: run `stow --target=$HOME --simulate agents` before `--restow` to confirm it will update `~/.agents` as expected.
+- **Sync new skills**: execute `agents/.bin/sync-agents-skills` (wraps `stow --adopt`) after installing or modifying a skill so the repo stays current.
 - **Dry-run test**: `stow --target=$HOME --simulate <package>` to preview symlink changes
 - **Neovim health check**: `nvim --headless "+checkhealth" +qa`
 - **Neovim sync plugins**: `nvim --headless "+Lazy sync" +qa`

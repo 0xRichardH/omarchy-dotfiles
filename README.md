@@ -10,11 +10,13 @@ Opinionated configuration bundles for development and daily use, managed with GN
    stow --target="$HOME" hypr
    stow --target="$HOME" tmux
    stow --target="$HOME" sesh
+   stow --target="$HOME" agents
    ```
 3. Use `stow --target="$HOME" --restow <package>` after you make changes.
 4. Run `stow --target="$HOME" --simulate <package>` to preview symlink updates before applying them.
-5. Refresh user services with `systemctl --user daemon-reload`, then enable xremap with `systemctl --user enable --now xremap.service`.
-6. Tail recent xremap logs with `journalctl --user -u xremap.service -b -n 200 --no-pager` to confirm it started cleanly.
+5. Capture new OpenCode skills with `agents/.bin/sync-agents-skills` whenever you install or edit anything under `~/.agents`.
+6. Refresh user services with `systemctl --user daemon-reload`, then enable xremap with `systemctl --user enable --now xremap.service`.
+7. Tail recent xremap logs with `journalctl --user -u xremap.service -b -n 200 --no-pager` to confirm it started cleanly.
 
 ## Enable ssh-agent service
 Load user services so the bundled unit is picked up, then enable it for automatic startups:
@@ -54,6 +56,7 @@ sudo usermod -aG input "$USER"
 
 ## Packages
 
+-   `agents`: Mirrors `~/.agents` skill definitions, lock metadata, and helper templates used by OpenCode agents.
 -   `alacritty`: Fast, cross-platform, OpenGL terminal emulator configuration.
 -   `bash`: Shell configuration with custom scripts for Docker, fonts, and tmux.
 -   `bw`: Helper scripts for Bitwarden, such as `bw_add_sshkeys`.
