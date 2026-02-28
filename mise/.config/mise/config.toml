@@ -3,6 +3,7 @@ npm.bun = true
 idiomatic_version_file_enable_tools = ["ruby"]
 
 [settings.ruby]
+compile = false
 
 [tools]
 bun = "latest"
