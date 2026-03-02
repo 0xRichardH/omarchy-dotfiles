@@ -1,20 +1,18 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "instructions": ["AGENTS.md", "CLAUDE.md", "CONTRIBUTING.md", "docs/guidelines.md", ".cursor/rules/*.md"],
-  "theme": "system",
+  "instructions": [
+    "AGENTS.md",
+    "CLAUDE.md",
+    "CONTRIBUTING.md",
+    "docs/guidelines.md",
+    ".cursor/rules/*.md"
+  ],
   "autoupdate": false,
-  "tui": {
-    "diff_style": "auto"
-  },
   "plugin": [
     "opencode-supermemory@latest", // https://github.com/supermemoryai/opencode-supermemory
     "opencode-mystatus@latest", // https://github.com/vbgate/opencode-mystatus
     "yet-another-opencode-cursor-auth@latest", // https://github.com/Yukaii/yet-another-opencode-cursor-auth/
   ],
-  "keybinds": {
-    "leader": "ctrl+x",
-    "input_newline": "shift+return",
-  },
   "command": {
     "mystatus": {
       "description": "Query quota usage for all AI accounts",

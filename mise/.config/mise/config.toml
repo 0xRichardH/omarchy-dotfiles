@@ -3,6 +3,7 @@ npm.bun = true
 idiomatic_version_file_enable_tools = ["ruby"]
 
 [settings.ruby]
+compile = false
 
 [tools]
 bun = "latest"
@@ -20,4 +21,5 @@ atuin = "latest"
 "npm:critique" = "latest" # https://github.com/remorses/critique
 "npm:@railway/cli" = "latest"
 "npm:openclaw" = "latest"
+"npm:@sourcegraph/amp" = "latest"
 "pipx:pgcli" = { version = "latest", extras = "sshtunnel", uvx_args = "--with 'paramiko<4'" }
