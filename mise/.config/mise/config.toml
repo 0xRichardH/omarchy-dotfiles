@@ -20,4 +20,6 @@ atuin = "latest"
 "npm:critique" = "latest" # https://github.com/remorses/critique
 "npm:@railway/cli" = "latest"
 "npm:openclaw" = "latest"
+"npm:@sourcegraph/amp" = "latest"
+"npm:acpx" = "latest"
 "pipx:pgcli" = { version = "latest", extras = "sshtunnel", uvx_args = "--with 'paramiko<4'" }
