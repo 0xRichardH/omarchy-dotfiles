@@ -43,13 +43,22 @@
             "max": { "thinkingBudget": 32768 }
           }
         },
-        "claude-opus-4-5": {
-          "name": "Claude Opus 4.5 [CRS]",
-          "limit": { "context": 200000, "output": 64000 },
+        "claude-opus-4-6": {
+          "name": "Claude Opus 4.6 [CRS]",
+          "limit": { "context": 1000000, "output": 128000 },
           "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
           "variants": {
             "low": { "thinkingConfig": { "thinkingBudget": 8192 } },
             "max": { "thinkingConfig": { "thinkingBudget": 32768 } }
+          }
+        },
+        "glm-5": {
+          "name": "GLM-5 [CRS]",
+          "limit": { "context": 200000, "output": 128000 },
+          "modalities": { "input": ["text"], "output": ["text"] },
+          "options": {
+            "thinking": { "type": "enabled" },
+            "interleaved": { "field": "reasoning_content" }
           }
         },
         "claude-sonnet-4-5": {
