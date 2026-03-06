@@ -48,6 +48,7 @@
   "venv-selector.nvim": { "branch": "main", "commit": "59adce1481e2a182bc1e4d706869b069f19b32ba" },
   "vim-wakatime": { "branch": "master", "commit": "d7973b157a632d1edeff01818f18d67e584eeaff" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
+  "white.nvim": { "branch": "main", "commit": "e3c3c3cc4b943b521032299e4f9b0d84a02e06d1" },
   "yanky.nvim": { "branch": "main", "commit": "9d3caea67cf183639d4e510d34f2d58b6109abdd" },
   "yazi.nvim": { "branch": "main", "commit": "1317633540114eeed5dd060d23590d448b7fe16e" }
 }
