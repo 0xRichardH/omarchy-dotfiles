@@ -52,14 +52,11 @@
             "max": { "thinkingConfig": { "thinkingBudget": 32768 } }
           }
         },
-        "glm-5": {
+        "GLM-5": {
           "name": "GLM-5 [CRS]",
           "limit": { "context": 200000, "output": 128000 },
           "modalities": { "input": ["text"], "output": ["text"] },
-          "options": {
-            "thinking": { "type": "enabled" },
-            "interleaved": { "field": "reasoning_content" }
-          }
+          "reasoning": true
         },
         "claude-sonnet-4-5": {
           "name": "Claude Sonnet 4.5 [CRS]",
