@@ -50,14 +50,15 @@
             "max": { "thinkingConfig": { "thinkingBudget": 32768 } }
           }
         },
-        "GLM-5": {
+        "glm-5": {
           "name": "GLM-5 [CRS]",
           "limit": { "context": 200000, "output": 128000 },
           "modalities": { "input": ["text"], "output": ["text"] },
           "reasoning": true
         },
-        "claude-sonnet-4-5": {
-          "name": "Claude Sonnet 4.5 [CRS]",
+        "claude-sonnet-4-6": {
+          "name": "Claude Sonnet 4.6 [CRS]",
+          "limit": { "context": 200000, "output": 64000 },
           "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
           "variants": {
             "low": { "thinkingConfig": { "thinkingBudget": 8192 } },
@@ -71,34 +72,6 @@
           "variants": {
             "low": { "thinkingConfig": { "thinkingBudget": 8192 } },
             "max": { "thinkingConfig": { "thinkingBudget": 32768 } }
-          }
-        }
-      }
-    },
-    "ark": {
-      "name": "volcengine",
-      "npm": "@ai-sdk/openai-compatible",
-      "options": {
-        "baseURL": "https://ark.cn-beijing.volces.com/api/coding/v3",
-        "apiKey": "{file:~/.credentials/ark_api_key}"
-      },
-      "models": {
-        "glm-4.7": {
-          "name": "GLM-4.7",
-          "limit": { "context": 200000, "output": 128000 },
-          "options": {
-            "thinking": {
-              "type": "enabled"
-            }
-          }
-        },
-        "kimi-k2.5": {
-          "name": "Kimi K2.5",
-          "limit": { "context": 262144, "output": 32768 },
-          "options": {
-            "thinking": {
-              "type": "enabled"
-            }
           }
         }
       }
