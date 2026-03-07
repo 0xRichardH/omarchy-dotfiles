@@ -1,235 +1,201 @@
 ---
 name: github-pr-review
-description: Handles PR review comments and feedback resolution. Use when user wants to resolve PR comments, handle review feedback, fix review comments, address PR review, check review status, respond to reviewer, or verify PR readiness. Fetches comments via GitHub CLI, classifies by severity, applies fixes with user confirmation, commits with proper format, replies to threads.
+description: Handles PR review comments and feedback resolution. Use when user wants to resolve PR comments, handle review feedback, fix review comments, address PR review, check review status, respond to reviewer, verify PR readiness, review PR comments, analyze review feedback, evaluate PR comments, assess review suggestions, or triage PR comments. Fetches comments via GitHub CLI, classifies by severity, applies fixes with user confirmation, commits with proper format, replies to threads.
 ---
 
-# GitHub PR Review
+# GitHub PR review
 
 Resolves Pull Request review comments with severity-based prioritization, fix application, and thread replies.
 
-## Quick Start
+## Current PR
+
+!`gh pr view --json number,title,state,milestone -q '"PR #\(.number): \(.title) (\(.state)) | Milestone: \(.milestone.title // "none")"' 2>/dev/null`
+
+## Core workflow
+
+### 1. Fetch, filter, and classify comments
 
 ```bash
-# 1. Check project-specific instructions
-cat AGENTS.md 2>/dev/null | head -50  # Review project conventions
-
-# 2. Get PR and repo info
-PR=$(gh pr view --json number -q '.number')
 REPO=$(gh repo view --json nameWithOwner -q '.nameWithOwner')
+PR=$(gh pr view --json number -q '.number')
+LAST_PUSH=$(git log -1 --format=%cI HEAD)
 
-# 3. Fetch and list comments by severity
-gh api repos/$REPO/pulls/$PR/comments | python3 -c "
-import json, sys
-comments = [c for c in json.load(sys.stdin) if not c.get('in_reply_to_id')]
-def sev(b): return 'CRITICAL' if 'critical' in b.lower() else 'HIGH' if 'high' in b.lower() else 'MEDIUM' if 'medium' in b.lower() else 'LOW'
-for s in ['CRITICAL','HIGH','MEDIUM','LOW']:
-    cs = [c for c in comments if sev(c['body'])==s]
-    if cs: print(f'{s} ({len(cs)}): ' + ', '.join(f\"#{c['id]}\" for c in cs))
-"
+# Inline review comments - filter out replies (keep only originals)
+gh api repos/$REPO/pulls/$PR/comments --jq '
+  [.[] | select(.in_reply_to_id == null) |
+   {id, path, user: .user.login, created_at, body: .body[0:200]}]
+'
 
-# 4. For each comment: read -> analyze -> fix -> verify -> commit -> reply
-# 5. Run tests: make test (or project-specific command)
-# 6. Push when all fixes verified
+# PR-level reviews with non-empty body (CodeRabbit sections, Gemini, etc.)
+gh api repos/$REPO/pulls/$PR/reviews --jq '
+  [.[] | select(.body | length > 0) |
+   {id, user: .user.login, state, submitted_at, body: .body[0:500]}]
+'
 ```
 
-## Pre-Review Checklist
+**Filter new vs already-seen**: compare `created_at`/`submitted_at` with `$LAST_PUSH`. Comments posted after the last push are new. Mark older comments as "previous round" in the summary table.
 
-Before processing comments, verify:
-
-1. **Project conventions**: Read `AGENTS.md`, `.kiro/steering/`, or similar
-2. **Commit format**: Check `git log --oneline -5` for project style
-3. **Test command**: Identify test runner (`make test`, `pytest`, `npm test`)
-4. **Branch status**: `git status` to ensure clean working tree
-
-## Core Workflow
-
-### 1. Fetch PR Comments
+**Parse CodeRabbit review bodies**: the initial fetch truncates bodies for classification. For reviews from CodeRabbit (`user.login` starts with `coderabbitai`), fetch the full body separately:
 
 ```bash
-PR=$(gh pr view --json number -q '.number')
-REPO=$(gh repo view --json nameWithOwner -q '.nameWithOwner')
-gh api repos/$REPO/pulls/$PR/comments > /tmp/pr_comments.json
+gh api repos/$REPO/pulls/$PR/reviews --jq '
+  [.[] | select(.user.login | startswith("coderabbitai")) |
+   {id, submitted_at, body}]
+'
 ```
 
-### 2. Classify by Severity
+CodeRabbit posts structured `<details>` blocks containing outside-diff, duplicate, and nitpick comments. Each block includes file path, line range, severity, and optionally a "Prompt for AI Agents" with pre-built context. See `references/coderabbit_parsing.md` for full parsing guide.
 
-Process in order: CRITICAL > HIGH > MEDIUM > LOW
+**Use CodeRabbit AI prompts when available**: if a comment (or the review body) contains a "Prompt for AI Agents" `<details>` block, use it to understand the issue and suggested approach. Always read the actual code before proposing a fix.
+
+Classify all comments by severity and process in order: CRITICAL > HIGH > MEDIUM > LOW.
 
 | Severity | Indicators | Action |
 |----------|------------|--------|
-| CRITICAL | `critical.svg`, "security", "vulnerability" | Must fix |
-| HIGH | `high-priority.svg`, "High Severity" | Should fix |
-| MEDIUM | `medium-priority.svg`, "Medium Severity" | Recommended |
-| LOW | `low-priority.svg`, "style", "nit" | Optional |
+| CRITICAL | `critical.svg`, `_🔒 Security_`, `_🔴 Critical_`, "security", "vulnerability" | Must fix |
+| HIGH | `high-priority.svg`, `_⚠️ Potential issue_`, `_🐛 Bug_`, `_🟠 Major_`, "High Severity" | Should fix |
+| MEDIUM | `medium-priority.svg`, `_🛠️ Refactor suggestion_`, `_💡 Suggestion_`, "Medium Severity" | Recommended |
+| LOW | `low-priority.svg`, `_🧹 Nitpick_`, `_🔧 Optional_`, `_🟡 Minor_`, `_🔵 Trivial_`, `_⚪ Info_`, "style", "nit" | Optional |
 
-### 3. Process Each Comment
+See `references/severity_guide.md` for full detection patterns (Gemini badges, CodeRabbit emoji, Cursor comments, keyword fallback, related comments heuristics).
 
-For each comment:
+### 2. Show review summary table
 
-**a. Show context**
+Before processing, display a structured overview of all comments:
+
 ```
-Comment #123456789 (HIGH) - app/auth.py:45
-"The validation logic should use constant-time comparison..."
-```
-
-**b. Read affected code and propose fix**
-
-**c. Confirm with user before applying**
-
-**d. Apply fix if approved**
-
-**e. Verify fix addresses ALL issues in the comment**
-
-### 4. Commit Changes
-
-Use **git-commit skill** format for review fixes:
-
-```bash
-git add <files>
-git commit -m "fix(scope): address review comment #ID
-
-Brief explanation of what was wrong and how it's fixed.
-Addresses review comment #123456789."
+| # | ID         | Severity | File:Line          | Type     | Status   | Summary            |
+|---|------------|----------|--------------------|----------|----------|--------------------|
+| 1 | 123456789  | CRITICAL | src/auth.py:45     | inline   | new      | SQL injection risk |
+| 2 | 987654321  | HIGH     | src/db.py:346-350  | outside  | new      | Missing join cond  |
+| 3 | 555555555  | HIGH     | src/chunk.py:188   | duplicate| previous | Stale metadata     |
+| 4 | 444444444  | LOW      | tests/test_q.py:12 | nitpick  | previous | Naming convention  |
 ```
 
-**Review fix commit rules** (see git-commit skill for full details):
-- First line: `type(scope): subject` (max 50 chars)
-- Types: `fix`, `refactor`, `security`, `test`, `style`, `perf`
-- Reference the comment ID in body
-- Explain what was wrong and how it's fixed
+- **Type**: `inline`, `outside` (outside diff), `duplicate`, `minor`, `nitpick` (from CodeRabbit sections), or `review` (generic PR-level)
+- **Status**: `new` (posted after last push) or `previous` (from earlier rounds)
+- Group related comments (same file, same root cause, "also applies to" ranges) and note clusters
+- Deduplicate: if the same issue appears both as an inline comment and in a CodeRabbit review body section (e.g., duplicate), keep one entry and note both sources
 
-### 5. Reply to Thread
+If there are **more than 10 comments**, suggest saving a review summary to Claude's memory for tracking across sessions. The summary should include: PR number, comment IDs, severity, status (new/addressed/deferred/won't fix), and brief description. This helps maintain continuity when new comments arrive after subsequent pushes.
+
+### 3. Process each comment
+
+For each comment, in severity order:
+
+1. **Show context**: comment ID, severity, file:line, quote
+2. **Check for AI prompt**: if CodeRabbit "Prompt for AI Agents" is available for this comment, use it to understand the issue and suggested approach
+3. **Check for proposed fix**: if CodeRabbit includes a "Proposed fix" or "Suggested fix" code block, use it as a starting point (but verify correctness)
+4. **Read affected code** and propose fix (always read the actual code, even when an AI prompt or proposed fix provides context)
+5. **Handle "also applies to"**: if the comment references additional line ranges, include all locations in the fix
+6. **Confirm with user** before applying
+7. **Apply fix** if approved
+8. **Verify ALL issues** in the comment are addressed (multi-issue comments are common)
+
+### 4. Commit changes
+
+Use git-commit skill format. Functional fixes get separate commits, cosmetic fixes are batched:
+
+| Change type | Strategy |
+|-------------|----------|
+| Functional (CRITICAL/HIGH) | Separate commit per fix |
+| Cosmetic (MEDIUM/LOW) | Single batch `style:` commit |
+
+Reference the comment ID in the commit body.
+
+### 5. Reply to threads
+
+#### Inline comments
+
+**Important**: use `--input -` with JSON. The `-f in_reply_to=...` syntax does NOT work.
 
 ```bash
 COMMIT=$(git rev-parse --short HEAD)
 gh api repos/$REPO/pulls/$PR/comments \
-  --input - <<< '{"body": "Fixed in '"$COMMIT"'. Replaced set lookup with hmac.compare_digest.", "in_reply_to": 123456789}'
+  --input - <<< '{"body": "Fixed in '"$COMMIT"'. Brief explanation.", "in_reply_to": 123456789}'
 ```
 
-**Standard Reply Templates**:
+#### Non-inline comments (CodeRabbit review body)
+
+Comments embedded in the review body (outside diff, duplicate, nitpick) do not have inline threads. The GitHub API does not support replying to a review body directly. Post a general PR comment referencing the specific issue:
+
+```bash
+gh pr comment $PR --body "Fixed in $COMMIT. Addresses outside-diff comment on file/path.py:346-350."
+```
+
+**Reply templates** (no emojis, minimal and professional):
 
 | Situation | Template |
 |-----------|----------|
 | Fixed | `Fixed in [hash]. [brief description of fix]` |
-| Won't fix | `Won't fix: [reason - e.g., out of scope, acceptable risk]` |
-| By design | `By design: [explanation of why current behavior is intentional]` |
-| Deferred | `Deferred to [issue/task number]. Will address in future iteration.` |
-| Acknowledged | `Acknowledged. [brief note, e.g., "acceptable for MVP"]` |
+| Won't fix | `Won't fix: [reason]` |
+| By design | `By design: [explanation]` |
+| Deferred | `Deferred to [issue/task]. Will address in future iteration.` |
+| Acknowledged | `Acknowledged. [brief note]` |
 
-No emojis. Keep it minimal and professional.
+### 6. Run tests and push
 
-### 6. Run Tests
+Run the project test suite. All tests must pass before pushing. Push all fixes together to minimize review loops.
 
-```bash
-make test  # or project-specific command
-```
-
-All tests must pass before pushing.
-
-### 7. Push
-
-```bash
-git push
-```
-
-### 8. Submit Review (Optional)
+### 7. Submit review (optional)
 
 After addressing all comments, formally submit a review:
 
-```bash
-# Approve the PR (use after all comments resolved)
-gh pr review $PR --approve --body "All review comments addressed. Ready to merge."
+- `gh pr review $PR --approve --body "..."` - all comments addressed, PR is ready
+- `gh pr review $PR --request-changes --body "..."` - critical issues remain
+- `gh pr review $PR --comment --body "..."` - progress update, no decision yet
 
-# Or request changes if issues remain
-gh pr review $PR --request-changes --body "Addressed X comments, Y issues remain."
-
-# Or just comment without approval decision
-gh pr review $PR --comment --body "Partial progress: fixed A and B, working on C."
-```
-
-**When to use each**:
-- `--approve`: All comments addressed, PR is ready
-- `--request-changes`: Critical issues remain unresolved
-- `--comment`: Progress update, no approval decision yet
-
-## Batch Commit Strategy
-
-Organize commits by impact when addressing multiple comments:
-
-| Change Type | Strategy |
-|-------------|----------|
-| Functional (CRITICAL/HIGH) | Separate commit per fix |
-| Cosmetic (MEDIUM/LOW) | Single batch commit |
-
-**Workflow:**
-1. Fix CRITICAL/HIGH → separate commits each
-2. Collect all cosmetic fixes
-3. Apply cosmetics → single `style:` commit
-4. Run tests once
-5. Push all together
-
-## Pre-Merge Checklist
-
-Before closing/merging PR, verify (or use **github-pr-merge** skill for automated validation):
-
-- [ ] All CRITICAL and HIGH comments addressed
-- [ ] All MEDIUM comments addressed or justified skip
-- [ ] Replies posted to all resolved threads
-- [ ] Tests passing (`make test` or equivalent)
-- [ ] Linting passing (`make lint` or equivalent)
-- [ ] CI checks green (`gh pr checks`)
-- [ ] No unresolved conversations
-
-**TIP**: After resolving all comments, use the `github-pr-merge` skill to execute the merge with full pre-merge validation.
-
-## Reply to Threads API
-
-**Important**: Use `--input -` with JSON for `in_reply_to`:
+### 8. Verify milestone
 
 ```bash
-# Correct syntax
-gh api repos/$REPO/pulls/$PR/comments \
-  --input - <<< '{"body": "Fixed in abc123. Brief explanation.", "in_reply_to": 123456789}'
+gh pr view $PR --json milestone -q '.milestone.title // "none"'
 ```
 
-**Do NOT use**: `-f in_reply_to=...` (doesn't work)
+If the PR has no milestone, check for open milestones:
 
-## Avoiding Review Loops
+```bash
+REPO=$(gh repo view --json nameWithOwner -q '.nameWithOwner')
+gh api repos/$REPO/milestones --jq '[.[] | select(.state=="open")] | .[] | "\(.number): \(.title)"'
+```
 
-When bots review every push:
+If open milestones exist, inform the user and suggest assigning:
 
-1. **Batch fixes**: Accumulate all fixes, push once
-2. **Draft PR**: Convert to draft during fixes
-3. **Commit keywords**: Some bots respect `[skip ci]` or `[skip review]`
+```bash
+gh pr edit $PR --milestone "[milestone-title]"
+```
 
-## Severity Detection
+Do **not** assign automatically. This is a reminder only.
 
-**Gemini badges**:
-- `critical.svg` -> CRITICAL
-- `high-priority.svg` -> HIGH
-- `medium-priority.svg` -> MEDIUM
-- `low-priority.svg` -> LOW
+## Avoiding review loops
 
-**Cursor comments**:
-- `<!-- **High Severity** -->` -> HIGH
-- `<!-- **Medium Severity** -->` -> MEDIUM
+When bots (Gemini, Codex, etc.) review every push:
 
-**Fallback keywords**: "security", "vulnerability", "injection" -> CRITICAL
+1. **Batch fixes**: accumulate all fixes, push once
+2. **Draft PR**: convert to draft during fixes
+3. **Commit keywords**: some bots respect `[skip ci]` or `[skip review]`
 
-## Important Rules
+## Important rules
 
-- **ALWAYS** read project conventions (AGENTS.md, etc.) before starting
+- **ALWAYS** fetch both inline comments (`pulls/$PR/comments`) and review bodies (`pulls/$PR/reviews`)
+- **ALWAYS** parse CodeRabbit review bodies for all section types (outside diff, duplicate, minor, nitpick)
+- **ALWAYS** use CodeRabbit "Prompt for AI Agents" as primary context when available
+- **ALWAYS** show the review summary table before processing
 - **ALWAYS** confirm before modifying files
-- **ALWAYS** verify ALL issues in multi-issue comments are fixed
+- **ALWAYS** verify ALL issues in multi-issue comments are fixed, including "also applies to" ranges
 - **ALWAYS** run tests before pushing
 - **ALWAYS** reply to resolved threads using standard templates
 - **ALWAYS** submit formal review (`gh pr review`) after addressing all comments
+- **ALWAYS** check milestone at the end and remind if missing
+- **ALWAYS** suggest saving a review summary to memory when there are more than 10 comments
 - **NEVER** use emojis in commit messages or thread replies
 - **NEVER** skip HIGH/CRITICAL comments without explicit user approval
+- **NEVER** assign milestone automatically - suggest only
 - **Functional fixes** -> separate commits (one per fix)
 - **Cosmetic fixes** -> batch into single `style:` commit
+- **Duplicate comments** -> treat as higher priority than their label (issue was already flagged before)
+- **Related comments** -> group and fix together when they share root cause or file context
 
-## Related Skills
+## References
 
-- **git-commit** - Commit message format and conventions (use for review fix commits)
-- **github-pr-merge** - Execute merge after review is complete (use after fixing all comments)
+- `references/severity_guide.md` - Severity detection patterns (Gemini badges, CodeRabbit emoji, Cursor comments, keyword fallback, related comments heuristics)
+- `references/coderabbit_parsing.md` - CodeRabbit review body structure, section parsing, "Prompt for AI Agents" usage, duplicate and "also applies to" handling

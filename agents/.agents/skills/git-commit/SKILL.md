@@ -1,235 +1,124 @@
 ---
 name: git-commit
-description: Creates git commits following Conventional Commits format with type/scope/subject. Use when user wants to commit changes, create commit, save work, or stage and commit. Handles regular branch commits (development) and merge commits (PR closure). Enforces project-specific conventions from AGENTS.md.
+description: 'Execute git commit with conventional commit message analysis, intelligent staging, and message generation. Use when user asks to commit changes, create a git commit, or mentions "/commit". Supports: (1) Auto-detecting type and scope from changes, (2) Generating conventional commit messages from diff, (3) Interactive commit with optional type/scope/description overrides, (4) Intelligent file staging for logical grouping'
+license: MIT
+allowed-tools: Bash
 ---
 
-# Git Commit
+# Git Commit with Conventional Commits
 
-Creates git commits following Conventional Commits format with proper type, scope, and subject.
+## Overview
 
-## Quick Start
+Create standardized, semantic git commits using the Conventional Commits specification. Analyze the actual diff to determine appropriate type, scope, and message.
 
-```bash
-# 1. Check for project-specific commit conventions
-cat AGENTS.md 2>/dev/null | grep -A 20 -i "commit"
+## Conventional Commit Format
 
-# 2. Stage changes
-git add <files>  # or: git add -A
+```
+<type>[optional scope]: <description>
 
-# 3. Create commit (branch commit format)
-git commit -m "type(scope): subject
+[optional body]
 
-Body explaining HOW and WHY.
-Reference: Task X.Y, Req N"
+[optional footer(s)]
 ```
 
 ## Commit Types
 
-### Regular Branch Commits (During Development)
-
-**Format**: `type(scope): subject`
-
-| Type | Purpose |
-|------|---------|
-| `feat` | New feature or functionality |
-| `fix` | Bug fix or issue resolution |
-| `refactor` | Code refactoring without behavior change |
-| `perf` | Performance improvements |
-| `test` | Test additions or modifications |
-| `ci` | CI/CD configuration changes |
-| `docs` | Documentation updates |
-| `chore` | Maintenance, dependencies, tooling |
-| `style` | Code formatting, linting (non-functional) |
-| `security` | Security vulnerability fixes or hardening |
-
-### Scope (Required, kebab-case)
-
-Examples: `validation`, `auth`, `cookie-service`, `template`, `config`, `tests`, `api`
-
-### Subject Line Rules
-
-- Max 50 characters after colon
-- Present tense imperative: add, implement, fix, improve, enhance, refactor, remove, prevent
-- NO period at the end
-- Specific and descriptive - state WHAT, not WHY
-
-## Core Workflow
-
-### 1. Check Project Conventions
-
-**ALWAYS check first** - project may override defaults:
-
-```bash
-cat AGENTS.md 2>/dev/null | grep -A 30 -i "commit"
-cat .kiro/steering/*.md 2>/dev/null | grep -A 20 -i "commit"
-```
-
-If project specifies different format, **USE PROJECT FORMAT**.
-
-### 2. Review Changes
-
-```bash
-git status
-git diff --staged  # if already staged
-git diff           # if not staged
-```
-
-### 3. Stage Files
-
-```bash
-git add <specific-files>  # preferred
-# or
-git add -A  # all changes
-```
-
-**NEVER commit**:
-- `.env`, `credentials.json`, secrets
-- `node_modules/`, `__pycache__/`, `.venv/`
-- Large binary files without explicit approval
-
-### 4. Create Commit
-
-**Simple change**:
-```bash
-git commit -m "fix(auth): use hmac.compare_digest for secure comparison"
-```
-
-**Complex change (with body)**:
-```bash
-git commit -m "$(cat <<'EOF'
-feat(validation): add URLValidator with domain whitelist
-
-Implement URLValidator class supporting:
-- Domain whitelist enforcement (youtube.com, youtu.be)
-- Dangerous scheme blocking (javascript, data, file)
-- URL parsing with embedded credentials handling
-
-Addresses Requirement 31: Input validation
-Part of Task 5.1: Input Validation Utilities
-EOF
-)"
-```
-
-### 5. Verify Commit
-
-```bash
-git log -1 --format="%h %s"
-git show --stat HEAD
-```
-
-## Body Format (Recommended for Complex Changes)
-
-```
-<blank line>
-Explain HOW and WHY the change was made.
-- Use bullet points for multiple items
-- Wrap at 72 characters
-
-Reference: Task X.Y
-Addresses: Req N
-```
-
-## Git Trailers
-
-| Trailer | Purpose |
-|---------|---------|
-| `Fixes #N` | Links and closes issue on merge |
-| `Closes #N` | Same as Fixes |
-| `Co-authored-by: Name <email>` | Credit co-contributors |
-
-Place trailers at end of body after blank line. See `references/commit_examples.md` for examples.
+| Type       | Purpose                        |
+| ---------- | ------------------------------ |
+| `feat`     | New feature                    |
+| `fix`      | Bug fix                        |
+| `docs`     | Documentation only             |
+| `style`    | Formatting/style (no logic)    |
+| `refactor` | Code refactor (no feature/fix) |
+| `perf`     | Performance improvement        |
+| `test`     | Add/update tests               |
+| `build`    | Build system/dependencies      |
+| `ci`       | CI/config changes              |
+| `chore`    | Maintenance/misc               |
+| `revert`   | Revert commit                  |
 
 ## Breaking Changes
 
-For incompatible API/behavior changes, use `!` after scope OR `BREAKING CHANGE:` footer:
-
 ```
-feat(api)!: change response format to JSON:API
+# Exclamation mark after type/scope
+feat!: remove deprecated endpoint
 
-BREAKING CHANGE: Response envelope changed from `{ data }` to `{ data: { type, id, attributes } }`.
+# BREAKING CHANGE footer
+feat: allow config to extend other configs
+
+BREAKING CHANGE: `extends` key behavior changed
 ```
 
-Triggers major version bump in semantic-release.
+## Workflow
 
-## Merge Commits (PR Closure)
-
-For PRs, use extended description with sections:
+### 1. Analyze Diff
 
 ```bash
-gh pr create --title "feat(security): implement input validation (Task 5)" --body "$(cat <<'EOF'
-## Summary
-- Input validation utilities (URLValidator, FormatValidator)
-- Secure template processor with path traversal prevention
-- API key authentication middleware
+# If files are staged, use staged diff
+git diff --staged
 
-## Task Breakdown
-Task 5.1: Input Validation - URLValidator, FormatValidator
-Task 5.2: Template Processing - Path traversal prevention
-Task 5.3: API Key Auth - Multi-key support, excluded paths
-Task 5.4: Security Tests - 102 path traversal tests
+# If nothing staged, use working tree diff
+git diff
 
-## Requirements Covered
-Req 7, Req 9, Req 31, Req 33
+# Also check status
+git status --porcelain
+```
 
-## Test Coverage
-- All 473 tests passing
-- Coverage: 93%
-- Pre-commit checks: passing
+### 2. Stage Files (if needed)
+
+If nothing is staged or you want to group changes differently:
+
+```bash
+# Stage specific files
+git add path/to/file1 path/to/file2
+
+# Stage by pattern
+git add *.test.*
+git add src/components/*
+
+# Interactive staging
+git add -p
+```
+
+**Never commit secrets** (.env, credentials.json, private keys).
+
+### 3. Generate Commit Message
+
+Analyze the diff to determine:
+
+- **Type**: What kind of change is this?
+- **Scope**: What area/module is affected?
+- **Description**: One-line summary of what changed (present tense, imperative mood, <72 chars)
+
+### 4. Execute Commit
+
+```bash
+# Single line
+git commit -m "<type>[scope]: <description>"
+
+# Multi-line with body/footer
+git commit -m "$(cat <<'EOF'
+<type>[scope]: <description>
+
+<optional body>
+
+<optional footer>
 EOF
 )"
 ```
 
-## Integration with Other Skills
+## Best Practices
 
-### From github-pr-review
+- One logical change per commit
+- Present tense: "add" not "added"
+- Imperative mood: "fix bug" not "fixes bug"
+- Reference issues: `Closes #123`, `Refs #456`
+- Keep description under 72 characters
 
-When fixing review comments, use this format:
+## Git Safety Protocol
 
-```bash
-git commit -m "fix(scope): address review comment #ID
-
-Brief explanation of what was wrong and how it's fixed.
-Addresses review comment #123456789."
-```
-
-### From github-pr-creation
-
-Before creating PR, ensure all commits follow this format. The PR skill will:
-1. Analyze commits for proper format
-2. Extract types for PR labels
-3. Build PR description from commit bodies
-
-## Important Rules
-
-- **ALWAYS** check project conventions (AGENTS.md) before committing
-- **ALWAYS** use project format if it differs from default
-- **ALWAYS** include scope in parentheses
-- **ALWAYS** use present tense imperative verb
-- **NEVER** end subject with period
-- **NEVER** commit secrets or credentials
-- **NEVER** use generic messages ("update code", "fix bug", "changes")
-- **NEVER** exceed 50 chars in subject line
-- Group related changes -> single focused commit
-
-## Examples
-
-**Good**:
-```
-feat(validation): add URLValidator with domain whitelist
-fix(auth): use hmac.compare_digest for secure key comparison
-refactor(template): consolidate filename sanitization logic
-test(security): add 102 path traversal prevention tests
-```
-
-**Bad**:
-```
-update validation code           # no type, no scope, vague
-feat: add stuff                  # missing scope, too vague
-fix(auth): fix bug               # circular, not specific
-chore: make changes              # missing scope, vague
-feat(security): improve things.  # has period, vague
-```
-
-## References
-
-- `references/commit_examples.md` - Extended examples by type
+- NEVER update git config
+- NEVER run destructive commands (--force, hard reset) without explicit request
+- NEVER skip hooks (--no-verify) unless user asks
+- NEVER force push to main/master
+- If commit fails due to hooks, fix and create NEW commit (don't amend)
