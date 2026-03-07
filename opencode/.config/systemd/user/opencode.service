@@ -5,16 +5,10 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-Environment=OPENCODE_EXPERIMENTAL=1
-ExecStart=%h/.bin/opencode-serve --hostname 0.0.0.0 --port 4096
-LoadCredential=OPENCODE_SERVER_PASSWORD:%h/.credentials/opencode_password
-LoadCredential=SUPERMEMORY_API_KEY:%h/.credentials/supermemory_api_key
+ExecStart=/bin/sh -c 'OPENCODE_SERVER_PASSWORD=$(cat "$CREDENTIALS_DIRECTORY/opencode_password") exec /home/richard/.local/share/mise/shims/opencode serve --hostname 0.0.0.0 --port 4096'
+LoadCredential=opencode_password:/home/richard/.credentials/opencode_password
 Restart=on-failure
 RestartSec=10
-
-# Security hardening (optional but recommended)
-NoNewPrivileges=true
-PrivateTmp=true
 
 [Install]
 WantedBy=default.target
