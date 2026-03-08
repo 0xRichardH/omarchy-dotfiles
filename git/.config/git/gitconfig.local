@@ -6,7 +6,5 @@
   format = ssh
 [commit]
   gpgsign = true
-[url "git@github.com:"]
-  insteadOf = "https://github.com/"
 [includeIf "gitdir:~/feedmob/"]
   path = "~/feedmob/.gitconfig"
