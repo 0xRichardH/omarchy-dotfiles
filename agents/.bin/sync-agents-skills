@@ -5,4 +5,18 @@ script_dir=$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)
 repo_root=$(cd "$script_dir/../.." && pwd)
 cd "$repo_root"
 
+repo_skills="$repo_root/agents/.agents/skills"
+home_skills="$HOME/.agents/skills"
+
+# Copy new skills from home into the repo so stow can adopt them
+if [[ -d "$home_skills" ]]; then
+  for skill in "$home_skills"/*/; do
+    skill_name=$(basename "$skill")
+    if [[ ! -d "$repo_skills/$skill_name" ]]; then
+      echo "New skill found: $skill_name — copying into repo"
+      cp -r "$skill" "$repo_skills/$skill_name"
+    fi
+  done
+fi
+
 stow --target="$HOME" --restow --adopt agents "$@"

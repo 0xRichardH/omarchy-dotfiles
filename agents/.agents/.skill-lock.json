@@ -215,6 +215,24 @@
       "skillFolderHash": "24b052727274cde237fddc53529d00dd9080757d",
       "installedAt": "2026-03-07T23:57:38.860Z",
       "updatedAt": "2026-03-07T23:57:38.860Z"
+    },
+    "docs:write-concisely": {
+      "source": "neolabhq/context-engineering-kit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/neolabhq/context-engineering-kit.git",
+      "skillPath": "plugins/docs/skills/write-concisely/SKILL.md",
+      "skillFolderHash": "cbf03d42bd48a64f6c9891f1042f5de1e05578f8",
+      "installedAt": "2026-03-08T14:13:56.859Z",
+      "updatedAt": "2026-03-08T14:13:56.859Z"
+    },
+    "documentation-writer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/github/awesome-copilot.git",
+      "skillPath": "skills/documentation-writer/SKILL.md",
+      "skillFolderHash": "016d8040a3f91c8360b1003e74fbf29f34c283f5",
+      "installedAt": "2026-03-08T14:15:16.206Z",
+      "updatedAt": "2026-03-08T14:15:16.206Z"
     }
   },
   "dismissed": {
