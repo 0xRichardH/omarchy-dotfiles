@@ -233,6 +233,33 @@
       "skillFolderHash": "016d8040a3f91c8360b1003e74fbf29f34c283f5",
       "installedAt": "2026-03-08T14:15:16.206Z",
       "updatedAt": "2026-03-08T14:15:16.206Z"
+    },
+    "using-jj-workspaces": {
+      "source": "edmundmiller/dotfiles",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/edmundmiller/dotfiles.git",
+      "skillPath": ".agents/skills/using-jj-workspaces/SKILL.md",
+      "skillFolderHash": "9a0c6ac58f020d3351be3f51fed7d8adf7e4b73b",
+      "installedAt": "2026-03-11T01:13:33.584Z",
+      "updatedAt": "2026-03-11T01:13:33.584Z"
+    },
+    "jj-history-investigation": {
+      "source": "edmundmiller/dotfiles",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/edmundmiller/dotfiles.git",
+      "skillPath": ".agents/skills/jj-history-investigation/SKILL.md",
+      "skillFolderHash": "fe623c5d147945555b1a4eace472ee5d136c71aa",
+      "installedAt": "2026-03-11T01:15:30.729Z",
+      "updatedAt": "2026-03-11T01:15:30.729Z"
+    },
+    "jj": {
+      "source": "coreyja/dotfiles",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/coreyja/dotfiles.git",
+      "skillPath": ".claude/skills/jj/SKILL.md",
+      "skillFolderHash": "e5b80f7a3e8f7e7231c1e2749493e9142a3adae1",
+      "installedAt": "2026-03-11T01:17:59.816Z",
+      "updatedAt": "2026-03-11T01:17:59.816Z"
     }
   },
   "dismissed": {
