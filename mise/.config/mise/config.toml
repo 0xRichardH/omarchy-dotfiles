@@ -23,6 +23,7 @@ atuin = "18.12.1"
 "npm:openclaw" = "latest"
 "npm:@sourcegraph/amp" = "latest"
 "npm:acpx" = "latest"
+"npm:@google/gemini-cli" = "latest"
 "pipx:pgcli" = { version = "latest", extras = "sshtunnel", uvx_args = "--with 'paramiko<4'" }
 "cargo:jj-cli" = "latest"
 "cargo:https://github.com/rtk-ai/rtk" = "latest"

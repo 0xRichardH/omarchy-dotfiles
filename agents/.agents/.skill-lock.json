@@ -252,15 +252,6 @@
       "installedAt": "2026-03-11T01:15:30.729Z",
       "updatedAt": "2026-03-11T01:15:30.729Z"
     },
-    "jj": {
-      "source": "coreyja/dotfiles",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/coreyja/dotfiles.git",
-      "skillPath": ".claude/skills/jj/SKILL.md",
-      "skillFolderHash": "e5b80f7a3e8f7e7231c1e2749493e9142a3adae1",
-      "installedAt": "2026-03-11T01:17:59.816Z",
-      "updatedAt": "2026-03-11T01:17:59.816Z"
-    }
   },
   "dismissed": {
     "findSkillsPrompt": true
