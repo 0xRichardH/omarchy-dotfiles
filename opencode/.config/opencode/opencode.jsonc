@@ -10,15 +10,8 @@
   "autoupdate": false,
   "plugin": [
     "opencode-supermemory@latest", // https://github.com/supermemoryai/opencode-supermemory
-    "opencode-mystatus@latest", // https://github.com/vbgate/opencode-mystatus
-    "yet-another-opencode-cursor-auth@latest", // https://github.com/Yukaii/yet-another-opencode-cursor-auth/
+    "opencode-cursor-oauth@latest", // https://github.com/ephraimduncan/opencode-cursor
   ],
-  "command": {
-    "mystatus": {
-      "description": "Query quota usage for all AI accounts",
-      "template": "Use the mystatus tool to query quota usage. Return the result as-is without modification."
-    }
-  },
   "provider": {
     "cursor": {
       "name": "Cursor"
