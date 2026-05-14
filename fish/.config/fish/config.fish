@@ -18,3 +18,6 @@ source (dirname (status --current-filename))/keybindings.fish
 if status is-interactive
     atuin init fish | source # https://atuin.sh/
 end
+
+# OpenClaw Completion
+source "/home/richard/.openclaw/completions/openclaw.fish"

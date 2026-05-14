@@ -10,12 +10,19 @@
   "autoupdate": false,
   "plugin": [
     "opencode-supermemory@latest", // https://github.com/supermemoryai/opencode-supermemory
-    "opencode-cursor-oauth@latest", // https://github.com/ephraimduncan/opencode-cursor
   ],
-  "provider": {
-    "cursor": {
-      "name": "Cursor"
+  "lsp": false,
+  "agent": {
+    "explore": {
+      "mode": "subagent",
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
     },
+    "general": {
+      "mode": "subagent",
+      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
+    }
+  },
+  "provider": {
     "crs": {
       "npm": "@ai-sdk/anthropic",
       "options": {

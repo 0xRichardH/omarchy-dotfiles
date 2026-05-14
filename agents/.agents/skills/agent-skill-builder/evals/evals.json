@@ -1,0 +1,122 @@
+{
+  "skill_name": "agent-skill-builder",
+  "evals": [
+    {
+      "id": 0,
+      "name": "new-skill-from-recurring-workflow",
+      "prompt": "I keep doing a weekly release-readiness check for our web app: inspect open PRs, identify blocked CI, summarize risky migrations, and write a short go/no-go note for Slack. Please turn this into an agent skill draft. I do not need packaging yet.",
+      "expected_output": "A draft skill proposal or SKILL.md that decides whether a skill is warranted, uses a routing-focused description, keeps the body lean, and notes that skill-creator should handle evals/packaging later.",
+      "files": [],
+      "assertions": [
+        "Output includes SKILL.md-style frontmatter with name and description.",
+        "Description is routing-focused and starts with or uses 'Load when'.",
+        "Output includes positive and negative trigger examples or equivalent routing boundaries.",
+        "Output avoids packaging because the user explicitly said packaging is not needed yet."
+      ]
+    },
+    {
+      "id": 1,
+      "name": "refactor-existing-overlong-skill",
+      "prompt": "I have an existing skill called api-debug-helper. Its SKILL.md is huge and mixes curl examples, API error tables, retry policy, and output templates. Please refactor the skill structure without changing its name.",
+      "expected_output": "A refactor plan that preserves the skill name, separates main instructions from references/scripts/assets, removes obvious command listings, and keeps the routing boundary precise.",
+      "files": [],
+      "assertions": [
+        "Output preserves the api-debug-helper name.",
+        "Output includes routing-focused frontmatter or explicitly recommends it.",
+        "Output separates long examples, references, and reusable templates out of the main SKILL.md.",
+        "Main SKILL.md avoids obvious command lists and keeps durable guidance in the body."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "routing-description-update",
+      "prompt": "My agent skill for creating design docs does not trigger when I say 'turn this idea into a spec', but I worry that broadening it will collide with my general documentation skill. Help me update it safely.",
+      "expected_output": "Guidance that treats the description as routing logic, proposes positive and near-miss negative trigger examples, warns that description changes need evals, and hands off formal trigger optimization to skill-creator.",
+      "files": [],
+      "assertions": [
+        "Output treats the description as routing logic rather than implementation documentation.",
+        "Output includes the requested phrase 'turn this idea into a spec' as a positive trigger.",
+        "Output defines a boundary against end-user documentation or documentation-writer.",
+        "Output recommends trigger evals or skill-creator before deploying the description change."
+      ]
+    },
+    {
+      "id": 3,
+      "name": "forbidden-load-routing-evals",
+      "prompt": "I'm adding a skill for database migration safety. Before we write the skill body, help me define routing evals so it triggers for risky migration review but does not collide with our general Postgres query optimization skill or generic code review skill.",
+      "expected_output": "A test-first routing plan with positive examples, near-miss negative examples, forbidden-load cases for adjacent skills, and a note that the body should wait until the routing boundary is clear.",
+      "files": [],
+      "assertions": [
+        "Output recommends writing evals before the skill body.",
+        "Output includes positive trigger examples for risky migration review.",
+        "Output includes near-miss negative or forbidden-load examples for Postgres optimization and generic code review.",
+        "Output treats off-target routing as a regression risk for other skills."
+      ]
+    },
+    {
+      "id": 4,
+      "name": "progressive-file-read-design",
+      "prompt": "Our incident-response skill is getting long. It has pager playbooks, customer-update templates, root-cause-analysis rubrics, and cloud-provider outage references. Refactor it so the agent only reads heavy material when needed.",
+      "expected_output": "A progressive disclosure structure that keeps SKILL.md lean, moves heavy content into references/assets/scripts as appropriate, and names when each accessory file should be read.",
+      "files": [],
+      "assertions": [
+        "Output keeps SKILL.md focused on durable judgment and pointers.",
+        "Output places playbooks and outage references in references or equivalent conditional files.",
+        "Output places customer-update templates in assets or an equivalent template location.",
+        "Output includes instructions for when the agent should read each accessory file."
+      ]
+    },
+    {
+      "id": 5,
+      "name": "skill-metadata-and-dependencies",
+      "prompt": "I need a skill that depends on our browser-automation skill and has review metadata for ownership and eval coverage. It also needs first-run setup where the user chooses a default project board. What should the skill structure include?",
+      "expected_output": "A skill structure that includes depends metadata when supported, review/eval metadata, config.json for first-run setup, and keeps implementation minutiae out of model context when possible.",
+      "files": [],
+      "assertions": [
+        "Output mentions depends or dependency metadata for the browser-automation skill.",
+        "Output mentions metadata for ownership, review, or eval coverage.",
+        "Output recommends config.json or equivalent first-run setup for the default project board.",
+        "Output warns not to pollute SKILL.md context with runtime minutiae."
+      ]
+    },
+    {
+      "id": 6,
+      "name": "append-mostly-maintenance",
+      "prompt": "A merged skill failed once because the agent used the wrong report template. Should I rewrite the workflow and broaden the description so it catches more cases next time?",
+      "expected_output": "Maintenance guidance that prefers adding a gotcha or targeted accessory-file pointer, avoids broad description changes without evals, and treats merged skills as append-mostly unless evidence supports a larger refactor.",
+      "files": [],
+      "assertions": [
+        "Output recommends adding a gotcha or targeted note for the observed failure.",
+        "Output discourages broadening the description without trigger evals.",
+        "Output describes merged skills as append-mostly or equivalent.",
+        "Output asks for evidence or evals before a larger workflow rewrite."
+      ]
+    },
+    {
+      "id": 7,
+      "name": "self-refactor-agent-skill-builder",
+      "prompt": "Use agent-skill-builder to refactor an existing skill named agent-skill-builder. Keep the name, do not add a dependency on skill-creator, and move detailed routing, structure, and maintenance guidance out of the root SKILL.md when that lowers context cost.",
+      "expected_output": "A refactor that preserves the name, keeps SKILL.md lean, moves conditional detail into references, and explicitly avoids depends: skill-creator unless every invocation requires it.",
+      "files": [],
+      "assertions": [
+        "Output preserves the agent-skill-builder name.",
+        "Output keeps the root SKILL.md focused on fast-path workflow and pointers.",
+        "Output moves detailed routing, structure, and maintenance guidance into references or equivalent conditional files.",
+        "Output avoids adding depends: skill-creator by default."
+      ]
+    },
+    {
+      "id": 8,
+      "name": "adjacent-skill-routing-boundary",
+      "prompt": "I want a skill that helps improve other skills, but I already have skill-creator for evals and packaging, documentation-writer for docs, and customize-opencode for opencode config. Define the routing boundary so the new skill does not collide with those.",
+      "expected_output": "A boundary plan that loads for skill-shaping work, hands evals/packaging to skill-creator, avoids human documentation tasks, and does not trigger for opencode configuration unless the task is specifically about a skill artifact.",
+      "files": [],
+      "assertions": [
+        "Output defines positive triggers for creating, updating, or refactoring agent skills.",
+        "Output hands formal evals, packaging, or trigger-description optimization to skill-creator.",
+        "Output excludes general human documentation work covered by documentation-writer.",
+        "Output excludes opencode configuration work covered by customize-opencode unless a skill artifact is the subject."
+      ]
+    }
+  ]
+}
