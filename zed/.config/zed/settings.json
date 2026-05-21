@@ -1,0 +1,251 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "status_bar": {
+    "show_active_file": false,
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_branch_status_icon": true,
+  },
+  "which_key": {
+    "enabled": true,
+  },
+  "ui_font_family": "CaskaydiaMono Nerd Font",
+  "redact_private_values": true,
+  "project_panel": {
+    "dock": "left",
+  },
+  "outline_panel": {
+    "dock": "left",
+  },
+  "agent": {
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "gpt-5.5",
+      "enable_thinking": true,
+      "effort": "medium",
+    },
+    "single_file_review": true,
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "git_panel": {
+    "dock": "left",
+  },
+  "agent_servers": {
+    "hermes-agent": {
+      "type": "custom",
+      "command": "hermes",
+      "args": ["acp"],
+    },
+    "claude-acp": {
+      "type": "registry",
+    },
+    "amp-acp": {
+      "type": "registry",
+    },
+  },
+  "context_servers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "env": null,
+    },
+  },
+  "ssh_connections": [
+    {
+      "host": "richard.tail53973.ts.net",
+      "username": "0xdev",
+      "projects": [],
+    },
+    {
+      "host": "0xdevtekimini.tail53973.ts.net",
+      "username": "0xdev",
+      "projects": [
+        {
+          "paths": ["~/dotfiles"],
+        },
+      ],
+    },
+  ],
+  "use_system_prompts": false,
+  "icon_theme": {
+    "mode": "system",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)",
+  },
+  "autosave": "on_focus_change",
+  "use_autoclose": true,
+  "always_treat_brackets_as_autoclosed": true,
+  "restore_on_startup": "last_workspace",
+  "hide_mouse": "on_typing_and_action",
+  "centered_layout": {
+    "left_padding": 0.2,
+    "right_padding": 0.2,
+  },
+  "journal": {
+    "hour_format": "hour24",
+    "path": "~/Notes/zed-notes",
+  },
+  "collaboration_panel": {
+    "button": true,
+    "dock": "left",
+  },
+  "edit_predictions": {
+    "provider": "copilot",
+    "disabled_globs": [
+      "**/.env*",
+      "**/*.pem",
+      "**/*.key",
+      "**/*.cert",
+      "**/*.crt",
+      "**/secrets.yml",
+    ],
+    "mode": "eager",
+  },
+  "base_keymap": "Emacs",
+  "vim_mode": true,
+  "vim": {
+    "use_smartcase_find": true,
+    "toggle_relative_line_numbers": true,
+  },
+  "relative_line_numbers": "enabled",
+  "scrollbar": {
+    "show": "never",
+  },
+  "show_whitespaces": "selection",
+  "show_completions_on_input": true,
+  "show_signature_help_after_edits": true,
+  "tab_bar": {
+    "show": true,
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": true,
+  },
+  "tabs": {
+    "close_position": "right",
+    "file_icons": true,
+    "git_status": true,
+    "activate_on_close": "history",
+    "show_close_button": "hover",
+  },
+  // Turn off telemetry
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  // Use zed commit editor
+  "terminal": {
+    "font_family": "CaskaydiaMono Nerd Font",
+    "font_fallbacks": ["CaskaydiaMono Nerd Font"],
+    "copy_on_select": true,
+    "font_size": 14,
+    "env": {
+      "EDITOR": "zed --wait",
+      "VISUAL": "zed --wait",
+    },
+    "shell": {
+      "with_arguments": {
+        "program": "fish",
+        "args": [],
+      },
+    },
+  },
+  "theme": {
+    "dark": "Ayu Mirage",
+    "light": "Ayu Light",
+    "mode": "system",
+  },
+  "toolbar": {
+    "breadcrumbs": true,
+    "quick_actions": true,
+  },
+  "ui_font_size": 16,
+  "ui_font_fallbacks": ["CaskaydiaMono Nerd Font"],
+  "buffer_font_size": 16.0,
+  "buffer_line_height": {
+    "custom": 1.2,
+  },
+  "buffer_font_family": "CaskaydiaMono Nerd Font",
+  "buffer_font_fallbacks": ["CaskaydiaMono Nerd Font"],
+  "buffer_font_features": {
+    "calt": true, //Enable ligatures -> => !=
+    "zero": true, // Alternative zero -> 0
+    "cv01": true, // Remove gaps @$%
+  },
+  "experimental.theme_overrides": {
+    "syntax": {
+      "comment": {
+        "font_style": "italic",
+      },
+      "keyword": {
+        "font_style": "italic",
+      },
+    },
+  },
+  "current_line_highlight": "line",
+  // Indentation, rainbow indentation
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+  },
+  // Inlay hints preconfigured by Zed: Go, Rust, Typescript and Svelte
+  "inlay_hints": {
+    "enabled": false,
+  },
+  "format_on_save": "on",
+  "formatter": "auto",
+  "languages": {
+    "Python": {
+      "language_servers": ["pyright", "ruff"],
+      "format_on_save": "on",
+      "formatter": [
+        {
+          "code_action": "source.organizeImports.ruff",
+        },
+        {
+          "code_action": "source.fixAll.ruff",
+        },
+        {
+          "language_server": {
+            "name": "ruff",
+          },
+        },
+      ],
+    },
+    "Ruby": {
+      "language_servers": ["ruby-lsp", "!solargraph", "!rubocop"],
+      "formatter": "language_server",
+      "format_on_save": "on",
+    },
+  },
+  "lsp": {
+    "rust-analyzer": {
+      "initialization_options": {
+        "check": {
+          "command": "clippy", // rust-analyzer.check.command (default: "check")
+        },
+      },
+    },
+    "ruby-lsp": {
+      "initialization_options": {
+        "enabledFeatures": {
+          "diagnostics": false,
+          "formatting": true,
+        },
+        "formatter": "rubyfmt",
+        "linters": ["standard"],
+      },
+      "settings": {
+        "use_bundler": false,
+      },
+    },
+  },
+}
