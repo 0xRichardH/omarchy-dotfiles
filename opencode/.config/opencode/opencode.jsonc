@@ -12,16 +12,6 @@
     "opencode-supermemory@latest", // https://github.com/supermemoryai/opencode-supermemory
   ],
   "lsp": false,
-  "agent": {
-    "explore": {
-      "mode": "subagent",
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
-    },
-    "general": {
-      "mode": "subagent",
-      "model": "fireworks-ai/accounts/fireworks/routers/kimi-k2p5-turbo"
-    }
-  },
   "provider": {
     "crs": {
       "npm": "@ai-sdk/anthropic",
@@ -89,6 +79,12 @@
     "grep": {
       "type": "remote",
       "url": "https://mcp.grep.app",
+      "enabled": true
+    },
+    "linear": {
+      "type": "remote",
+      "url": "https://mcp.linear.app/mcp",
+      "oauth": {},
       "enabled": true
     }
   }
