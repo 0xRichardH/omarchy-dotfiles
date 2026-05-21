@@ -5,7 +5,7 @@
     "CLAUDE.md",
     "CONTRIBUTING.md",
     "docs/guidelines.md",
-    ".cursor/rules/*.md"
+    ".cursor/rules/*.md",
   ],
   "autoupdate": false,
   "plugin": [
@@ -23,69 +23,86 @@
         "kimi-k2.5": {
           "name": "Kimi-K2.5 [CRS]",
           "limit": { "context": 262144, "output": 16000 },
-          "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
+          "modalities": {
+            "input": ["text", "image", "video"],
+            "output": ["text"],
+          },
           "reasoning": true,
           "interleaved": { "field": "reasoning_content" },
           "variants": {
             "low": { "thinkingBudget": 8192 },
-            "max": { "thinkingBudget": 32768 }
-          }
+            "max": { "thinkingBudget": 32768 },
+          },
         },
         "claude-opus-4-6": {
           "name": "Claude Opus 4.6 [CRS]",
           "limit": { "context": 1000000, "output": 128000 },
-          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
           "variants": {
             "low": { "thinkingConfig": { "thinkingBudget": 8192 } },
-            "max": { "thinkingConfig": { "thinkingBudget": 32768 } }
-          }
+            "max": { "thinkingConfig": { "thinkingBudget": 32768 } },
+          },
         },
         "glm-5": {
           "name": "GLM-5 [CRS]",
           "limit": { "context": 200000, "output": 128000 },
           "modalities": { "input": ["text"], "output": ["text"] },
-          "reasoning": true
+          "reasoning": true,
         },
         "claude-sonnet-4-6": {
           "name": "Claude Sonnet 4.6 [CRS]",
           "limit": { "context": 200000, "output": 64000 },
-          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
           "variants": {
             "low": { "thinkingConfig": { "thinkingBudget": 8192 } },
-            "max": { "thinkingConfig": { "thinkingBudget": 32768 } }
-          }
+            "max": { "thinkingConfig": { "thinkingBudget": 32768 } },
+          },
         },
         "claude-haiku-4-5": {
           "name": "Claude Haiku 4.5 [CRS]",
           "limit": { "context": 200000, "output": 64000 },
-          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
           "variants": {
             "low": { "thinkingConfig": { "thinkingBudget": 8192 } },
-            "max": { "thinkingConfig": { "thinkingBudget": 32768 } }
-          }
-        }
-      }
-    }
+            "max": { "thinkingConfig": { "thinkingBudget": 32768 } },
+          },
+        },
+      },
+    },
   },
   "mcp": {
     "exa": {
       "type": "local",
-      "command": ["bunx", "-y", "exa-mcp-server", "tools=get_code_context_exa,web_search_exa"],
+      "command": [
+        "bunx",
+        "-y",
+        "exa-mcp-server",
+        "tools=get_code_context_exa,web_search_exa",
+      ],
       "environment": {
-        "EXA_API_KEY": "{file:~/.credentials/exa_api_key}"
+        "EXA_API_KEY": "{file:~/.credentials/exa_api_key}",
       },
-      "enabled": true
+      "enabled": true,
     },
     "grep": {
       "type": "remote",
       "url": "https://mcp.grep.app",
-      "enabled": true
+      "enabled": true,
     },
     "linear": {
       "type": "remote",
       "url": "https://mcp.linear.app/mcp",
       "oauth": {},
-      "enabled": true
-    }
-  }
+      "enabled": true,
+    },
+  },
 }
