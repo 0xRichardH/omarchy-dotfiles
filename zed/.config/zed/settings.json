@@ -46,12 +46,6 @@
       "command": "hermes",
       "args": ["acp"],
     },
-    "claude-acp": {
-      "type": "registry",
-    },
-    "amp-acp": {
-      "type": "registry",
-    },
   },
   "context_servers": {
     "context7": {
@@ -65,15 +59,6 @@
       "host": "richard.tail53973.ts.net",
       "username": "0xdev",
       "projects": [],
-    },
-    {
-      "host": "0xdevtekimini.tail53973.ts.net",
-      "username": "0xdev",
-      "projects": [
-        {
-          "paths": ["~/dotfiles"],
-        },
-      ],
     },
   ],
   "use_system_prompts": false,
@@ -143,19 +128,17 @@
   },
   // Use zed commit editor
   "terminal": {
+    "font_weight": 400.0,
     "font_family": "CaskaydiaMono Nerd Font",
     "font_fallbacks": ["CaskaydiaMono Nerd Font"],
     "copy_on_select": true,
-    "font_size": 14,
+    "font_size": 16.0,
     "env": {
       "EDITOR": "zed --wait",
       "VISUAL": "zed --wait",
     },
     "shell": {
-      "with_arguments": {
-        "program": "fish",
-        "args": [],
-      },
+      "program": "fish",
     },
   },
   "theme": {
@@ -167,12 +150,13 @@
     "breadcrumbs": true,
     "quick_actions": true,
   },
-  "ui_font_size": 16,
+  "ui_font_size": 16.0,
   "ui_font_fallbacks": ["CaskaydiaMono Nerd Font"],
   "buffer_font_size": 16.0,
-  "buffer_line_height": {
-    "custom": 1.2,
-  },
+  "buffer_line_height": "standard",
+  // "buffer_line_height": {
+  //   "custom": 1.2,
+  // },
   "buffer_font_family": "CaskaydiaMono Nerd Font",
   "buffer_font_fallbacks": ["CaskaydiaMono Nerd Font"],
   "buffer_font_features": {
