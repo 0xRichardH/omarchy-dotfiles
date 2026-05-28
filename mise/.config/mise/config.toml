@@ -24,6 +24,7 @@ atuin = "18.12.1"
 "npm:@sourcegraph/amp" = "latest"
 "npm:acpx" = "latest"
 "npm:@google/gemini-cli" = "latest"
+"npm:@earendil-works/pi-coding-agent" = "latest"
 "pipx:pgcli" = { version = "latest", extras = "sshtunnel", uvx_args = "--with 'paramiko<4'" }
 "cargo:jj-cli" = "latest"
-"cargo:https://github.com/rtk-ai/rtk" = "latest"
+"github:rtk-ai/rtk" = "latest"

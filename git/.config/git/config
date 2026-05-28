@@ -33,6 +33,7 @@
   template = ~/.config/git/gitmessage
 [fetch]
   prune = true
+	recurseSubmodules = false
 [rebase]
   autosquash = true
 [include]
@@ -60,3 +61,5 @@
 	prompt = false
 [difftool "critique"]
 	cmd = critique difftool \"$LOCAL\" \"$REMOTE\"
+[submodule]
+	recurse = false

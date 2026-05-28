@@ -66,6 +66,11 @@
             "low": { "thinkingConfig": { "thinkingBudget": 8192 } },
             "max": { "thinkingConfig": { "thinkingBudget": 32768 } }
           }
+        },
+        "minimax-m2.5": {
+          "name": "MiniMax M2.5 [CRS]",
+          "limit": { "context": 196608, "output": 65536 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
         }
       }
     }
