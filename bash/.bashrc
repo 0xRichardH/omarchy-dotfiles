@@ -15,3 +15,7 @@ fi
 source ~/.local/share/omarchy/default/bash/rc
 
 # Add your own exports, aliases, and functions below.
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/richard/.local/bin:$PATH"

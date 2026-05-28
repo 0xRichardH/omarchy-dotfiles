@@ -18,3 +18,7 @@ source (dirname (status --current-filename))/keybindings.fish
 if status is-interactive
     atuin init fish | source # https://atuin.sh/
 end
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "/home/richard/.local/bin" $PATH
