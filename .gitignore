@@ -1,3 +1,4 @@
 bash/.bashrc.d/90-local.sh
 tmux/.config/tmux/plugins/
 .opencode/plans/
+.antigravitycli/
