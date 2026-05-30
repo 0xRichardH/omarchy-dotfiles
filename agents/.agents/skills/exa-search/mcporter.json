@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "exa": {
+      "description": "Exa neural search MCP",
+      "command": "bunx",
+      "args": ["-y", "exa-mcp-server", "tools=get_code_context_exa,web_search_exa,web_search_advanced_exa"],
+      "env": {
+        "EXA_API_KEY": "${EXA_API_KEY}"
+      }
+    }
+  }
+}
