@@ -1,0 +1,25 @@
+onboarding = false
+
+[ui.toast]
+delivery = "off"
+
+[theme]
+name = "rose-pine"
+
+[keys]
+prefix = "ctrl+s"
+split_horizontal = "prefix+|"
+split_vertical = "prefix+minus"
+previous_tab = "ctrl+h"
+next_tab = "ctrl+l"
+previous_workspace = "prefix+L"
+cycle_pane_next = "prefix+tab"
+focus_pane_down = ""
+focus_pane_right = ""
+copy_mode = "prefix+["
+goto = "prefix+j"
+
+[[keys.command]]
+key = "prefix+g"
+type = "pane"
+command = "lazygit"
