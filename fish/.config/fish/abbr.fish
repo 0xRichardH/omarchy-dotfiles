@@ -30,6 +30,9 @@ abbr gu git-up
 
 # port scanner
 abbr havn "docker run --rm -it --network=host mrjackwills/havn:latest"
+abbr h herdr
+abbr he herdr
+abbr her herdr
 
 abbr j just
 

@@ -39,6 +39,7 @@ keybind = alt+c=text:\x13[
 keybind = alt+g=text:\x13\x67
 # <prefix>+j (open the session manager popup)
 keybind = alt+j=text:\x13\x6a
+keybind = alt+,=text:\x13\x2c
 # <prefix>+l (switch to last session)
 keybind = alt+l=text:\x13\x4c
 # <prefix>+u (open url)
