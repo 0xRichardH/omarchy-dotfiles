@@ -4,7 +4,9 @@ set -uo pipefail
 INTERNAL_MONITOR="${HYPR_AUTO_MONITOR_INTERNAL:-eDP-1}"
 INTERNAL_ENABLE="${HYPR_AUTO_MONITOR_INTERNAL_ENABLE:-$INTERNAL_MONITOR,preferred,auto,2}"
 EXTERNAL_SCALE="${HYPR_AUTO_MONITOR_EXTERNAL_SCALE:-1.6}"
+SETTLE_SECONDS="${HYPR_AUTO_MONITOR_SETTLE_SECONDS:-1.5}"
 LOG_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/hypr-auto-monitor-switch.log"
+LOCK_DIR="${XDG_RUNTIME_DIR:-/tmp}/hypr-auto-monitor-switch.lock"
 
 mkdir -p "$(dirname "$LOG_FILE")"
 
@@ -13,7 +15,30 @@ log() {
 }
 
 external_monitors() {
-  hyprctl monitors all -j | jq -r --arg internal "$INTERNAL_MONITOR" '.[] | select(.name != $internal) | .name'
+  local status output
+  for status in /sys/class/drm/card*-*/status; do
+    [[ "$status" == *-eDP-*/status ]] && continue
+    [[ "$status" == *-Writeback-*/status ]] && continue
+    [[ -r "$status" && "$(<"$status")" == "connected" ]] || continue
+
+    output="${status%/status}"
+    output="${output##*/}"
+    output="${output#card*-}"
+    printf '%s\n' "$output"
+  done | sort
+}
+
+move_internal_workspaces_to() {
+  local target="$1"
+  local workspaces=()
+  local workspace
+
+  mapfile -t workspaces < <(hyprctl workspaces -j | jq -r --arg internal "$INTERNAL_MONITOR" '.[] | select(.monitor == $internal) | .name')
+
+  for workspace in "${workspaces[@]}"; do
+    log "moving workspace $workspace from $INTERNAL_MONITOR to $target"
+    hyprctl dispatch moveworkspacetomonitor "$workspace" "$target" >>"$LOG_FILE" 2>&1 || true
+  done
 }
 
 apply_monitor_layout() {
@@ -21,18 +46,63 @@ apply_monitor_layout() {
   mapfile -t externals < <(external_monitors)
 
   if ((${#externals[@]} > 0)); then
-    log "external monitor detected (${externals[*]}), disabling $INTERNAL_MONITOR"
+    log "external monitor detected (${externals[*]}), moving workspaces to ${externals[0]}"
+
+    # Keep the internal display registered so it can wake cleanly after unplug.
+    hyprctl keyword monitor "$INTERNAL_ENABLE" >>"$LOG_FILE" 2>&1 || true
 
     for monitor in "${externals[@]}"; do
       hyprctl keyword monitor "$monitor,preferred,auto,$EXTERNAL_SCALE" >>"$LOG_FILE" 2>&1 || true
     done
 
-    hyprctl keyword monitor "$INTERNAL_MONITOR,disable" >>"$LOG_FILE" 2>&1 || true
+    move_internal_workspaces_to "${externals[0]}"
+    hyprctl dispatch focusmonitor "${externals[0]}" >>"$LOG_FILE" 2>&1 || true
+
+    # Hyprland can move/focus workspaces while finishing hotplug setup.
+    # Move them again after the event settles.
+    sleep 2
+    move_internal_workspaces_to "${externals[0]}"
     hyprctl dispatch focusmonitor "${externals[0]}" >>"$LOG_FILE" 2>&1 || true
   else
-    log "no external monitor detected, enabling $INTERNAL_MONITOR"
+    log "no external monitor detected, focusing $INTERNAL_MONITOR"
     hyprctl keyword monitor "$INTERNAL_ENABLE" >>"$LOG_FILE" 2>&1 || true
+    hyprctl dispatch focusmonitor "$INTERNAL_MONITOR" >>"$LOG_FILE" 2>&1 || true
   fi
+}
+
+watch_monitor_layout() {
+  local socket
+
+  if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+    log "watcher already running"
+    exit 0
+  fi
+  trap 'rmdir "$LOCK_DIR"' EXIT
+
+  if [[ -z "${HYPRLAND_INSTANCE_SIGNATURE:-}" || -z "${XDG_RUNTIME_DIR:-}" ]]; then
+    log "missing Hyprland environment"
+    exit 1
+  fi
+
+  socket="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+  if [[ ! -S "$socket" ]]; then
+    log "Hyprland event socket not found: $socket"
+    exit 1
+  fi
+
+  log "watcher started"
+  sleep "$SETTLE_SECONDS"
+  apply_monitor_layout
+
+  socat -U - "UNIX-CONNECT:$socket" | while IFS= read -r event; do
+    case "$event" in
+      monitoradded*|monitorremoved*)
+        log "event: $event"
+        sleep "$SETTLE_SECONDS"
+        apply_monitor_layout
+        ;;
+    esac
+  done
 }
 
 if ! command -v hyprctl >/dev/null 2>&1 || ! command -v jq >/dev/null 2>&1 || ! command -v socat >/dev/null 2>&1; then
@@ -40,26 +110,16 @@ if ! command -v hyprctl >/dev/null 2>&1 || ! command -v jq >/dev/null 2>&1 || ! 
   exit 1
 fi
 
-if [[ -z "${HYPRLAND_INSTANCE_SIGNATURE:-}" || -z "${XDG_RUNTIME_DIR:-}" ]]; then
-  log "missing Hyprland environment"
-  exit 1
-fi
-
-SOCKET="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
-
-apply_monitor_layout
-
-if [[ ! -S "$SOCKET" ]]; then
-  log "Hyprland event socket not found: $SOCKET"
-  exit 1
-fi
-
-socat -U - "UNIX-CONNECT:$SOCKET" | while IFS= read -r event; do
-  case "$event" in
-    monitoradded*|monitorremoved*)
-      log "event: $event"
-      sleep 0.5
-      apply_monitor_layout
-      ;;
-  esac
-done
+case "${1:-}" in
+  --watch)
+    watch_monitor_layout
+    ;;
+  "")
+    sleep "$SETTLE_SECONDS"
+    apply_monitor_layout
+    ;;
+  *)
+    echo "Usage: $(basename "$0") [--watch]" >&2
+    exit 1
+    ;;
+esac
