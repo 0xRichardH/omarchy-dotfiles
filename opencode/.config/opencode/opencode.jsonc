@@ -39,8 +39,8 @@
             "max": { "thinkingConfig": { "thinkingBudget": 32768 } }
           }
         },
-        "glm-5": {
-          "name": "GLM-5 [CRS]",
+        "glm-5.1": {
+          "name": "GLM-5.1 [CRS]",
           "limit": { "context": 200000, "output": 128000 },
           "modalities": { "input": ["text"], "output": ["text"] },
           "reasoning": true
