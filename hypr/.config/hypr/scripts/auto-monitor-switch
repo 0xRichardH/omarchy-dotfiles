@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+set -uo pipefail
+
+INTERNAL_MONITOR="${HYPR_AUTO_MONITOR_INTERNAL:-eDP-1}"
+INTERNAL_ENABLE="${HYPR_AUTO_MONITOR_INTERNAL_ENABLE:-$INTERNAL_MONITOR,preferred,auto,2}"
+EXTERNAL_SCALE="${HYPR_AUTO_MONITOR_EXTERNAL_SCALE:-1.6}"
+LOG_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/hypr-auto-monitor-switch.log"
+
+mkdir -p "$(dirname "$LOG_FILE")"
+
+log() {
+  printf '[%s] %s\n' "$(date --iso-8601=seconds)" "$*" >>"$LOG_FILE"
+}
+
+external_monitors() {
+  hyprctl monitors all -j | jq -r --arg internal "$INTERNAL_MONITOR" '.[] | select(.name != $internal) | .name'
+}
+
+apply_monitor_layout() {
+  local externals=()
+  mapfile -t externals < <(external_monitors)
+
+  if ((${#externals[@]} > 0)); then
+    log "external monitor detected (${externals[*]}), disabling $INTERNAL_MONITOR"
+
+    for monitor in "${externals[@]}"; do
+      hyprctl keyword monitor "$monitor,preferred,auto,$EXTERNAL_SCALE" >>"$LOG_FILE" 2>&1 || true
+    done
+
+    hyprctl keyword monitor "$INTERNAL_MONITOR,disable" >>"$LOG_FILE" 2>&1 || true
+    hyprctl dispatch focusmonitor "${externals[0]}" >>"$LOG_FILE" 2>&1 || true
+  else
+    log "no external monitor detected, enabling $INTERNAL_MONITOR"
+    hyprctl keyword monitor "$INTERNAL_ENABLE" >>"$LOG_FILE" 2>&1 || true
+  fi
+}
+
+if ! command -v hyprctl >/dev/null 2>&1 || ! command -v jq >/dev/null 2>&1 || ! command -v socat >/dev/null 2>&1; then
+  log "missing required command: hyprctl, jq, or socat"
+  exit 1
+fi
+
+if [[ -z "${HYPRLAND_INSTANCE_SIGNATURE:-}" || -z "${XDG_RUNTIME_DIR:-}" ]]; then
+  log "missing Hyprland environment"
+  exit 1
+fi
+
+SOCKET="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+
+apply_monitor_layout
+
+if [[ ! -S "$SOCKET" ]]; then
+  log "Hyprland event socket not found: $SOCKET"
+  exit 1
+fi
+
+socat -U - "UNIX-CONNECT:$SOCKET" | while IFS= read -r event; do
+  case "$event" in
+    monitoradded*|monitorremoved*)
+      log "event: $event"
+      sleep 0.5
+      apply_monitor_layout
+      ;;
+  esac
+done
