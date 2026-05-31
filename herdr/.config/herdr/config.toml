@@ -1,10 +1,7 @@
 onboarding = false
 
-[ui.toast]
-delivery = "system"
-
 [theme]
-name = "rose-pine"
+name = "terminal"
 
 [keys]
 prefix = "ctrl+s"
@@ -27,3 +24,9 @@ command = "lazygit"
 
 [ui]
 show_agent_labels_on_pane_borders = true
+
+[ui.sound]
+enabled = false
+
+[ui.toast]
+delivery = "off"
