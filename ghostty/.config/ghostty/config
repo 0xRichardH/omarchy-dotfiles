@@ -34,7 +34,7 @@ keybind = alt+physical:eight=text:\x138
 keybind = alt+physical:nine=text:\x139
 
 # Change to tmux copy mode
-keybind = alt+c=text:\x13[
+keybind = alt+[=text:\x13[
 # <prefix>+g (open lazygit window)
 keybind = alt+g=text:\x13\x67
 # <prefix>+j (open the session manager popup)
