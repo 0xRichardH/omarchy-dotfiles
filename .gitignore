@@ -1,3 +1,8 @@
 bash/.bashrc.d/90-local.sh
 tmux/.config/tmux/plugins/
 .opencode/plans/
+.antigravitycli/
+pi/.pi/agent/npm/
+pi/.pi/agent/sessions/
+pi/.pi/agent/auth.json
+pi/.pi/agent/extensions/
