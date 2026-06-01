@@ -1,0 +1,20 @@
+{
+  "lastChangelogVersion": "0.78.0",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
+  "defaultThinkingLevel": "medium",
+  "terminal": {
+    "showTerminalProgress": true
+  },
+  "enableInstallTelemetry": false,
+  "treeFilterMode": "default",
+  "theme": "dark",
+  "hideThinkingBlock": true,
+  "enabledModels": [
+    "openai-codex/gpt-5.5",
+    "openai-codex/gpt-5.4-mini"
+  ],
+  "packages": [
+    "npm:pi-web-access"
+  ]
+}
