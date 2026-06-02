@@ -5,8 +5,8 @@ name = "terminal"
 
 [keys]
 prefix = "ctrl+s"
-split_horizontal = "prefix+|"
-split_vertical = "prefix+minus"
+split_horizontal = "prefix+minus"
+split_vertical = "prefix+|"
 previous_tab = "ctrl+h"
 next_tab = "ctrl+l"
 previous_workspace = "prefix+L"
