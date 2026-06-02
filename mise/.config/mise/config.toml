@@ -19,7 +19,6 @@ atuin = "latest"
 "npm:@openai/codex" = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@earendil-works/pi-coding-agent" = "latest"
-"npm:@google/gemini-cli" = "latest"
 "npm:critique" = "latest" # https://github.com/remorses/critique
 "npm:acpx" = "latest"
 "pipx:pgcli" = { version = "latest", extras = "sshtunnel", uvx_args = "--with 'paramiko<4'" }
