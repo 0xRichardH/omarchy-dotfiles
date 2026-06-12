@@ -234,6 +234,15 @@
       "installedAt": "2026-03-08T14:15:16.206Z",
       "updatedAt": "2026-03-08T14:15:16.206Z"
     },
+    "docs-write-concisely": {
+      "source": "neolabhq/context-engineering-kit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/neolabhq/context-engineering-kit.git",
+      "skillPath": "skills/docs-write-concisely/SKILL.md",
+      "skillFolderHash": "fed08cc68b76f2e5b91ee82238ef2687646cc06604c0c22afe8569de77c29b8a",
+      "installedAt": "2026-06-11T15:48:32.371Z",
+      "updatedAt": "2026-06-11T15:48:32.371Z"
+    },
     "using-jj-workspaces": {
       "source": "edmundmiller/dotfiles",
       "sourceType": "github",
@@ -252,6 +261,14 @@
       "installedAt": "2026-03-11T01:15:30.729Z",
       "updatedAt": "2026-03-11T01:15:30.729Z"
     },
+    "onevcat-jj": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/onevcat-jj/SKILL.md",
+      "skillFolderHash": "c3321acb37a5a1d6faa257f5d155a238d5ed478d2c93841a4918004763ba0719",
+      "installedAt": "2026-06-11T15:48:32.371Z",
+      "updatedAt": "2026-06-11T15:48:32.371Z"
+    }
   },
   "dismissed": {
     "findSkillsPrompt": true
