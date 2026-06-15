@@ -1,9 +1,12 @@
 {
   "$schema": "https://opencode.ai/tui.json",
-  "theme": "system",
+  "diff_style": "auto",
   "keybinds": {
     "leader": "ctrl+x",
     "input_newline": "shift+return"
   },
-  "diff_style": "auto"
+  "plugin": [
+    "opencode-subagent-statusline"
+  ],
+  "theme": "system"
 }

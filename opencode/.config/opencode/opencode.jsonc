@@ -8,9 +8,7 @@
     ".cursor/rules/*.md"
   ],
   "autoupdate": false,
-  "plugin": [
-    "opencode-supermemory@latest", // https://github.com/supermemoryai/opencode-supermemory
-  ],
+  "plugin": [],
   "provider": {
     "crs": {
       "npm": "@ai-sdk/anthropic",

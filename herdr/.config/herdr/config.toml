@@ -31,3 +31,6 @@ enabled = false
 
 [ui.toast]
 delivery = "off"
+
+[experimental]
+kitty_graphics = true
