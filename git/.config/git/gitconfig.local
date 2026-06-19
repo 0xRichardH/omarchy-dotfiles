@@ -12,5 +12,3 @@
   insteadOf = "https://github.com/"
 [includeIf "gitdir:~/feedmob/"]
   path = "~/feedmob/.gitconfig"
-[includeIf "gitdir:~/befreed/"]
-  path = "~/befreed/.gitconfig"

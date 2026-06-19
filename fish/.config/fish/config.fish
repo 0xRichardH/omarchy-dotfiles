@@ -19,5 +19,8 @@ if status is-interactive
     atuin init fish | source # https://atuin.sh/
 end
 
-# OpenClaw Completion
-source "/home/richard/.openclaw/completions/openclaw.fish"
+fish_add_path "$HOME/.local/bin"
+
+if test -f "$HOME/.openclaw/completions/openclaw.fish"
+    source "$HOME/.openclaw/completions/openclaw.fish"
+end

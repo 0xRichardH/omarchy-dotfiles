@@ -4,14 +4,12 @@
   "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
   "enabledModels": [
-    "openai-codex/gpt-5.5",
-    "r/fm/kimi-k2.7-code",
     "r/kmca/kimi-for-coding",
     "0xdev/gpt-5.5",
     "0xdev/kimi-k2.7-code"
   ],
   "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.79.8",
+  "lastChangelogVersion": "0.79.7",
   "npmCommand": [
     "mise",
     "exec",
@@ -21,12 +19,14 @@
   ],
   "packages": [
     "npm:pi-web-access",
+    "npm:pi-codex-goal",
+    "npm:pi-subagents",
     "npm:gentle-engram@0.1.7",
     "npm:pi-mcp-adapter",
-    "npm:pi-codex-goal",
     "git:github.com/Fatih0234/btw",
     "git:github.com/0xRichardH/pi-cliproxyapi-provider"
   ],
+  "steeringMode": "one-at-a-time",
   "terminal": {
     "showTerminalProgress": true
   },

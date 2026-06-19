@@ -1,0 +1,26 @@
+modmap:
+  - name: Built-in CapsLock as Ctrl/Esc
+    device:
+      only: "AT Translated Set 2 keyboard"
+    remap:
+      CapsLock:
+        alone: Esc
+        held: Ctrl_L
+      Super_L: Alt_L
+      Alt_L: Super_L
+
+  - name: External Ctrl_L as Ctrl/Esc
+    device:
+      only: "Topre Corporation HHKB Professional"
+    remap:
+      Ctrl_L:
+        alone: Esc
+        held: Ctrl_L
+
+keymap:
+  - name: Ctrl+HJKL as Arrow Keys
+    remap:
+      C-h: left
+      C-j: down
+      C-k: up
+      C-l: right
