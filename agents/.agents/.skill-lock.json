@@ -279,14 +279,142 @@
       "installedAt": "2026-06-09T02:32:08.424Z",
       "updatedAt": "2026-06-11T12:53:15.804Z"
     },
-    "docs:write-concisely": {
-      "source": "neolabhq/context-engineering-kit",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/neolabhq/context-engineering-kit.git",
-      "skillPath": "plugins/docs/skills/write-concisely/SKILL.md",
-      "skillFolderHash": "cbf03d42bd48a64f6c9891f1042f5de1e05578f8",
-      "installedAt": "2026-03-08T14:13:56.859Z",
-      "updatedAt": "2026-03-08T14:13:56.859Z"
+    "ask-matt": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/ask-matt/SKILL.md",
+      "skillFolderHash": "422927f205ba5b7cc80dcbc79cebad6e3e612487ef81c20b76269139d9bcc378",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "codebase-design": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/codebase-design/SKILL.md",
+      "skillFolderHash": "0975ee04f1fb03ed6efaee5860da4946871297055f550300d1f0f93714dcd24c",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "decision-mapping": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/decision-mapping/SKILL.md",
+      "skillFolderHash": "9302b487da30ae09299bac4c861f391ee402050ffefc2c151c1199d2a9db5d3f",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "diagnosing-bugs": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/diagnosing-bugs/SKILL.md",
+      "skillFolderHash": "88449e38e311c2152204ad0365160e8c666b6c32121b95b3e991a2c5b08634a9",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "domain-modeling": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/domain-modeling/SKILL.md",
+      "skillFolderHash": "77f0ac21c44684c8710a12c3656eadec8ae1d73a055088336a532f675550317c",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "grill-me": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/grill-me/SKILL.md",
+      "skillFolderHash": "b395482d739d3e4110b43e50ddf027c771370be4e1b03f30affbe2372aa9fdcf",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "grill-with-docs": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/grill-with-docs/SKILL.md",
+      "skillFolderHash": "da2afc844ffffba4ae5fb405c052a9ecf66fc786b356bbcaf82bee4e4108c77f",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "grilling": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/grilling/SKILL.md",
+      "skillFolderHash": "a3426f0c57fcdd8a33fd0bd91c6b70e85d815a6e1b123c0e8c0a358c818542aa",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "handoff": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/handoff/SKILL.md",
+      "skillFolderHash": "b1a439dbece2122c8f22ee901f5eeef35f2e13841d4412a9317c780185e672c1",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "improve-codebase-architecture": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/improve-codebase-architecture/SKILL.md",
+      "skillFolderHash": "5611efa466f99457c4e2c26c211d17a15b4f1fcd9f62be73838286d12f7b080e",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "omarchy": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/omarchy/SKILL.md",
+      "skillFolderHash": "",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z",
+      "symlinkTarget": "../../.local/share/omarchy/default/omarchy-skill"
+    },
+    "prototype": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/prototype/SKILL.md",
+      "skillFolderHash": "305674375ccd27bf20d81c3c3da99512d2f8be30c869acc00b91b2adedf963ec",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "tdd": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/tdd/SKILL.md",
+      "skillFolderHash": "affc1d38c3c23ee0752627c910b5f9a402c1a105633f53948deb766698fc91b3",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "to-issues": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/to-issues/SKILL.md",
+      "skillFolderHash": "8ac44c93ff4198a13dce1bc6e97ed5c8a2ab45bfb70af7386174ab89cbec0e9e",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "to-prd": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/to-prd/SKILL.md",
+      "skillFolderHash": "4e0d2b27ee8c4f87a8b5f50d6aeb64903943311d2eb8051433e1d399a8a5ad37",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "triage": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/triage/SKILL.md",
+      "skillFolderHash": "d646c77029cd0b8379c13c8307344fabcd2e610e5a19d5615e2d3d0cda5270e9",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "writing-great-skills": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/writing-great-skills/SKILL.md",
+      "skillFolderHash": "9df9d2b18efd0ffabe5b2403e3ebbdbfab6cad9ade852e86d08b92f23c187938",
+      "installedAt": "2026-06-19T18:51:40.000Z",
+      "updatedAt": "2026-06-19T18:51:40.000Z"
     }
   },
   "dismissed": {
