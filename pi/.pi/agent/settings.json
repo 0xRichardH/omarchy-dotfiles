@@ -1,12 +1,13 @@
 {
-  "defaultModel": "kimi-k2.7-code",
+  "defaultModel": "glm-5.2",
   "defaultProvider": "0xdev",
   "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
   "enabledModels": [
     "r/kmca/kimi-for-coding",
     "0xdev/gpt-5.5",
-    "0xdev/kimi-k2.7-code"
+    "0xdev/kimi-k2.7-code",
+    "0xdev/glm-5.2"
   ],
   "hideThinkingBlock": false,
   "lastChangelogVersion": "0.79.8",
