@@ -15,3 +15,4 @@ fi
 source ~/.local/share/omarchy/default/bash/rc
 
 # Add your own exports, aliases, and functions below.
+export PATH="$HOME/.local/bin:$PATH"

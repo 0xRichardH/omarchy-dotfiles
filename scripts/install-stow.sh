@@ -1,15 +1,20 @@
-#!/bin/sh
+#!/usr/bin/env bash
+set -euo pipefail
 
-# Install stow
+usage() {
+  cat <<'USAGE'
+Usage: scripts/install-stow.sh <laptop|desktop>
+
+Install GNU Stow, then stow shared packages plus the selected host overlay.
+USAGE
+}
+
+host="${1:-}"
+if [[ -z "$host" ]]; then
+  usage >&2
+  exit 2
+fi
+
 sudo pacman -S --noconfirm --needed stow
 
-# Restow the packages
-
-stow --target="$HOME" --adopt nvim
-stow --target="$HOME" --adopt hypr
-stow --target="$HOME" --adopt git
-stow --target="$HOME" --adopt bash
-stow --target="$HOME" --adopt bw
-stow --target="$HOME" --adopt ssh
-stow --target="$HOME" --adopt fish
-stow --target="$HOME" --adopt atuin
+"$(dirname "$0")/stow-machine.sh" "$host"
