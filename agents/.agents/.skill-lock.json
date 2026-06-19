@@ -10,6 +10,15 @@
       "installedAt": "2026-02-26T08:06:40.237Z",
       "updatedAt": "2026-03-07T22:22:28.698Z"
     },
+    "agent-skill-builder": {
+      "source": "0xRichardH/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/0xRichardH/agent-skills.git",
+      "skillPath": "skills/agent-skill-builder/SKILL.md",
+      "skillFolderHash": "012c1d0fbd1498e349a7b0841e604381b67fcf4d",
+      "installedAt": "2026-05-14T09:05:51.138Z",
+      "updatedAt": "2026-05-29T00:45:46.595Z"
+    },
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",
@@ -216,7 +225,7 @@
       "installedAt": "2026-03-07T23:57:38.860Z",
       "updatedAt": "2026-03-07T23:57:38.860Z"
     },
-    "docs:write-concisely": {
+    "docs-write-concisely": {
       "source": "neolabhq/context-engineering-kit",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neolabhq/context-engineering-kit.git",
@@ -234,36 +243,59 @@
       "installedAt": "2026-03-08T14:15:16.206Z",
       "updatedAt": "2026-03-08T14:15:16.206Z"
     },
-    "using-jj-workspaces": {
-      "source": "edmundmiller/dotfiles",
+    "exa-search": {
+      "source": "0xRichardH/agent-skills",
       "sourceType": "github",
-      "sourceUrl": "https://github.com/edmundmiller/dotfiles.git",
-      "skillPath": ".agents/skills/using-jj-workspaces/SKILL.md",
-      "skillFolderHash": "9a0c6ac58f020d3351be3f51fed7d8adf7e4b73b",
-      "installedAt": "2026-03-11T01:13:33.584Z",
-      "updatedAt": "2026-03-11T01:13:33.584Z"
+      "sourceUrl": "https://github.com/0xRichardH/agent-skills.git",
+      "skillPath": "skills/exa-search/SKILL.md",
+      "skillFolderHash": "308453c262299da3f8375b106f6fabf9f9a33f89",
+      "installedAt": "2026-05-29T00:44:44.893Z",
+      "updatedAt": "2026-05-29T00:44:44.893Z"
     },
-    "jj-history-investigation": {
-      "source": "edmundmiller/dotfiles",
+    "mcporter": {
+      "source": "0xRichardH/agent-skills",
       "sourceType": "github",
-      "sourceUrl": "https://github.com/edmundmiller/dotfiles.git",
-      "skillPath": ".agents/skills/jj-history-investigation/SKILL.md",
-      "skillFolderHash": "fe623c5d147945555b1a4eace472ee5d136c71aa",
-      "installedAt": "2026-03-11T01:15:30.729Z",
-      "updatedAt": "2026-03-11T01:15:30.729Z"
+      "sourceUrl": "https://github.com/0xRichardH/agent-skills.git",
+      "skillPath": "skills/mcporter/SKILL.md",
+      "skillFolderHash": "07a836b21a9143f2e441967aac944a28b4f80ea1",
+      "installedAt": "2026-05-29T00:44:44.894Z",
+      "updatedAt": "2026-05-29T00:44:44.894Z"
     },
+    "herdr": {
+      "source": "ogulcancelik/herdr",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ogulcancelik/herdr.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "77819797385c5538f624a8881208921342911db0",
+      "installedAt": "2026-05-31T04:35:31.787Z",
+      "updatedAt": "2026-05-31T04:35:31.787Z"
+    },
+    "teach": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/teach/SKILL.md",
+      "skillFolderHash": "975430f7801bac2258ed18f4d80860024443b4f7",
+      "installedAt": "2026-06-09T02:32:08.424Z",
+      "updatedAt": "2026-06-11T12:53:15.804Z"
+    }
   },
   "dismissed": {
     "findSkillsPrompt": true
   },
   "lastSelectedAgents": [
     "amp",
+    "antigravity",
+    "antigravity-cli",
     "cline",
     "codex",
     "cursor",
+    "deepagents",
     "gemini-cli",
     "github-copilot",
-    "kimi-cli",
-    "opencode"
+    "kimi-code-cli",
+    "opencode",
+    "warp",
+    "zed"
   ]
 }
