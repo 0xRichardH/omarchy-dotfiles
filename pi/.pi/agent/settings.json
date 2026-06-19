@@ -9,7 +9,7 @@
     "0xdev/kimi-k2.7-code"
   ],
   "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.79.7",
+  "lastChangelogVersion": "0.79.8",
   "npmCommand": [
     "mise",
     "exec",
