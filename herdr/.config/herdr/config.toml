@@ -10,6 +10,7 @@ split_vertical = "prefix+|"
 previous_tab = "ctrl+h"
 next_tab = "ctrl+l"
 previous_workspace = "prefix+L"
+swap_pane_right = ""
 cycle_pane_next = "prefix+tab"
 focus_pane_down = ""
 focus_pane_right = ""
@@ -30,3 +31,6 @@ enabled = false
 
 [ui.toast]
 delivery = "off"
+
+[experimental]
+kitty_graphics = true
