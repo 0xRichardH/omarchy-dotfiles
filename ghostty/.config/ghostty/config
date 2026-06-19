@@ -51,7 +51,7 @@ keybind = alt+f=text:\x3a\x47\x72\x65\x70\x0a
 # :qa!
 keybind = alt+q=text:\x3a\x1b\x1b\x3a\x71\x61\x21\x0a
 # <prefix>+c (new window)
-keybind = alt+t=text:\x13\x63
+keybind = alt+n=text:\x13\x63
 # <prefix>+x (close window)
 keybind = alt+w=text:\x13\x78
 
