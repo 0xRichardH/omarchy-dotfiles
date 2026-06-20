@@ -1,5 +1,5 @@
 {
-  "defaultModel": "gpt-5.5",
+  "defaultModel": "kimi-k2.7-code",
   "defaultProvider": "0xdev",
   "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
@@ -22,7 +22,7 @@
     "npm:pi-web-access",
     "npm:pi-codex-goal",
     "npm:pi-subagents",
-    "npm:gentle-engram@0.1.7",
+    "npm:gentle-engram",
     "npm:pi-mcp-adapter",
     "git:github.com/Fatih0234/btw",
     "git:github.com/0xRichardH/pi-cliproxyapi-provider",
