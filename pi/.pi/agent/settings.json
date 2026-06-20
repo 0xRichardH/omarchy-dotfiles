@@ -1,5 +1,5 @@
 {
-  "defaultModel": "glm-5.2",
+  "defaultModel": "gpt-5.5",
   "defaultProvider": "0xdev",
   "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
@@ -25,7 +25,8 @@
     "npm:gentle-engram@0.1.7",
     "npm:pi-mcp-adapter",
     "git:github.com/Fatih0234/btw",
-    "git:github.com/0xRichardH/pi-cliproxyapi-provider"
+    "git:github.com/0xRichardH/pi-cliproxyapi-provider",
+    "npm:@ff-labs/pi-fff"
   ],
   "steeringMode": "one-at-a-time",
   "terminal": {
