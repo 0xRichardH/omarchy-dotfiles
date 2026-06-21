@@ -1,0 +1,30 @@
+# Package-local ignore list for GNU Stow.
+# Keep the default noise ignores because a package-local ignore file replaces
+# Stow's built-in default ignore list.
+
+RCS
+.+,v
+
+CVS
+\.\#.+
+\.cvsignore
+
+\.svn
+_darcs
+\.hg
+
+\.git
+\.gitignore
+\.gitmodules
+
+.+~
+\#.*\#
+
+^/README.*
+^/LICENSE.*
+^/COPYING
+
+# Option B for skills management: ~/.agents/skills is a single symlink to
+# ~/omarchy-dotfiles/agents/.agents/skills, so Stow must not unfold or manage
+# the individual skill files below this directory.
+^/\.agents/skills$

@@ -6,17 +6,34 @@ repo_root=$(cd "$script_dir/../.." && pwd)
 cd "$repo_root"
 
 repo_skills="$repo_root/agents/.agents/skills"
-home_skills="$HOME/.agents/skills"
+home_agents="$HOME/.agents"
+home_skills="$home_agents/skills"
 
-# Copy new skills from home into the repo so stow can adopt them
-if [[ -d "$home_skills" ]]; then
-  for skill in "$home_skills"/*/; do
-    skill_name=$(basename "$skill")
-    if [[ ! -d "$repo_skills/$skill_name" ]]; then
-      echo "New skill found: $skill_name — copying into repo"
-      cp -r "$skill" "$repo_skills/$skill_name"
-    fi
-  done
+if [[ ! -d "$repo_skills" ]]; then
+  echo "repo skills directory does not exist: $repo_skills" >&2
+  exit 1
 fi
 
-stow --target="$HOME" --restow --adopt agents "$@"
+mkdir -p "$home_agents"
+
+# Option B: make ~/.agents/skills a single symlink to the repo skills directory.
+# This lets skills installed by the CLI write directly into the dotfiles repo.
+if [[ -L "$home_skills" ]]; then
+  if [[ "$(readlink -f "$home_skills")" != "$(readlink -f "$repo_skills")" ]]; then
+    backup="$home_skills.backup.$(date +%Y%m%d%H%M%S)"
+    echo "Existing skills symlink points elsewhere; moving to $backup"
+    mv "$home_skills" "$backup"
+  fi
+elif [[ -e "$home_skills" ]]; then
+  backup="$home_skills.backup.$(date +%Y%m%d%H%M%S)"
+  echo "Existing skills directory found; moving to $backup"
+  mv "$home_skills" "$backup"
+fi
+
+if [[ ! -e "$home_skills" ]]; then
+  relative_repo_skills=$(realpath --relative-to="$home_agents" "$repo_skills")
+  ln -s "$relative_repo_skills" "$home_skills"
+  echo "Linked $home_skills -> $relative_repo_skills"
+fi
+
+stow --target="$HOME" --restow agents "$@"

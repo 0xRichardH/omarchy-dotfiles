@@ -261,15 +261,6 @@
       "installedAt": "2026-05-29T00:44:44.894Z",
       "updatedAt": "2026-05-29T00:44:44.894Z"
     },
-    "herdr": {
-      "source": "ogulcancelik/herdr",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/ogulcancelik/herdr.git",
-      "skillPath": "SKILL.md",
-      "skillFolderHash": "77819797385c5538f624a8881208921342911db0",
-      "installedAt": "2026-05-31T04:35:31.787Z",
-      "updatedAt": "2026-05-31T04:35:31.787Z"
-    },
     "teach": {
       "source": "mattpocock/skills",
       "sourceType": "github",
@@ -422,12 +413,17 @@
   },
   "lastSelectedAgents": [
     "amp",
+    "antigravity",
+    "antigravity-cli",
     "cline",
     "codex",
     "cursor",
+    "deepagents",
     "gemini-cli",
     "github-copilot",
-    "kimi-cli",
-    "opencode"
+    "kimi-code-cli",
+    "opencode",
+    "warp",
+    "zed"
   ]
 }

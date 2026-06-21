@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if command -v bunx >/dev/null 2>&1; then
+  exec env -u XDG_STATE_HOME bunx skills update -g "$@"
+else
+  exec env -u XDG_STATE_HOME npx --yes skills update -g "$@"
+fi

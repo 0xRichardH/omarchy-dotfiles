@@ -1,0 +1,21 @@
+{
+  "name": "logseq-plugin-template",
+  "version": "0.0.1",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "logseq": {
+    "id": "logseq-plugin-template",
+    "title": "Logseq Plugin Template",
+    "icon": "icon.svg",
+    "description": "A basic Logseq plugin template."
+  },
+  "devDependencies": {
+    "@logseq/libs": "^0.0.17",
+    "typescript": "^5.0.0",
+    "vite": "^4.0.0"
+  }
+}
