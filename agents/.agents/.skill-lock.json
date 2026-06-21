@@ -6,9 +6,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "skillFolderHash": "45f9dcf935433abcb49929aef1d1bc3dedf20c79",
+      "skillFolderHash": "9b31e495b887e4ca123960415eca69fc7e1bba28",
       "installedAt": "2026-02-26T08:06:40.237Z",
-      "updatedAt": "2026-03-07T22:22:28.698Z"
+      "updatedAt": "2026-06-21T03:52:03.808Z"
     },
     "agent-skill-builder": {
       "source": "0xRichardH/agent-skills",
@@ -24,18 +24,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/skills.git",
       "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "c2f31172b6f256272305a5e6e7228b258446899f",
+      "skillFolderHash": "3013fdeb8a11b10b1eb795ec3ae8bfca38f7c26d",
       "installedAt": "2026-02-26T08:23:29.252Z",
-      "updatedAt": "2026-03-02T12:21:57.815Z"
-    },
-    "slack": {
-      "source": "vercel-labs/agent-browser",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
-      "skillPath": "skills/slack/SKILL.md",
-      "skillFolderHash": "45b116adcbbb159d2103afc5d6ae704ba47427f8",
-      "installedAt": "2026-03-02T12:10:59.040Z",
-      "updatedAt": "2026-03-02T12:10:59.040Z"
+      "updatedAt": "2026-06-21T03:52:05.700Z"
     },
     "acpx": {
       "source": "openclaw/acpx",
@@ -45,15 +36,6 @@
       "skillFolderHash": "fa689578f9e42fff2c4c8e1c4c09d569bd299a2e",
       "installedAt": "2026-03-02T12:16:52.100Z",
       "updatedAt": "2026-03-02T12:16:52.100Z"
-    },
-    "electron": {
-      "source": "vercel-labs/agent-browser",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
-      "skillPath": "skills/electron/SKILL.md",
-      "skillFolderHash": "262130632e186c3ee2d153b6d5b5dd6e60b8236f",
-      "installedAt": "2026-03-02T13:50:02.818Z",
-      "updatedAt": "2026-03-02T13:50:02.818Z"
     },
     "beautiful-mermaid": {
       "source": "intellectronica/agent-skills",
@@ -78,29 +60,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/brainstorming/SKILL.md",
-      "skillFolderHash": "d28aa4ed67fe5a3f1336f0fcccb1e548c67dc864",
+      "skillFolderHash": "27e73ef7b83994e913cba378081b587412d2e9cb",
       "installedAt": "2026-03-07T22:30:16.121Z",
-      "updatedAt": "2026-03-07T22:30:16.121Z"
+      "updatedAt": "2026-06-21T03:52:13.199Z"
     },
     "frontend-design": {
       "source": "anthropics/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/anthropics/skills.git",
       "skillPath": "skills/frontend-design/SKILL.md",
-      "skillFolderHash": "928950704df8a8b885c03de5da626331e6f29cf8",
-      "pluginName": "example-skills",
+      "skillFolderHash": "0d5b74a14bdf3ebcd64f352d06376a2ef05ed296",
       "installedAt": "2026-03-07T22:30:34.060Z",
-      "updatedAt": "2026-03-07T22:30:34.060Z"
+      "updatedAt": "2026-06-21T03:52:29.274Z"
     },
     "skill-creator": {
       "source": "anthropics/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/anthropics/skills.git",
       "skillPath": "skills/skill-creator/SKILL.md",
-      "skillFolderHash": "98a510d1cfef9f82c3b1eec200229ca68725e613",
-      "pluginName": "example-skills",
+      "skillFolderHash": "3cf9a8db32597ba3e24b584a3d696f4e11c7d7b6",
       "installedAt": "2026-03-07T22:31:39.701Z",
-      "updatedAt": "2026-03-07T22:31:39.701Z"
+      "updatedAt": "2026-06-21T03:52:37.033Z"
     },
     "git-commit": {
       "source": "github/awesome-copilot",
@@ -110,36 +90,6 @@
       "skillFolderHash": "883a6a7466f55a9cd9f22cf1cce2d9333fc9b998",
       "installedAt": "2026-03-07T22:37:18.712Z",
       "updatedAt": "2026-03-07T22:37:18.712Z"
-    },
-    "github-pr-review": {
-      "source": "fvadicamo/dev-agent-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/fvadicamo/dev-agent-skills.git",
-      "skillPath": "skills/github-pr-review/SKILL.md",
-      "skillFolderHash": "a22e9c9c878cf61d0533b44a524a6b24759f28b4",
-      "pluginName": "github-workflow",
-      "installedAt": "2026-03-07T22:45:39.456Z",
-      "updatedAt": "2026-03-07T22:45:39.456Z"
-    },
-    "github-pr-merge": {
-      "source": "fvadicamo/dev-agent-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/fvadicamo/dev-agent-skills.git",
-      "skillPath": "skills/github-pr-merge/SKILL.md",
-      "skillFolderHash": "96cadc6d5f0f64d7cb6362f33501d9f130f9ef26",
-      "pluginName": "github-workflow",
-      "installedAt": "2026-03-07T22:47:18.134Z",
-      "updatedAt": "2026-03-07T22:47:18.134Z"
-    },
-    "github-pr-creation": {
-      "source": "fvadicamo/dev-agent-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/fvadicamo/dev-agent-skills.git",
-      "skillPath": "skills/github-pr-creation/SKILL.md",
-      "skillFolderHash": "0bda96ef8d1daab80b174759d2c700eeec7acaeb",
-      "pluginName": "github-workflow",
-      "installedAt": "2026-03-07T22:48:13.610Z",
-      "updatedAt": "2026-03-07T22:48:13.610Z"
     },
     "infographic-creator": {
       "source": "antvis/chart-visualization-skills",
@@ -156,47 +106,45 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/anthropics/skills.git",
       "skillPath": "skills/mcp-builder/SKILL.md",
-      "skillFolderHash": "9173e2c2107aac82d4ca6c726d71e89d11760470",
-      "pluginName": "example-skills",
+      "skillFolderHash": "b866bcfb57b780c10b587c7b543e871a91661ce0",
       "installedAt": "2026-03-07T22:49:53.807Z",
-      "updatedAt": "2026-03-07T22:49:53.807Z"
+      "updatedAt": "2026-06-21T03:52:45.207Z"
     },
     "opentui": {
       "source": "msmps/opentui-skill",
       "sourceType": "github",
       "sourceUrl": "https://github.com/msmps/opentui-skill.git",
       "skillPath": "skill/opentui/SKILL.md",
-      "skillFolderHash": "00be9b06139cfcfc3a4f63469e148b574a31781b",
+      "skillFolderHash": "5762c20998971757745d9c3dc8d55e9b64539fd3",
       "installedAt": "2026-03-07T22:50:38.948Z",
-      "updatedAt": "2026-03-07T22:50:38.948Z"
+      "updatedAt": "2026-06-21T03:52:55.113Z"
     },
     "supabase-postgres-best-practices": {
       "source": "supabase/agent-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/supabase/agent-skills.git",
       "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
-      "skillFolderHash": "95fe6d29daaf88aa9bc3b505ca4defe19ceabf92",
-      "pluginName": "postgres-best-practices",
+      "skillFolderHash": "6f1495c72c918e6f80c2f69df9005eacd5c57d7a",
       "installedAt": "2026-03-07T22:51:14.561Z",
-      "updatedAt": "2026-03-07T22:51:14.561Z"
+      "updatedAt": "2026-06-21T03:53:02.963Z"
     },
     "test-driven-development": {
       "source": "obra/superpowers",
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/test-driven-development/SKILL.md",
-      "skillFolderHash": "98904a7d8e0e04b9bd46220b9b17298f45fe0b72",
+      "skillFolderHash": "61939b456845d75979423c855829d05cbf2c304d",
       "installedAt": "2026-03-07T22:51:54.083Z",
-      "updatedAt": "2026-03-07T22:51:54.083Z"
+      "updatedAt": "2026-06-21T03:52:20.612Z"
     },
     "vercel-react-best-practices": {
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
       "skillPath": "skills/react-best-practices/SKILL.md",
-      "skillFolderHash": "fce8b5a24ff4ff2fc5db6aa1051e03b53c6b5bf1",
+      "skillFolderHash": "343db72180d05814949fef7d46be96b5c6ee86b3",
       "installedAt": "2026-03-07T22:52:57.927Z",
-      "updatedAt": "2026-03-07T22:52:57.927Z"
+      "updatedAt": "2026-06-21T03:53:05.137Z"
     },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
@@ -266,9 +214,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/productivity/teach/SKILL.md",
-      "skillFolderHash": "975430f7801bac2258ed18f4d80860024443b4f7",
+      "skillFolderHash": "3b6a4245e2aaeacb308ba6175ab3e7f2e43b0c47",
       "installedAt": "2026-06-09T02:32:08.424Z",
-      "updatedAt": "2026-06-11T12:53:15.804Z"
+      "updatedAt": "2026-06-21T03:53:23.125Z"
     },
     "ask-matt": {
       "source": "local",
@@ -406,6 +354,42 @@
       "skillFolderHash": "9df9d2b18efd0ffabe5b2403e3ebbdbfab6cad9ade852e86d08b92f23c187938",
       "installedAt": "2026-06-19T18:51:40.000Z",
       "updatedAt": "2026-06-19T18:51:40.000Z"
+    },
+    "write-concisely": {
+      "source": "neolabhq/context-engineering-kit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/neolabhq/context-engineering-kit.git",
+      "skillPath": "plugins/docs/skills/write-concisely/SKILL.md",
+      "skillFolderHash": "b8542851000e0a8b150774ef536ccc2e62fe3199",
+      "installedAt": "2026-06-21T03:53:16.298Z",
+      "updatedAt": "2026-06-21T04:00:19.022Z"
+    },
+    "github-pr-creation": {
+      "source": "fvadicamo/dev-agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/fvadicamo/dev-agent-skills.git",
+      "skillPath": "plugins/github-workflow/skills/github-pr-creation/SKILL.md",
+      "skillFolderHash": "0bda96ef8d1daab80b174759d2c700eeec7acaeb",
+      "installedAt": "2026-06-21T03:59:56.472Z",
+      "updatedAt": "2026-06-21T03:59:56.472Z"
+    },
+    "github-pr-merge": {
+      "source": "fvadicamo/dev-agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/fvadicamo/dev-agent-skills.git",
+      "skillPath": "plugins/github-workflow/skills/github-pr-merge/SKILL.md",
+      "skillFolderHash": "affc92da31f434e2a9f283f6e5ae09fa113dd42a",
+      "installedAt": "2026-06-21T03:59:56.474Z",
+      "updatedAt": "2026-06-21T03:59:56.474Z"
+    },
+    "github-pr-review": {
+      "source": "fvadicamo/dev-agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/fvadicamo/dev-agent-skills.git",
+      "skillPath": "plugins/github-workflow/skills/github-pr-review/SKILL.md",
+      "skillFolderHash": "c99b90ae29e3261976a24957e24bae9bbdf19c39",
+      "installedAt": "2026-06-21T03:59:56.476Z",
+      "updatedAt": "2026-06-21T03:59:56.476Z"
     }
   },
   "dismissed": {
