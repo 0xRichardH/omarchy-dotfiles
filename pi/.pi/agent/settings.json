@@ -10,7 +10,7 @@
     "0xdev/glm-5.2"
   ],
   "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.79.9",
+  "lastChangelogVersion": "0.79.10",
   "npmCommand": [
     "mise",
     "exec",
