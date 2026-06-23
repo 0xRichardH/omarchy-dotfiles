@@ -9,7 +9,6 @@ split_horizontal = "prefix+minus"
 split_vertical = "prefix+|"
 previous_tab = "ctrl+h"
 next_tab = "ctrl+l"
-previous_workspace = "prefix+L"
 swap_pane_right = ""
 cycle_pane_next = "prefix+tab"
 focus_pane_down = ""
@@ -22,6 +21,12 @@ goto = "prefix+j"
 key = "prefix+g"
 type = "pane"
 command = "lazygit"
+
+[[keys.command]]
+key = "prefix+L"
+type = "plugin_action"
+command = "third774.last-workspace.toggle"
+description = "last workspace"
 
 [ui]
 show_agent_labels_on_pane_borders = true
