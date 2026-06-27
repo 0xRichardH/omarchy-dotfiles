@@ -24,9 +24,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/skills.git",
       "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "3013fdeb8a11b10b1eb795ec3ae8bfca38f7c26d",
+      "skillFolderHash": "eb6a23305aea6e340d14b9de3766e721f9f4861b",
       "installedAt": "2026-02-26T08:23:29.252Z",
-      "updatedAt": "2026-06-21T03:52:05.700Z"
+      "updatedAt": "2026-06-24T13:21:05.235Z"
     },
     "acpx": {
       "source": "openclaw/acpx",
@@ -127,15 +127,6 @@
       "skillFolderHash": "6f1495c72c918e6f80c2f69df9005eacd5c57d7a",
       "installedAt": "2026-03-07T22:51:14.561Z",
       "updatedAt": "2026-06-21T03:53:02.963Z"
-    },
-    "test-driven-development": {
-      "source": "obra/superpowers",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/obra/superpowers.git",
-      "skillPath": "skills/test-driven-development/SKILL.md",
-      "skillFolderHash": "61939b456845d75979423c855829d05cbf2c304d",
-      "installedAt": "2026-03-07T22:51:54.083Z",
-      "updatedAt": "2026-06-21T03:52:20.612Z"
     },
     "vercel-react-best-practices": {
       "source": "vercel-labs/agent-skills",
@@ -381,10 +372,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/productivity/writing-great-skills/SKILL.md",
-      "skillFolderHash": "9252419010c7944edb297aa79b3f61a338a4f1f2",
-      "pluginName": "mattpocock-skills",
+      "skillFolderHash": "0875ef784dfdf0a3860f1cdc3937c2796b0314a5",
       "installedAt": "2026-06-19T18:51:40.000Z",
-      "updatedAt": "2026-06-21T04:09:09.056Z"
+      "updatedAt": "2026-06-24T13:22:10.593Z"
     },
     "write-concisely": {
       "source": "neolabhq/context-engineering-kit",
@@ -393,7 +383,7 @@
       "skillPath": "plugins/docs/skills/write-concisely/SKILL.md",
       "skillFolderHash": "b8542851000e0a8b150774ef536ccc2e62fe3199",
       "installedAt": "2026-06-21T03:53:16.298Z",
-      "updatedAt": "2026-06-21T04:00:19.022Z"
+      "updatedAt": "2026-06-27T03:12:01.737Z"
     },
     "github-pr-creation": {
       "source": "fvadicamo/dev-agent-skills",
@@ -440,6 +430,15 @@
       "skillFolderHash": "54f63545c8a6d9aaeacc036107b5f32f427c9bc6",
       "installedAt": "2026-06-21T04:09:09.056Z",
       "updatedAt": "2026-06-21T04:09:09.056Z"
+    },
+    "hunk-review": {
+      "source": "modem-dev/hunk",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/modem-dev/hunk.git",
+      "skillPath": "skills/hunk-review/SKILL.md",
+      "skillFolderHash": "dcdffe55e1a26317d4639174fe2b66ae71686b6c",
+      "installedAt": "2026-06-24T03:00:29.957Z",
+      "updatedAt": "2026-06-24T03:00:29.957Z"
     }
   },
   "dismissed": {
