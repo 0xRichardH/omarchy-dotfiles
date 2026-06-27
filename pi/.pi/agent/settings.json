@@ -1,5 +1,5 @@
 {
-  "defaultModel": "glm-5.2",
+  "defaultModel": "gpt-5.5",
   "defaultProvider": "0xdev",
   "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
