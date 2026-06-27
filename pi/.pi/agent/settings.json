@@ -4,13 +4,13 @@
   "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
   "enabledModels": [
-    "r/kmca/kimi-for-coding",
     "0xdev/gpt-5.5",
     "0xdev/kimi-k2.7-code",
-    "0xdev/glm-5.2"
+    "0xdev/glm-5.2",
+    "0xdev/kimi-for-coding"
   ],
   "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.79.10",
+  "lastChangelogVersion": "0.80.2",
   "npmCommand": [
     "mise",
     "exec",
@@ -21,12 +21,13 @@
   "packages": [
     "npm:pi-web-access",
     "npm:pi-codex-goal",
-    "npm:pi-subagents",
     "npm:gentle-engram",
     "npm:pi-mcp-adapter",
     "git:github.com/Fatih0234/btw",
     "git:github.com/0xRichardH/pi-cliproxyapi-provider",
-    "npm:@ff-labs/pi-fff"
+    "npm:@ff-labs/pi-fff",
+    "npm:@juicesharp/rpiv-todo",
+    "git:github.com/0xRichardH/pi-subagents"
   ],
   "steeringMode": "one-at-a-time",
   "terminal": {

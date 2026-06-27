@@ -8,6 +8,8 @@ set -U LC_ALL en_US.UTF-8
 
 set -Ux SSH_ASKPASS_REQUIRE force
 
+set -Ux PI_SUBAGENT_MUX herdr
+
 set -U TERM screen-256color
 set -x SHELL /usr/bin/fish
 
