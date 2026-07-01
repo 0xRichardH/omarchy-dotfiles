@@ -7,10 +7,11 @@
     "0xdev/gpt-5.5",
     "0xdev/kimi-k2.7-code",
     "0xdev/glm-5.2",
-    "0xdev/kimi-for-coding"
+    "0xdev/kimi-for-coding",
+    "0xdev/minimax-m3"
   ],
   "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.80.2",
+  "lastChangelogVersion": "0.80.3",
   "npmCommand": [
     "mise",
     "exec",

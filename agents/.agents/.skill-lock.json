@@ -33,9 +33,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/openclaw/acpx.git",
       "skillPath": "skills/acpx/SKILL.md",
-      "skillFolderHash": "fa689578f9e42fff2c4c8e1c4c09d569bd299a2e",
+      "skillFolderHash": "096d6174d411d440a9a8ec212f19b6343d065c5f",
       "installedAt": "2026-03-02T12:16:52.100Z",
-      "updatedAt": "2026-03-02T12:16:52.100Z"
+      "updatedAt": "2026-07-01T02:30:20.171Z"
     },
     "beautiful-mermaid": {
       "source": "intellectronica/agent-skills",
@@ -60,9 +60,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/brainstorming/SKILL.md",
-      "skillFolderHash": "27e73ef7b83994e913cba378081b587412d2e9cb",
+      "skillFolderHash": "b14f49a55a8387cfa12ac89794ab79698d7fddbb",
       "installedAt": "2026-03-07T22:30:16.121Z",
-      "updatedAt": "2026-06-21T03:52:13.199Z"
+      "updatedAt": "2026-07-01T02:30:26.753Z"
     },
     "frontend-design": {
       "source": "anthropics/skills",
@@ -384,7 +384,7 @@
       "skillPath": "plugins/docs/skills/write-concisely/SKILL.md",
       "skillFolderHash": "b8542851000e0a8b150774ef536ccc2e62fe3199",
       "installedAt": "2026-06-21T03:53:16.298Z",
-      "updatedAt": "2026-06-27T03:12:01.737Z"
+      "updatedAt": "2026-07-01T02:30:35.070Z"
     },
     "github-pr-creation": {
       "source": "fvadicamo/dev-agent-skills",
@@ -440,6 +440,15 @@
       "skillFolderHash": "dcdffe55e1a26317d4639174fe2b66ae71686b6c",
       "installedAt": "2026-06-24T03:00:29.957Z",
       "updatedAt": "2026-06-24T03:00:29.957Z"
+    },
+    "architecture-diagram": {
+      "source": "cocoon-ai/architecture-diagram-generator",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/cocoon-ai/architecture-diagram-generator.git",
+      "skillPath": "architecture-diagram/SKILL.md",
+      "skillFolderHash": "07b4fbe3d0dfc307deafd29038e96b247c6d7d27",
+      "installedAt": "2026-07-01T02:24:31.117Z",
+      "updatedAt": "2026-07-01T02:24:31.117Z"
     }
   },
   "dismissed": {
