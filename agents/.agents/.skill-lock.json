@@ -449,6 +449,15 @@
       "skillFolderHash": "07b4fbe3d0dfc307deafd29038e96b247c6d7d27",
       "installedAt": "2026-07-01T02:24:31.117Z",
       "updatedAt": "2026-07-01T02:24:31.117Z"
+    },
+    "animation-vocabulary": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/emilkowalski/skills.git",
+      "skillPath": "skills/animation-vocabulary/SKILL.md",
+      "skillFolderHash": "e6dc24ca1ff1e70c9677df9a1d2d1c80415cbb3c",
+      "installedAt": "2026-07-02T03:12:32.404Z",
+      "updatedAt": "2026-07-02T03:12:32.404Z"
     }
   },
   "dismissed": {

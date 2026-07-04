@@ -17,6 +17,8 @@ Workflow:
 3. Write the comment:
    - Short and direct.
    - Natural, like a human maintainer or contributor.
+   - Use GitHub-flavored Markdown where helpful: links, inline code, quotes, or short bullets.
+   - Keep formatting minimal; do not wrap the whole comment in a code block.
    - No AI phrasing, no over-explaining, no bullet list unless clearly useful.
    - Match the language:
      - `en`: English

@@ -1,5 +1,5 @@
 {
-  "defaultModel": "gpt-5.5",
+  "defaultModel": "step-3.7-flash",
   "defaultProvider": "0xdev",
   "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
@@ -28,7 +28,7 @@
     "git:github.com/0xRichardH/pi-cliproxyapi-provider",
     "npm:@ff-labs/pi-fff",
     "npm:@juicesharp/rpiv-todo",
-    "git:github.com/0xRichardH/pi-subagents"
+    "npm:@tintinweb/pi-subagents"
   ],
   "steeringMode": "one-at-a-time",
   "terminal": {
