@@ -1,4 +1,5 @@
 [settings]
+minimum_release_age = "12h"
 npm.bun = true
 idiomatic_version_file_enable_tools = ["ruby"]
 
@@ -21,6 +22,7 @@ atuin = "latest"
 "npm:@earendil-works/pi-coding-agent" = "latest"
 "npm:critique" = "latest" # https://github.com/remorses/critique
 "npm:acpx" = "latest"
+"npm:hunkdiff" = "latest"
 "pipx:pgcli" = { version = "latest", extras = "sshtunnel", uvx_args = "--with 'paramiko<4'" }
 "cargo:jj-cli" = "latest"
 "npm:mcporter" = "latest"

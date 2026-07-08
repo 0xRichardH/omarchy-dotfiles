@@ -1,8 +1,9 @@
 onboarding = false
 
 [theme]
-name = "terminal"
+name = "catppuccin"
 
+auto_switch = false
 [keys]
 prefix = "ctrl+s"
 split_horizontal = "prefix+minus"
@@ -33,10 +34,10 @@ show_agent_labels_on_pane_borders = true
 
 agent_panel_scope = "all"
 [ui.sound]
-enabled = false
+enabled = true
 
 [ui.toast]
-delivery = "off"
+delivery = "system"
 
 [experimental]
 kitty_graphics = true
