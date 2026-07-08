@@ -1,5 +1,5 @@
 {
-  "defaultModel": "kimi-k2.7-code",
+  "defaultModel": "glm-5.2",
   "defaultProvider": "0xdev",
   "defaultThinkingLevel": "high",
   "enableInstallTelemetry": false,
