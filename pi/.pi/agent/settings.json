@@ -1,14 +1,15 @@
 {
-  "defaultModel": "step-3.7-flash",
+  "defaultModel": "kimi-k2.7-code",
   "defaultProvider": "0xdev",
-  "defaultThinkingLevel": "medium",
+  "defaultThinkingLevel": "high",
   "enableInstallTelemetry": false,
   "enabledModels": [
     "0xdev/gpt-5.5",
     "0xdev/kimi-k2.7-code",
     "0xdev/glm-5.2",
     "0xdev/kimi-for-coding",
-    "0xdev/minimax-m3"
+    "0xdev/minimax-m3",
+    "0xdev/openrouter/free"
   ],
   "hideThinkingBlock": false,
   "lastChangelogVersion": "0.80.3",
