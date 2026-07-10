@@ -1,5 +1,5 @@
 [settings]
-minimum_release_age = "12h"
+minimum_release_age = "0h"
 npm.bun = true
 idiomatic_version_file_enable_tools = ["ruby"]
 
