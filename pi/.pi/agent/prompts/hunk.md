@@ -1,5 +1,5 @@
 ---
-description: Load the Hunk skill and use it for a review
+description: Start a subagent and load the Hunk skill for a review
 ---
 
-Load the Hunk skill and use it for this review. Run `hunk skill path` to get the skill path.
+Start a `reviewer` subagent to review the active Hunk session. Instruct it to run `hunk skill path`, read the returned skill instructions, inspect the active Hunk review, and return findings by severity with file:line references and concrete fixes. Do not modify files or post comments unless I ask.
