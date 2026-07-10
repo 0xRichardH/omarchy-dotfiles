@@ -26,9 +26,19 @@
     "dock": "left",
   },
   "agent": {
+    "tool_permissions": {
+      "tools": {
+        "terminal": {
+          "default": "allow"
+        },
+        "skill": {
+          "default": "allow"
+        }
+      }
+    },
     "default_model": {
       "provider": "zed.dev",
-      "model": "gpt-5.5",
+      "model": "gpt-5.6-terra",
       "enable_thinking": true,
       "effort": "medium",
     },
