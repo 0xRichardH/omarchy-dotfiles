@@ -1,18 +1,21 @@
 {
-  "defaultModel": "glm-5.2",
+  "defaultModel": "grok-4.5",
   "defaultProvider": "0xdev",
   "defaultThinkingLevel": "high",
   "enableInstallTelemetry": false,
   "enabledModels": [
-    "0xdev/gpt-5.5",
     "0xdev/kimi-k2.7-code",
     "0xdev/glm-5.2",
     "0xdev/kimi-for-coding",
     "0xdev/minimax-m3",
-    "0xdev/openrouter/free"
+    "0xdev/openrouter/free",
+    "0xdev/gpt-5.6-terra",
+    "0xdev/gpt-5.6-luna",
+    "0xdev/gpt-5.6-sol",
+    "0xdev/grok-4.5"
   ],
   "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.80.3",
+  "lastChangelogVersion": "0.80.6",
   "npmCommand": [
     "mise",
     "exec",
@@ -35,6 +38,6 @@
   "terminal": {
     "showTerminalProgress": true
   },
-  "theme": "dark",
+  "theme": "light",
   "treeFilterMode": "default"
 }
