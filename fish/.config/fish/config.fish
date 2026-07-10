@@ -24,3 +24,7 @@ fish_add_path "$HOME/.local/bin"
 if test -f "$HOME/.openclaw/completions/openclaw.fish"
     source "$HOME/.openclaw/completions/openclaw.fish"
 end
+
+# >>> grok installer >>>
+fish_add_path $HOME/.grok/bin
+# <<< grok installer <<<
