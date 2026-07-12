@@ -1,7 +1,7 @@
 {
-  "defaultModel": "grok-4.5",
+  "defaultModel": "gpt-5.6-luna",
   "defaultProvider": "0xdev",
-  "defaultThinkingLevel": "high",
+  "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
   "enabledModels": [
     "0xdev/kimi-k2.7-code",
@@ -29,15 +29,15 @@
     "npm:gentle-engram",
     "npm:pi-mcp-adapter",
     "git:github.com/Fatih0234/btw",
-    "git:github.com/0xRichardH/pi-cliproxyapi-provider",
     "npm:@ff-labs/pi-fff",
     "npm:@juicesharp/rpiv-todo",
-    "npm:@tintinweb/pi-subagents"
+    "npm:pi-cliproxyapi-provider",
+    "npm:pi-herdr-subagents"
   ],
   "steeringMode": "one-at-a-time",
   "terminal": {
     "showTerminalProgress": true
   },
-  "theme": "light",
+  "theme": "dark",
   "treeFilterMode": "default"
 }
