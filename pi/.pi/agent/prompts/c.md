@@ -2,10 +2,11 @@
 description: Commit current changes with signed commit(s) (-S)
 argument-hint: "[optional commit message]"
 ---
-Commit the current changes as one or more signed logical commits.
+Create signed, atomic commit(s) from the current changes.
 
-1. Inspect `git status --short`, `git diff`, and `git diff --staged`. If there are no changes, stop and report that nothing was committed.
-2. Stage by concern, never with `git add -A`. Split independent concerns into separate commits.
-3. Use Conventional Commits `type(scope): description`, derived from each staged diff. If `$@` is supplied, use it only when making one commit; if the changes require multiple commits, ask for per-commit messages.
-4. Commit each staged concern with `git commit -S`, then immediately verify it with `git log -1 --pretty=%G?`. On signing failure, stop and report the error without creating an unsigned commit.
-5. Print every new commit's hash, subject, and signature status.
+1. Inspect `git status --short`, `git diff`, and `git diff --staged`. Stop with a no-changes report when the worktree and index are clean.
+2. Form an atomic commit plan. Keep changes together when they deliver one outcome, including its tests, documentation, and configuration. Create separate commits only for concerns that remain meaningful, valid, and safely revertible on their own. Ask for guidance when no defensible grouping is clear.
+3. For each planned commit, stage its exact paths or hunks without broad staging commands. Review `git diff --staged` and proceed only when it matches that commit's complete concern.
+4. Use Conventional Commits `type(scope): description`. With one planned commit, use `$@` as its message when supplied. With multiple commits, use `$@` as intent and derive a message from each staged diff.
+5. Create each commit with `git commit -S` and verify it immediately with `git log -1 --pretty=%G?`. A signing failure ends the run without an unsigned replacement.
+6. Report every new commit's hash, subject, and signature status.
