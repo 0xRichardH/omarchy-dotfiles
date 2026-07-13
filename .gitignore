@@ -5,4 +5,3 @@ tmux/.config/tmux/plugins/
 pi/.pi/agent/npm/
 pi/.pi/agent/sessions/
 pi/.pi/agent/auth.json
-pi/.pi/agent/extensions/
