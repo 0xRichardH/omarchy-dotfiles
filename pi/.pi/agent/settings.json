@@ -1,5 +1,5 @@
 {
-  "defaultModel": "kimi-k2.7-code",
+  "defaultModel": "gpt-5.6-luna",
   "defaultProvider": "0xdev",
   "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
