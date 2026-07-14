@@ -28,15 +28,6 @@
       "installedAt": "2026-02-26T08:23:29.252Z",
       "updatedAt": "2026-07-12T14:50:19.205Z"
     },
-    "acpx": {
-      "source": "openclaw/acpx",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/openclaw/acpx.git",
-      "skillPath": "skills/acpx/SKILL.md",
-      "skillFolderHash": "296b03398bfd16423bcb1ea73f2cb9708ed3f534",
-      "installedAt": "2026-03-02T12:16:52.100Z",
-      "updatedAt": "2026-07-08T14:43:43.213Z"
-    },
     "beautiful-mermaid": {
       "source": "intellectronica/agent-skills",
       "sourceType": "github",
