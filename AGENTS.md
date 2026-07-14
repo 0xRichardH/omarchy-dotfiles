@@ -38,5 +38,8 @@ Always use `stow --simulate` before applying changes. For Neovim, run `nvim --he
 ## Commit & Pull Request Guidelines
 Follow Conventional Commits: `type(scope): description`. Types: feat, fix, docs, style, refactor, test, chore, revert. Scope should be the package name (git, nvim, hypr, etc.). Keep bodies short but note migration steps. Example: `feat(git): add custom merge-branch command`.
 
+### Skip ephemeral Pi model selection
+Do **not** commit `pi/.pi/agent/settings.json` when its diff only changes `defaultModel` and/or `defaultProvider`. Those fields track the currently selected model and churn constantly. Commit the file only when other keys change (thinking level, telemetry, packages, etc.).
+
 ## Security & Secrets
 Never commit tokens, SSH keys, or Bitwarden exports. The `bw_add_sshkeys` script expects secrets in vault. Review diffs for accidental absolute paths or credentials before committing.
