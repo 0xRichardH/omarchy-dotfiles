@@ -1,5 +1,5 @@
 {
-  "defaultModel": "gpt-5.6-luna",
+  "defaultModel": "minimax-m3",
   "defaultProvider": "0xdev",
   "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
