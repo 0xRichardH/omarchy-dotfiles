@@ -1,0 +1,19 @@
+# Official repository packages managed by this repository.
+# One package name per line. Comments and blank lines are ignored.
+# Install with: ./scripts/install-packages.sh
+
+# Bootstrap / stow
+stow
+
+# Shell
+omarchy-fish
+
+# Utilities referenced by scripts/
+cronie
+fcitx5
+fcitx5-chinese-addons
+fcitx5-configtool
+fcitx5-gtk
+fcitx5-qt
+rclone
+yazi

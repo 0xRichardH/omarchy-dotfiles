@@ -10,10 +10,12 @@ Each top-level directory is a GNU Stow package for a specific tool. Key paths:
 - `bash/.bin` and `bw/.bin` house utility scripts.
 - `tmux/.config/tmux/tmux.conf` manages multiplexer defaults and key bindings.
 - `sesh/.config/sesh/sesh.toml` defines reusable tmux session templates.
-Symlink everything into `$HOME` with `stow <package>`; avoid editing live dotfiles in place.
+- `packages/` declares intentional Arch/AUR package names (`official.txt`, `aur.txt`); install with `scripts/install-packages.sh`.
+Symlink everything into `$HOME` with `stow <package>`; avoid editing live dotfiles in place. Stow manages configs; package manifests manage system packages.
 
 ## Build, Test, and Development Commands
 - **Apply changes**: `stow --target=$HOME --restow <package>` (e.g., `hypr`, `nvim`, `git`)
+- **Install declared packages**: `./scripts/install-packages.sh` (add `--audit` to compare manifests vs installed packages)
 - **Agents package**: run `stow --target=$HOME --simulate agents` before `--restow` to confirm it will update `~/.agents` as expected.
 - **Sync new skills**: execute `agents/.bin/sync-agents-skills` (wraps `stow --adopt`) after installing or modifying a skill so the repo stays current.
 - **Dry-run test**: `stow --target=$HOME --simulate <package>` to preview symlink changes

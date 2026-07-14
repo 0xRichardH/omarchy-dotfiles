@@ -1,7 +1,11 @@
-#!/bin/sh
+#!/usr/bin/env bash
+set -euo pipefail
 
-# Install remap
-yay -S --noconfirm --needed xremap-x11-bin
+if ! pacman -Q xremap-hypr-bin >/dev/null 2>&1; then
+  echo "Error: xremap-hypr-bin is not installed" >&2
+  echo "Run ./scripts/install-packages.sh first" >&2
+  exit 1
+fi
 
 # Restow the package
 stow --target="$HOME" xremap

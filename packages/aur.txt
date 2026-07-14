@@ -1,0 +1,13 @@
+# AUR packages managed by this repository.
+# One package name per line. Comments and blank lines are ignored.
+# Install with: ./scripts/install-packages.sh
+# Review PKGBUILD diffs interactively unless --non-interactive is set.
+
+# Shell history / line editing
+blesh-git
+
+# Fonts
+ttf-google-sans-code-vf
+
+# Input remapping (Hyprland)
+xremap-hypr-bin

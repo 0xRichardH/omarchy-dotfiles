@@ -41,6 +41,30 @@ Run the installer with a host name:
 ./install.sh desktop
 ```
 
+For an explicitly unattended bootstrap:
+
+```bash
+./install.sh laptop --non-interactive
+./install.sh desktop --non-interactive
+```
+
+## Packages
+
+Declared Arch packages live in `packages/`:
+
+- `packages/official.txt` for repository packages
+- `packages/aur.txt` for AUR packages
+
+Install or refresh them with:
+
+```bash
+./scripts/install-packages.sh
+./scripts/install-packages.sh --audit
+./scripts/install-packages.sh --upgrade
+```
+
+See [`packages/README.md`](packages/README.md) and [`docs/package-management.md`](docs/package-management.md) for the design.
+
 ## Enable ssh-agent service
 
 Load user services so the bundled unit is picked up, then enable it for automatic startups:
@@ -79,7 +103,7 @@ Add yourself to the `input` group, then log out and back in or reboot so the mem
 sudo usermod -aG input "$USER"
 ```
 
-## Packages
+## Stow packages
 
 - `agents`: Mirrors `~/.agents` skill definitions, lock metadata, and helper templates used by OpenCode agents.
 - `atuin`: Shell history configuration.

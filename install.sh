@@ -3,18 +3,29 @@ set -euo pipefail
 
 usage() {
   cat <<'USAGE'
-Usage: ./install.sh <laptop|desktop>
+Usage: ./install.sh <laptop|desktop> [--non-interactive]
 USAGE
 }
 
 host="${1:-}"
-if [[ -z "$host" ]]; then
+mode="${2:-}"
+if [[ -z "$host" ]] || [[ "$host" != "laptop" && "$host" != "desktop" ]]; then
+  usage >&2
+  exit 2
+fi
+if [[ -n "$mode" && "$mode" != "--non-interactive" ]] || (($# > 2)); then
   usage >&2
   exit 2
 fi
 
+package_args=()
+if [[ "$mode" == "--non-interactive" ]]; then
+  package_args+=(--non-interactive)
+fi
+
 omarchy-install-tailscale
 
+./scripts/install-packages.sh "${package_args[@]}"
 ./scripts/install-stow.sh "$host"
 ./scripts/enable-ssh-agent-service.sh
 ./scripts/enable-opencode-service.sh
