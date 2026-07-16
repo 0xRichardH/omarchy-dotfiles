@@ -1,7 +1,7 @@
 {
-  "defaultModel": "gpt-5.6-sol",
+  "defaultModel": "grok-4.5",
   "defaultProvider": "0xdev",
-  "defaultThinkingLevel": "medium",
+  "defaultThinkingLevel": "high",
   "enableInstallTelemetry": false,
   "enabledModels": [
     "0xdev/kimi-k2.7-code",
@@ -15,7 +15,7 @@
     "0xdev/grok-4.5"
   ],
   "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.80.6",
+  "lastChangelogVersion": "0.80.7",
   "npmCommand": [
     "mise",
     "exec",
