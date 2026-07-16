@@ -173,15 +173,6 @@
       "installedAt": "2026-05-29T00:44:44.893Z",
       "updatedAt": "2026-05-29T00:44:44.893Z"
     },
-    "mcporter": {
-      "source": "0xRichardH/agent-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/0xRichardH/agent-skills.git",
-      "skillPath": "skills/mcporter/SKILL.md",
-      "skillFolderHash": "07a836b21a9143f2e441967aac944a28b4f80ea1",
-      "installedAt": "2026-05-29T00:44:44.894Z",
-      "updatedAt": "2026-05-29T00:44:44.894Z"
-    },
     "teach": {
       "source": "mattpocock/skills",
       "sourceType": "github",
