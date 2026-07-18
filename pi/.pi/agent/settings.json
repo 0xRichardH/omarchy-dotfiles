@@ -1,7 +1,7 @@
 {
-  "defaultModel": "gpt-5.6-sol",
+  "defaultModel": "kimi-k2.7-code",
   "defaultProvider": "0xdev",
-  "defaultThinkingLevel": "medium",
+  "defaultThinkingLevel": "high",
   "enableInstallTelemetry": false,
   "enabledModels": [
     "0xdev/glm-5.2",
