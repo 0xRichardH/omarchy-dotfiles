@@ -58,3 +58,4 @@ abbr v "nvim +GoToFile"
 abbr vim nvim
 
 abbr xx "chmod +x (ls | gum filter --limit 1 --header 'chmod +x')"
+abbr xo xdg-open
