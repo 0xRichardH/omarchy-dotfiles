@@ -31,7 +31,7 @@
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-cliproxyapi-provider",
     "git:github.com/Fatih0234/btw",
-    "npm:pi-herdr-subagents"
+    "npm:@tintinweb/pi-subagents"
   ],
   "steeringMode": "one-at-a-time",
   "terminal": {
