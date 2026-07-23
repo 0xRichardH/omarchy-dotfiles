@@ -1,0 +1,44 @@
+{
+  "mode": "path",
+  "scope": {
+    "allProviders": "off",
+    "additionalProviders": [
+      "0xdev"
+    ]
+  },
+  "tools": {
+    "webRun": true,
+    "imageGeneration": true,
+    "viewImageFallback": false,
+    "applyPatchOnly": false,
+    "viewImageOnly": false,
+    "webRunOnly": true,
+    "imageGenerationOnly": true
+  },
+  "ui": {
+    "statusLine": false,
+    "toolRenaming": true,
+    "compactTools": true,
+    "codeModeDetails": false,
+    "backgroundShellWidget": true,
+    "backgroundShellToggleShortcut": "alt+w",
+    "backgroundShellPrevShortcut": "alt+q",
+    "backgroundShellNextShortcut": "alt+e",
+    "backgroundShellCloseShortcut": "alt+r"
+  },
+  "compaction": {
+    "responsesCompaction": true,
+    "version": "v2"
+  },
+  "beta": {
+    "codeMode": false,
+    "responsesLite": false,
+    "v2UserMessageRetention": 64
+  },
+  "openai": {
+    "fast": false,
+    "verbosity": "low",
+    "forceCachedWebSockets": true,
+    "webSearchModel": "gpt-5.6-luna"
+  }
+}

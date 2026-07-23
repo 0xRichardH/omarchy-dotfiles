@@ -1,7 +1,7 @@
 {
-  "defaultModel": "kimi-k2.7-code",
+  "defaultModel": "gpt-5.6-sol",
   "defaultProvider": "0xdev",
-  "defaultThinkingLevel": "high",
+  "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
   "enabledModels": [
     "0xdev/glm-5.2",
@@ -30,8 +30,9 @@
     "npm:@ff-labs/pi-fff",
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-cliproxyapi-provider",
+    "git:github.com/Fatih0234/btw",
     "npm:@tintinweb/pi-subagents",
-    "npm:@maxedapps/pi-herdr-sidetrack"
+    "npm:@howaboua/pi-codex-conversion"
   ],
   "steeringMode": "one-at-a-time",
   "terminal": {
