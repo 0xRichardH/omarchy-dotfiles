@@ -9,6 +9,7 @@ stow
 omarchy-fish
 
 # Utilities referenced by scripts/
+aws-cli-v2
 cronie
 fcitx5
 fcitx5-chinese-addons

@@ -14,7 +14,7 @@
     "0xdev/kimi-for-coding-highspeed"
   ],
   "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.80.10",
+  "lastChangelogVersion": "0.81.1",
   "npmCommand": [
     "mise",
     "exec",
@@ -30,8 +30,8 @@
     "npm:@ff-labs/pi-fff",
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-cliproxyapi-provider",
-    "git:github.com/Fatih0234/btw",
-    "npm:@tintinweb/pi-subagents"
+    "npm:@tintinweb/pi-subagents",
+    "npm:@maxedapps/pi-herdr-sidetrack"
   ],
   "steeringMode": "one-at-a-time",
   "terminal": {
