@@ -1,5 +1,5 @@
 {
-  "defaultModel": "gpt-5.6-sol",
+  "defaultModel": "gemini-3.6-flash-high",
   "defaultProvider": "0xdev",
   "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
@@ -10,11 +10,10 @@
     "0xdev/gpt-5.6-terra",
     "0xdev/gpt-5.6-luna",
     "0xdev/gpt-5.6-sol",
-    "0xdev/kimi-k3",
-    "0xdev/kimi-for-coding-highspeed"
+    "0xdev/gemini-3.6-flash-high"
   ],
   "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.81.1",
+  "lastChangelogVersion": "0.82.0",
   "npmCommand": [
     "mise",
     "exec",
@@ -30,9 +29,7 @@
     "npm:@ff-labs/pi-fff",
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-cliproxyapi-provider",
-    "git:github.com/Fatih0234/btw",
-    "npm:@tintinweb/pi-subagents",
-    "npm:@howaboua/pi-codex-conversion"
+    "npm:@tintinweb/pi-subagents"
   ],
   "steeringMode": "one-at-a-time",
   "terminal": {
