@@ -4,7 +4,7 @@
 Each top-level directory is a GNU Stow package for a specific tool. Key paths:
 - `alacritty/.config/alacritty/alacritty.toml` for terminal defaults.
 - `agents/.agents` tracks OpenCode skill definitions, templates, and lock metadata.
-- `hypr/.config/hypr/*.conf` split by concern (bindings, input, monitors, etc.).
+- `hypr/.config/hypr/*.lua` contains shared Hyprland settings; host overlays own machine-specific Lua files such as bindings, autostart, and monitors.
 - `nvim/.config/nvim` contains LazyVim-based setup plus custom Lua modules in `lua/config/` and `lua/plugins/`.
 - `git/.config/git` centralizes Git templates and ignores; `git/.bin` holds custom git commands.
 - `bash/.bin` and `bw/.bin` house utility scripts.
@@ -28,7 +28,7 @@ Symlink everything into `$HOME` with `stow <package>`; avoid editing live dotfil
 ## Coding Style & Naming Conventions
 - **Lua**: Follow `stylua.toml` (2 spaces, max column 120). Use snake_case for modules/functions. Group plugins under `lua/plugins/`, config under `lua/config/`. No comments unless documenting complex logic.
 - **Shell scripts**: Use `#!/usr/bin/env bash` shebang. Place in `<package>/.bin/` and mark executable (`chmod +x`). Follow existing patterns (see `bash/.bin/tat`, `git/.bin/commit`).
-- **Hyprland**: Lowercase `*.conf` files named by domain (bindings.conf, monitors.conf, etc.).
+- **Hyprland**: Lowercase `*.lua` files named by domain (bindings.lua, monitors.lua, etc.). Keep service-specific files such as `hypridle.conf`, `hyprlock.conf`, and `hyprsunset.conf` in their native format.
 - **TOML/YAML**: 2-space indent. TOML uses lowercase with dashed keys. Keep configs ASCII-only unless required.
 - **Formatting**: Nvim uses tabstop=2, softtabstop=2, shiftwidth=2, expandtab=true.
 

@@ -26,7 +26,7 @@ Most packages are shared. Machine-specific files live in host overlay packages:
 - `hosts-laptop`
 - `hosts-desktop`
 
-The host packages provide files such as terminal font size, Hyprland monitor setup, Hyprland keybindings, autostart behavior, and xremap device rules. Shared packages and host overlays must not contain the same target path. `scripts/stow-machine.sh` checks for duplicate targets before running Stow.
+The host packages provide files such as terminal font size, Hyprland monitor setup, Hyprland keybindings, autostart behavior, and xremap device rules. Hyprland's active user configuration is Lua-based: shared Lua files live in `hypr`, while `autostart.lua`, `bindings.lua`, and `monitors.lua` live in the host overlays. Shared packages and host overlays must not contain the same target path. `scripts/stow-machine.sh` checks for duplicate targets before running Stow.
 
 Use `--no-folding` through the helper script so files from shared packages and host overlays can coexist in the same target directories.
 
