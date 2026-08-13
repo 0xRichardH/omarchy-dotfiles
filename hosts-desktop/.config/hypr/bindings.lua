@@ -22,11 +22,12 @@
 
 -- Disable a default binding without replacing it.
 -- hl.unbind("SUPER + SHIFT + B")
+-- Override Omarchy's Google Maps binding with the screenshot command.
 hl.unbind("SUPER + SHIFT + S")
-hl.unbind("SUPER + SHIFT + P")
-
--- Logitech MX Keys examples:
 o.bind("SUPER + SHIFT + S", nil, "omarchy-capture-screenshot")
--- o.bind("SUPER + SHIFT + P", "exec", "walker -m clipboard")
+
+-- Move Quattro's clipboard manager from SUPER + CTRL + V to SUPER + SHIFT + P.
+hl.unbind("SUPER + SHIFT + P")
+o.bind("SUPER + SHIFT + P", "Clipboard manager", "omarchy-shell shell toggle omarchy.clipboard")
 -- o.bind("SUPER + H", nil, "voxtype record toggle")
 -- o.bind("SUPER + PERIOD", nil, "omarchy-shell shell toggle omarchy.emojis")
