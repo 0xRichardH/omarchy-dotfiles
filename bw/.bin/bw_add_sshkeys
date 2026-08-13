@@ -4,6 +4,7 @@ Extracts SSH keys from Bitwarden vault
 """
 
 import argparse
+import getpass
 import json
 import logging
 import os
@@ -11,6 +12,14 @@ import re
 import subprocess
 import sys
 from typing import Any
+
+
+def get_interactive_stream() -> tuple[Any, bool]:
+    """Use the controlling terminal for subprocess input when available."""
+    try:
+        return open("/dev/tty", "r"), True
+    except OSError:
+        return sys.stdin, False
 
 
 def get_session(session: str) -> str:
@@ -38,18 +47,37 @@ def get_session(session: str) -> str:
 
     # Use a more interactive approach
     try:
-        # Interactive login that inherits stdin to allow password entry
         logging.info(
             f"Running 'bw {operation}' - you'll need to enter your credentials"
         )
-        # This allows the Bitwarden CLI to directly access the terminal
-        proc = subprocess.run(
-            ["bw", "--raw", operation],
-            text=True,
-            stdout=subprocess.PIPE,
-            check=True,
-            stdin=sys.stdin,
-        )
+        terminal, close_terminal = get_interactive_stream()
+        try:
+            command = ["bw", "--raw", operation]
+            environment = os.environ.copy()
+
+            # Recent Bitwarden CLI versions do not reliably read the master
+            # password from an inherited stdin. Supply it through the CLI's
+            # supported password environment option instead.
+            if operation == "unlock":
+                # Let getpass open /dev/tty itself for both prompt output and
+                # password input. The subprocess stream is read-only and must
+                # not be used as getpass's prompt stream.
+                environment["BW_MASTER_PASSWORD"] = getpass.getpass(
+                    "Master password: "
+                )
+                command.extend(["--passwordenv", "BW_MASTER_PASSWORD"])
+
+            proc = subprocess.run(
+                command,
+                text=True,
+                stdout=subprocess.PIPE,
+                check=True,
+                stdin=terminal,
+                env=environment,
+            )
+        finally:
+            if close_terminal:
+                terminal.close()
 
         session = proc.stdout.strip()
         if not session:
