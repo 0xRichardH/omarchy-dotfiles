@@ -1,7 +1,7 @@
 {
-  "defaultModel": "gpt-5.6-luna",
+  "defaultModel": "gemini-3.7-flash",
   "defaultProvider": "0xdev",
-  "defaultThinkingLevel": "medium",
+  "defaultThinkingLevel": "high",
   "enableInstallTelemetry": false,
   "enabledModels": [
     "0xdev/glm-5.2",
@@ -10,10 +10,11 @@
     "0xdev/gpt-5.6-terra",
     "0xdev/gpt-5.6-luna",
     "0xdev/gpt-5.6-sol",
-    "0xdev/gemini-3.6-flash-high"
+    "0xdev/grok-4.6",
+    "0xdev/gemini-3.7-flash"
   ],
   "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.84.1",
+  "lastChangelogVersion": "0.84.2",
   "npmCommand": [
     "mise",
     "exec",
