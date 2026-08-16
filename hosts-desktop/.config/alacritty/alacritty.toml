@@ -22,8 +22,7 @@ hide_when_typing = true
 
 [keyboard]
 bindings = [
-{ key = "F11", action = "ToggleFullscreen" }
+  { key = "F11", action = "ToggleFullscreen" },
+  # Send Shift+Return as CSI-u so TUIs can distinguish it from Return without treating it as Alt+Return.
+  { key = "Return", mods = "Shift", chars = "\u001B[13;2u" },
 ]
-
-# Send Shift+Return as CSI-u so TUIs can distinguish it from Return without treating it as Alt+Return.
-{ key = "Return", mods = "Shift", chars = "\u001B[13;2u" }
