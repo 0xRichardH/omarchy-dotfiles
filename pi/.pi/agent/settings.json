@@ -1,7 +1,7 @@
 {
   "defaultModel": "gemini-3.7-flash",
   "defaultProvider": "0xdev",
-  "defaultThinkingLevel": "high",
+  "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
   "enabledModels": [
     "0xdev/glm-5.2",
@@ -14,7 +14,7 @@
     "0xdev/gemini-3.7-flash"
   ],
   "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.84.2",
+  "lastChangelogVersion": "0.84.4",
   "npmCommand": [
     "mise",
     "exec",
@@ -30,7 +30,7 @@
     "npm:@ff-labs/pi-fff",
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-cliproxyapi-provider",
-    "npm:pi-herdr-subagents"
+    "npm:@tintinweb/pi-subagents"
   ],
   "steeringMode": "one-at-a-time",
   "terminal": {
