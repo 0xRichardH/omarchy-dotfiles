@@ -31,7 +31,7 @@ description = "last workspace"
 
 [ui]
 show_agent_labels_on_pane_borders = true
-agent_panel_sort = "spaces"
+agent_panel_sort = "priority"
 [ui.sound]
 enabled = true
 
