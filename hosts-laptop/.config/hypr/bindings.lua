@@ -11,7 +11,8 @@ o.bind("SUPER + ALT + R", "Reload Hyprland config", "hyprctl reload")
 
 -- Override Omarchy's Google Maps binding with the screenshot command.
 hl.unbind("SUPER + SHIFT + S")
-o.bind("SUPER + SHIFT + S", nil, "omarchy-capture-screenshot")
+-- o.bind("SUPER + SHIFT + S", nil, "omarchy-capture-screenshot")
+o.bind("SUPER + SHIFT + S", nil, "omasnap")
 
 -- Move Quattro's clipboard manager from SUPER + CTRL + V to SUPER + SHIFT + P.
 hl.unbind("SUPER + SHIFT + P")
