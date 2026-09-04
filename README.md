@@ -97,11 +97,15 @@ sudo udevadm control --reload-rules
 sudo udevadm trigger
 ```
 
-Add yourself to the `input` group, then log out and back in or reboot so the membership applies:
+Add yourself to the `input` group, then reboot so the membership applies:
 
 ```bash
 sudo usermod -aG input "$USER"
 ```
+
+> **Important (Reboot Required):** If user lingering is enabled (`Linger=yes`), `systemd --user` stays alive across logouts and will not adopt new groups on logout alone. A full reboot is required for `xremap.service` to gain input access.
+
+> **Note on Omarchy upgrades:** Omarchy updates may run security hardening migrations that drop unprivileged users from the `input` group to prevent arbitrary background keylogging. If `xremap.service` fails after an `omarchy update` with `Permission denied (os error 13)`, re-add yourself with `sudo gpasswd -a $USER input` and reboot.
 
 ## Stow packages
 
