@@ -11,7 +11,7 @@
     "0xdev/gpt-5.6-luna",
     "0xdev/gpt-5.6-sol",
     "0xdev/grok-4.6",
-    "0xdev/gemini-3.7-flash"
+    "0xdev/gemini-3.8-flash"
   ],
   "hideThinkingBlock": false,
   "lastChangelogVersion": "0.84.4",
