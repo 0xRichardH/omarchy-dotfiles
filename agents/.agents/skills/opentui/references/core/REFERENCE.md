@@ -113,7 +113,7 @@ bun test                      # Run tests
 ## Runtime Requirements
 
 OpenTUI runs on **Bun (reference runtime)** and uses Zig for native builds.
-**Node.js 26.3.0** is also supported for the native renderer when launched with
+**Node.js 26.4.0 or later** is also supported for the native renderer when launched with
 `--experimental-ffi`; importing core/keymap without a native renderer works on
 Node without FFI. See [Gotchas](./gotchas.md) for the full Node.js notes.
 
@@ -133,7 +133,9 @@ bun run build
 
 ## Additional Capabilities
 
-- **Audio** — native audio engine via `Audio` from `@opentui/core`. See [API](./api.md#audio).
+- **Audio** — loaded sounds, MP3/FLAC streams, input capture, and WAV recording via `Audio`. See [API](./api.md#audio).
+- **Images** — decode and display PNG, JPEG, WebP, and GIF content. See [Text & Display](../components/text-display.md#image-component).
+- **Clipboard** — combine native host reads/writes with terminal OSC 52. See [Keyboard](../keyboard/REFERENCE.md#clipboard-services).
 - **Notifications** — `renderer.triggerNotification(message, title?)` (OSC 9/777/99). See [API](./api.md).
 - **SSH** — serve a TUI over SSH with the `@opentui/ssh` package:
 

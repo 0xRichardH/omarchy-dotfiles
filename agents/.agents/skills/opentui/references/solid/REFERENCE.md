@@ -127,6 +127,8 @@ Inside `<text>`, use modifier elements:
 - `<box>` - Container with borders and layout
 - `<scrollbox>` - Scrollable container
 - `<ascii_font>` - ASCII art text (note underscore)
+- `<image>` - PNG, JPEG, WebP, or GIF image
+- `<time_to_first_draw>` / `TimeToFirstDraw` - First-draw diagnostic
 
 ### Input
 - `<input>` - Single-line text input
@@ -138,6 +140,7 @@ Inside `<text>`, use modifier elements:
 - `<code>` - Syntax-highlighted code
 - `<line_number>` - Code with line numbers (note underscore)
 - `<diff>` - Unified or split diff viewer
+- `<markdown>` - Markdown content
 
 ### Text Modifiers (inside `<text>`)
 - `<span>` - Inline styled text

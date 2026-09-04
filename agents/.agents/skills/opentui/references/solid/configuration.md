@@ -147,7 +147,7 @@ import { ConsolePosition } from "@opentui/core"
 
 render(() => <App />, {
   // Rendering
-  targetFPS: 60,
+  targetFps: 30,
   
   // Behavior
   exitOnCtrlC: true,

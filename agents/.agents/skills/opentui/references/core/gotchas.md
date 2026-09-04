@@ -2,7 +2,7 @@
 
 ## Runtime Environment
 
-### Bun (reference runtime) or Node.js 26.3.0
+### Bun (reference runtime) or Node.js 26.4.0+
 
 Bun is the reference runtime and the smoothest path — prefer it for new projects:
 
@@ -18,7 +18,7 @@ bun test
 - Importing `@opentui/core` (and `@opentui/keymap`) works in Node.js **without
   FFI** as long as you don't create a native renderer.
 - Creating a **native renderer** (`createCliRenderer()`) requires FFI: **Node.js
-  26.3.0** launched with `--experimental-ffi` (and, under Node's permission
+  26.4.0 or later** launched with `--experimental-ffi` (and, under Node's permission
   model, `--allow-ffi` plus filesystem permissions). OpenTUI does not install
   Node for you.
 - The Node path is lower-level than Bun; the `packages/*/package.json` `engines`
@@ -243,7 +243,7 @@ Yoga layout is calculated lazily. Force a recalculation:
 
 ```typescript
 // After changing layout properties
-box.setWidth(newWidth)
+box.width = newWidth
 renderer.requestRender()
 ```
 
@@ -311,14 +311,14 @@ Box({}, Box({}, Box({}, Text({ content: "Hello" }))))
 Box({}, Text({ content: "Hello" }))
 ```
 
-### Use display: none
+### Toggle visibility
 
 Hide elements instead of removing/re-adding:
 
 ```typescript
 // For toggling visibility
-element.setDisplay("none")   // Hidden
-element.setDisplay("flex")   // Visible
+element.visible = false  // Hidden and removed from layout
+element.visible = true   // Visible
 
 // Instead of
 parent.remove(element)
@@ -356,8 +356,8 @@ bun run test:native
 ### Filter Tests
 
 ```bash
-# Bun test filter
-bun test --filter "component name"
+# Bun test-name filter
+bun test --test-name-pattern "component name"
 
 # Native test filter
 bun run test:native -Dtest-filter="test name"

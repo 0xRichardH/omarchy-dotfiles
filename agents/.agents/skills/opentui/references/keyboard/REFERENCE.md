@@ -430,12 +430,12 @@ renderer.keyInput.on("paste", (event: PasteEvent) => {
 })
 ```
 
-### Solid
+### React and Solid
 
-Solid provides a dedicated `usePaste` hook:
+Both reconciler packages provide a dedicated `usePaste` hook:
 
 ```tsx
-import { usePaste } from "@opentui/solid"
+import { usePaste } from "@opentui/react" // or @opentui/solid
 import { decodePasteBytes } from "@opentui/core"
 
 function App() {
@@ -448,11 +448,16 @@ function App() {
 }
 ```
 
-> **Note**: `usePaste` is **Solid-only**. React does not have this hook - handle paste via the Core event emitter or input component's `onChange`.
-
 ## Text Selection
 
 Text selection is renderer-managed. The renderer owns a single `Selection` object, walks the renderable tree to find selectable children, and emits a `"selection"` event when the user finishes selecting (mouse-up). The `Selection` object aggregates text from all selected renderables automatically.
+
+Text-buffer renderables use repeated left-button presses: a first press/drag
+selects cells, a second press selects a word, and a third press selects a
+logical line (including soft wraps). Repeated presses must hit the same
+renderable within 500 ms and within one cell. Dragging after the second or third
+press extends by words or lines. ASCII Font, TextTable, and Embedded Terminal
+keep component-specific cell selection.
 
 ### Making Renderables Selectable
 
@@ -487,10 +492,10 @@ renderer.on("selection", (selection: Selection) => {
 
 > **Important**: Call `selection.getSelectedText()` on the `Selection` object from the event -- not `renderer.root.getSelectedText()`. Individual renderables only return their own selected text. The `Selection` object aggregates across the tree.
 
-### Copy-on-Selection (Solid)
+### Copy-on-Selection (React or Solid)
 
 ```tsx
-import { useSelectionHandler } from "@opentui/solid"
+import { useSelectionHandler } from "@opentui/react" // or @opentui/solid
 
 function App() {
   useSelectionHandler((selection) => {
@@ -504,8 +509,6 @@ function App() {
 }
 ```
 
-> **Note**: `useSelectionHandler` is **Solid-only**. React does not have this hook -- use the Core `renderer.on("selection", ...)` event.
-
 ### Selection Object
 
 The `Selection` object passed to the event callback:
@@ -515,7 +518,14 @@ selection.getSelectedText()       // Aggregated text from all selected renderabl
 selection.bounds                  // { startX, startY, endX, endY } bounding rect
 selection.selectedRenderables     // Renderable[] with active selections
 selection.isActive                // Whether selection is still active
+selection.behavior                // "cell" | "word" | "line"
+selection.anchor                  // Global anchor cell
+selection.focus                   // Global focus cell
 ```
+
+For text-buffer renderables, `getSelection()` returns a half-open
+`{ start, end }` range measured in terminal display columns; line breaks add
+one unit. These offsets are not JavaScript UTF-16 string indexes.
 
 Individual renderables also expose:
 
@@ -534,7 +544,44 @@ When the user drags to select, the renderer:
 
 This means selection works across multiple renderables. Dragging across two `<text selectable>` elements selects text in both, and `selection.getSelectedText()` joins them with newlines.
 
-## Clipboard API (OSC 52)
+## Clipboard Services
+
+Use the composed clipboard service when an application needs host reads/writes
+or needs to choose safely between the host and terminal clipboard:
+
+```typescript
+import {
+  createClipboard,
+  createHostClipboard,
+  createRendererClipboardAdapter,
+} from "@opentui/core"
+
+const clipboard = createClipboard({
+  host: createHostClipboard(),
+  terminal: createRendererClipboardAdapter(renderer),
+})
+
+await clipboard.writeText("Hello", { destination: "best-available" })
+const result = await clipboard.read({ preferredTypes: ["text/plain"] })
+if (result.status === "read") {
+  console.log(new TextDecoder().decode(result.representation.bytes))
+}
+await clipboard.dispose()
+```
+
+Write/clear destinations are `terminal-only`, `host-only`, `best-available`,
+and `all-available`. In a remote session, the host clipboard belongs to the
+server; host operations are skipped unless `allowRemoteHost: true`, while the
+terminal adapter sends OSC 52 to the remote client. Reads always use the process
+host. `ClipboardService` owns its host service, and `renderer.destroy()` does
+not dispose a clipboard service created by the application.
+
+Use `createHostClipboard()` by itself when no renderer is available. Host reads
+accept ordered MIME preferences and can return text or platform-supported image
+data. Operations support `AbortSignal`, timeouts, size limits, and `clipboard`
+or Linux `primary` selection.
+
+### Low-level OSC 52
 
 Copy text to the system clipboard using OSC 52 escape sequences. Works over SSH and in most modern terminal emulators.
 

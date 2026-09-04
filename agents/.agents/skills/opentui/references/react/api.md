@@ -188,7 +188,7 @@ function AnimatedBox() {
       {
         width: 50,
         duration: 2000,
-        ease: "easeOutQuad",
+        ease: "outQuad",
         onUpdate: (anim) => {
           setWidth(Math.round(anim.targets[0].width))
         },
@@ -270,7 +270,7 @@ React uses **hyphenated** tag names. Full props are in the linked file:
 
 | Element | Full props |
 |---------|-----------|
-| `<text>`, `<span>`, `<strong>`, `<em>`, `<u>`, `<a>`, `<br>` | [text-display.md](../components/text-display.md) |
+| `<text>`, `<span>`, `<strong>`, `<em>`, `<u>`, `<a>`, `<br>`, `<image>`, `<time-to-first-draw>` | [text-display.md](../components/text-display.md) |
 | `<box>`, `<scrollbox>` | [containers.md](../components/containers.md) |
 | `<input>`, `<textarea>`, `<select>`, `<tab-select>` | [inputs.md](../components/inputs.md) |
 | `<code>`, `<line-number>`, `<diff>`, `<markdown>` | [code-diff.md](../components/code-diff.md) |
@@ -293,12 +293,13 @@ Style text with **nested modifier elements**, not props:
 
 ### Controlled Inputs (React-specific)
 
-Inputs are controlled with `value` + `onChange` (single value), and use the
-`focused` prop to receive keyboard input:
+Single-line inputs are controlled with `value` + `onChange`, and use the
+`focused` prop to receive keyboard input. Textarea is imperative: use
+`initialValue`, keep a ref, and read `plainText` from `onContentChange`.
 
 ```tsx
 <input value={value} onChange={setValue} focused />
-<textarea value={text} onChange={setText} focused width={40} height={10} />
+<textarea initialValue={text} ref={textareaRef} onContentChange={() => setText(textareaRef.current!.plainText)} />
 
 // Select/tab-select: onChange fires on navigation, onSelect on Enter
 <select options={opts} onChange={(i, opt) => setSel(opt)} focused />

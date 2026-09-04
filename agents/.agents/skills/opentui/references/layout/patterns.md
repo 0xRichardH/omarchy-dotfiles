@@ -25,7 +25,7 @@ function AppLayout() {
   return (
     <box flexDirection="column" width="100%" height="100%">
       {/* Header - fixed height */}
-      <box height={3} borderStyle="single" borderBottom>
+      <box height={3} borderStyle="single" border={["bottom"]}>
         <text>Header</text>
       </box>
       
@@ -50,7 +50,7 @@ function SidebarLayout() {
   return (
     <box flexDirection="row" width="100%" height="100%">
       {/* Sidebar - fixed width */}
-      <box width={25} borderStyle="single" borderRight>
+      <box width={25} borderStyle="single" border={["right"]}>
         <text>Sidebar</text>
       </box>
       
@@ -140,7 +140,7 @@ function Modal({ children, visible }) {
       height="100%"
       justifyContent="center"
       alignItems="center"
-      backgroundColor="rgba(0,0,0,0.5)"
+      backgroundColor="#00000080"
     >
       <box
         width={50}
@@ -255,7 +255,7 @@ function LoginForm() {
 ```tsx
 function TabBar({ tabs, activeIndex, onSelect }) {
   return (
-    <box flexDirection="row" borderBottom>
+    <box flexDirection="row" border={["bottom"]}>
       {tabs.map((tab, i) => (
         <box
           key={i}

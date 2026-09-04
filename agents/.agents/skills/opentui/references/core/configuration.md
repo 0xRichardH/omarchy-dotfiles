@@ -9,10 +9,15 @@ import { createCliRenderer, ConsolePosition } from "@opentui/core"
 
 const renderer = await createCliRenderer({
   // Rendering
-  targetFPS: 60,                    // Target frames per second (default: 60)
+  targetFps: 30,                    // Continuous rendering target (default: 30)
+  maxFps: 60,                       // Immediate render cap (default: 60)
   
   // Behavior
   exitOnCtrlC: true,                // Exit on Ctrl+C (default: true)
+  useMouse: true,                   // Enable mouse input (default: true)
+  autoFocus: true,                  // Focus nearest focusable node on click
+  screenMode: "alternate-screen",  // "alternate-screen" | "main-screen" | "split-footer"
+  externalOutputMode: "passthrough", // Or "capture-stdout" in split-footer mode
   
   // Console overlay
   consoleOptions: {
@@ -45,12 +50,14 @@ OpenTUI respects several environment variables for configuration and debugging.
 | `OTUI_TRACE_FFI` | boolean | false | Tracing for FFI bindings |
 | `OTUI_SHOW_STATS` | boolean | false | Show debug overlay at startup |
 | `OTUI_DUMP_CAPTURES` | boolean | false | Dump captured output on exit |
+| `OTUI_STDIN_LOG` | string | "" | Write raw stdin bytes to a file (may contain secrets) |
+| `OTUI_GHOSTTY_LOG_LEVEL` | string | "" | Ghostty logs: `error`, `warn`, `info`, or `debug` |
 
 ### Console
 
 | Variable | Type | Default | Description |
 |----------|------|---------|-------------|
-| `OTUI_USE_CONSOLE` | boolean | true | Enable console capture |
+| `OTUI_USE_CONSOLE` | boolean | true | Enable global `console.*` capture and activation |
 | `SHOW_CONSOLE` | boolean | false | Show console at startup |
 
 ### Rendering
@@ -65,7 +72,8 @@ OpenTUI respects several environment variables for configuration and debugging.
 
 | Variable | Type | Default | Description |
 |----------|------|---------|-------------|
-| `OPENTUI_NO_GRAPHICS` | boolean | false | Disable Kitty graphics protocol |
+| `OPENTUI_GRAPHICS` | string | automatic | `false`/`0` disables Kitty and Sixel detection; `true`/`1` keeps auto-detection |
+| `OPENTUI_IMAGE_PROTOCOL` | string | `auto` | `auto`, `kitty`, `sixel`, or `blocks` |
 | `OPENTUI_FORCE_UNICODE` | boolean | false | Force Mode 2026 Unicode support |
 | `OPENTUI_FORCE_WCWIDTH` | boolean | false | Use wcwidth for character width |
 | `OPENTUI_FORCE_NOZWJ` | boolean | false | Disable ZWJ emoji joining |
@@ -77,6 +85,13 @@ OpenTUI respects several environment variables for configuration and debugging.
 |----------|------|---------|-------------|
 | `OTUI_TS_STYLE_WARN` | boolean | false | Warn on missing syntax styles |
 | `OTUI_TREE_SITTER_WORKER_PATH` | string | "" | Custom tree-sitter worker path |
+
+### Runtime Assets
+
+| Variable | Type | Default | Description |
+|----------|------|---------|-------------|
+| `OPENTUI_LIBC` | string | `glibc` | Select `glibc` or `musl` on Linux before the first Core import |
+| `OTUI_ASSET_ROOT` | string | "" | Absolute root for relocated native, worker, grammar, and WASM assets |
 
 ### XDG Paths
 
@@ -106,8 +121,8 @@ OTUI_NO_NATIVE_RENDER=true bun run src/index.ts
 # Force wcwidth for problematic terminals
 OPENTUI_FORCE_WCWIDTH=true bun run src/index.ts
 
-# Disable graphics for SSH sessions
-OPENTUI_NO_GRAPHICS=true bun run src/index.ts
+# Disable Kitty and Sixel detection for a remote session
+OPENTUI_GRAPHICS=false bun run src/index.ts
 ```
 
 ## Project Setup
@@ -166,3 +181,21 @@ bun run build
 ```
 
 **Note**: TypeScript changes do NOT require building. Bun runs TypeScript directly.
+
+## Standalone Executables
+
+Bun embeds OpenTUI runtime assets directly:
+
+```bash
+bun build --compile ./src/index.ts --outfile app
+```
+
+For a Linux musl target, define `process.env.OPENTUI_LIBC` as `"musl"` at
+build time so Bun retains only that native-package branch.
+
+Node SEA builds require Node.js 26.4.0+, ESM, and `--experimental-ffi`. At
+build time import `getNodeAssets()` from `@opentui/core/node-assets`, embed every
+returned `{ key, source }`, extract those exact keys at startup, and set the
+absolute `OTUI_ASSET_ROOT` before bundled Core code executes. Do not call
+`getNodeAssets()` from the finished executable. The root export
+`resolveBundledFilePath()` resolves runtime assets for custom packaging.

@@ -87,7 +87,10 @@ Display content?
 ├─ Scrollable content area -> components/containers.md (scrollbox)
 ├─ Standalone scrollbar -> components/containers.md (scrollbar)
 ├─ ASCII art banner/title -> components/text-display.md (ascii-font)
+├─ PNG/JPEG/WebP/GIF image -> components/text-display.md (image)
+├─ First-draw diagnostic -> components/text-display.md (time-to-first-draw)
 ├─ QR code -> components/text-display.md (qr-code, @opentui/qrcode)
+├─ Embedded child terminal/VT output -> components/containers.md (Core only)
 ├─ Data table with borders/wrapping -> components/code-diff.md (TextTable)
 ├─ Code with syntax highlighting -> components/code-diff.md
 ├─ Diff viewer (unified/split, hunk nav) -> components/code-diff.md
@@ -139,7 +142,7 @@ Input handling?
 ├─ Paste events -> keyboard/REFERENCE.md
 ├─ Mouse events -> components/containers.md
 ├─ Text selection & copy-on-select -> keyboard/REFERENCE.md (selection)
-└─ Clipboard (OSC 52) -> keyboard/REFERENCE.md (clipboard)
+└─ Host/terminal clipboard service or OSC 52 -> keyboard/REFERENCE.md (clipboard)
 ```
 
 ### "I need to test my TUI"
@@ -152,11 +155,14 @@ Testing?
 └─ Debugging tests -> testing/REFERENCE.md
 ```
 
-### "I need platform capabilities (audio, notifications, SSH)"
+### "I need platform capabilities (audio, images, clipboard, notifications, SSH)"
 
 ```
 Platform capability?
-├─ Play sound / native audio -> core/api.md (Audio)
+├─ Play loaded sound or MP3/FLAC stream -> core/api.md (Audio)
+├─ Capture microphone PCM / record WAV -> core/api.md (Audio)
+├─ Decode, transform, or display images -> components/text-display.md (image)
+├─ Read/write host or terminal clipboard -> keyboard/REFERENCE.md (clipboard)
 ├─ Desktop notifications (OSC 9/777/99) -> core/api.md (triggerNotification)
 ├─ Custom stdin/stdout (PTY, xterm.js) -> core/api.md (createCliRenderer)
 └─ Serve a TUI over SSH -> core/REFERENCE.md (@opentui/ssh)
@@ -204,8 +210,8 @@ For component naming differences and text modifiers, see `components/REFERENCE.m
 ### Component Categories
 | Category | Entry File | Components |
 |----------|------------|------------|
-| Text & Display | `./references/components/text-display.md` | text, ascii-font, styled text, qr-code |
-| Containers | `./references/components/containers.md` | box, scrollbox, scrollbar, borders |
+| Text & Display | `./references/components/text-display.md` | text, ascii-font, image, time-to-first-draw, styled text, qr-code |
+| Containers | `./references/components/containers.md` | box, scrollbox, scrollbar, embedded-terminal, borders |
 | Inputs | `./references/components/inputs.md` | input, textarea, select, tab-select, slider |
 | Code & Diff | `./references/components/code-diff.md` | code, line-number, diff, markdown, text-table |
 
@@ -218,7 +224,7 @@ For component naming differences and text modifiers, see `components/REFERENCE.m
 | `@opentui/three` | Three.js WebGPU renderer (formerly `core/src/3d`) | upstream `packages/three` |
 | `@opentui/examples` | Runnable examples (formerly `core/src/examples`) | upstream `packages/examples` |
 
-Core also ships a native **Audio** engine and OSC desktop **notifications** — see `./references/core/api.md`.
+Core also ships loaded/streaming/captured **Audio**, native **images**, host and terminal **clipboard** services, and OSC desktop **notifications**.
 
 ## Resources
 

@@ -15,7 +15,7 @@ render(() => <App />)
 // With config
 render(() => <App />, {
   exitOnCtrlC: false,
-  targetFPS: 60,
+  targetFps: 30,
 })
 
 // With existing renderer
@@ -212,7 +212,8 @@ function ResponsiveLayout() {
 
 ### onFocus(callback) / onBlur(callback)
 
-Handle terminal window focus and blur events. Solid-only hooks.
+Handle terminal window focus and blur events. React exposes equivalent
+`useFocus` and `useBlur` hooks.
 
 ```tsx
 import { onFocus, onBlur } from "@opentui/solid"
@@ -234,7 +235,8 @@ These hooks fire when the terminal emulator window gains or loses operating syst
 
 ### useSelectionHandler(handler)
 
-Handle text selection events. Fires when the user finishes a mouse selection (mouse-up). Solid-only hook - React does not have this.
+Handle text selection events. Fires when the user finishes a mouse selection
+(mouse-up). React exposes an equivalent `useSelectionHandler` hook.
 
 ```tsx
 import { useSelectionHandler } from "@opentui/solid"
@@ -285,7 +287,7 @@ function AnimatedBox() {
       {
         width: 50,
         duration: 2000,
-        ease: "easeOutQuad",
+        ease: "outQuad",
         onUpdate: (anim) => {
           setWidth(Math.round(anim.targets[0].width))
         },
@@ -309,7 +311,7 @@ Multi-word elements use **underscores** (not hyphens like React):
 
 | Element | Full props |
 |---------|-----------|
-| `<text>`, `<span>`, `<strong>`, `<em>`, `<u>`, `<a>`, `<br>` | [text-display.md](../components/text-display.md) |
+| `<text>`, `<span>`, `<strong>`, `<em>`, `<u>`, `<a>`, `<br>`, `<image>`, `<time_to_first_draw>` | [text-display.md](../components/text-display.md) |
 | `<box>`, `<scrollbox>` | [containers.md](../components/containers.md) |
 | `<input>`, `<textarea>`, `<select>`, `<tab_select>` | [inputs.md](../components/inputs.md) |
 | `<code>`, `<line_number>`, `<diff>`, `<markdown>` | [code-diff.md](../components/code-diff.md) |
@@ -328,12 +330,15 @@ Multi-word elements use **underscores** (not hyphens like React):
 
 ### Reactive Values + `onInput` (Solid-specific)
 
-Solid uses **`onInput`** (not React's `onChange`) for text inputs, and values are
+Solid uses **`onInput`** (not React's `onChange`) for single-line inputs, and values are
 signals. Use `<For>` inside `<scrollbox>` for lists:
 
 ```tsx
 <input value={value()} onInput={setValue} focused />
-<textarea value={text()} onInput={setText} focused width={40} height={10} />
+
+// Textarea is not a controlled input. Seed it with initialValue and use a ref
+// plus onContentChange to read textarea.plainText.
+<textarea initialValue={text()} ref={setTextarea} onContentChange={() => setText(textarea.plainText)} />
 
 // select/tab_select still use onChange (navigate) / onSelect (Enter)
 <select options={opts} onChange={(i, opt) => setSelected(opt)} focused />

@@ -522,7 +522,7 @@ function AnimatedProgress() {
       {
         value: 50,
         duration: 2000,
-        ease: "easeOutQuad",
+        ease: "outQuad",
         onUpdate: (anim) => {
           setWidth(Math.round(anim.targets[0].value))
         },

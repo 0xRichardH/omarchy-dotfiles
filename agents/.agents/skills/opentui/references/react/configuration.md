@@ -143,7 +143,7 @@ import { createCliRenderer, ConsolePosition } from "@opentui/core"
 
 const renderer = await createCliRenderer({
   // Rendering
-  targetFPS: 60,
+  targetFps: 30,
   
   // Behavior
   exitOnCtrlC: true,        // Set false to handle Ctrl+C yourself

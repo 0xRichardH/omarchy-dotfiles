@@ -34,7 +34,7 @@ function AnimatedBox() {
       {
         width: 50,
         duration: 2000,
-        ease: "easeOutQuad",
+        ease: "outQuad",
         onUpdate: (anim) => {
           setWidth(Math.round(anim.targets[0].width))
         },
@@ -71,7 +71,7 @@ function AnimatedBox() {
       {
         width: 50,
         duration: 2000,
-        ease: "easeOutQuad",
+        ease: "outQuad",
         onUpdate: (anim) => {
           setWidth(Math.round(anim.targets[0].width))
         },
@@ -107,14 +107,14 @@ timeline.add(
   {
     x: 50,
     duration: 2000,
-    ease: "easeOutQuad",
+    ease: "outQuad",
     onUpdate: (anim) => {
-      box.setLeft(Math.round(anim.targets[0].x))
+      box.left = Math.round(anim.targets[0].x)
     },
   }
 )
 
-engine.addTimeline(timeline)
+engine.register(timeline)
 ```
 
 ## Timeline Options
@@ -141,7 +141,7 @@ timeline.pause()          // Pause
 timeline.restart()        // Restart from beginning
 
 // State
-timeline.progress         // Current progress (0-1)
+timeline.currentTime      // Current position in milliseconds
 timeline.duration         // Total duration
 ```
 
@@ -154,7 +154,6 @@ timeline.add(
     value: 100,           // Final value
     duration: 1000,       // Animation duration in ms
     ease: "linear",       // Easing function
-    delay: 0,             // Delay before starting
     onUpdate: (anim) => {
       // Called each frame
       const current = anim.targets[0].value
@@ -163,7 +162,7 @@ timeline.add(
       // Called when this animation completes
     },
   },
-  0                       // Start time in timeline (optional)
+  0                       // Start time in timeline; use this instead of delay
 )
 ```
 
@@ -177,61 +176,17 @@ Available easing functions:
 |------|-------------|
 | `linear` | Constant speed |
 
-### Quad (Power of 2)
+### Curves
 
-| Name | Description |
-|------|-------------|
-| `easeInQuad` | Slow start |
-| `easeOutQuad` | Slow end |
-| `easeInOutQuad` | Slow start and end |
-
-### Cubic (Power of 3)
-
-| Name | Description |
-|------|-------------|
-| `easeInCubic` | Slower start |
-| `easeOutCubic` | Slower end |
-| `easeInOutCubic` | Slower start and end |
-
-### Quart (Power of 4)
-
-| Name | Description |
-|------|-------------|
-| `easeInQuart` | Even slower start |
-| `easeOutQuart` | Even slower end |
-| `easeInOutQuart` | Even slower start and end |
-
-### Expo (Exponential)
-
-| Name | Description |
-|------|-------------|
-| `easeInExpo` | Exponential start |
-| `easeOutExpo` | Exponential end |
-| `easeInOutExpo` | Exponential start and end |
-
-### Back (Overshoot)
-
-| Name | Description |
-|------|-------------|
-| `easeInBack` | Pull back, then forward |
-| `easeOutBack` | Overshoot, then settle |
-| `easeInOutBack` | Both |
-
-### Elastic
-
-| Name | Description |
-|------|-------------|
-| `easeInElastic` | Elastic start |
-| `easeOutElastic` | Elastic end (bouncy) |
-| `easeInOutElastic` | Both |
-
-### Bounce
-
-| Name | Description |
-|------|-------------|
-| `easeInBounce` | Bounce at start |
-| `easeOutBounce` | Bounce at end |
-| `easeInOutBounce` | Both |
+| Family | Names |
+|--------|-------|
+| Quad | `inQuad`, `outQuad`, `inOutQuad` |
+| Expo | `inExpo`, `outExpo` |
+| Sine | `inOutSine` |
+| Circular | `inCirc`, `outCirc`, `inOutCirc` |
+| Back | `inBack`, `outBack`, `inOutBack` |
+| Bounce | `inBounce`, `outBounce` |
+| Elastic | `outElastic` |
 
 ## Patterns
 
@@ -250,7 +205,7 @@ function ProgressBar({ progress }: { progress: number }) {
       {
         value: (progress / 100) * maxWidth,
         duration: 300,
-        ease: "easeOutQuad",
+        ease: "outQuad",
         onUpdate: (anim) => {
           setWidth(Math.round(anim.targets[0].value))
         },
@@ -283,7 +238,7 @@ function FadeIn({ children }) {
       {
         opacity: 1,
         duration: 500,
-        ease: "easeOutQuad",
+        ease: "outQuad",
         onUpdate: (anim) => {
           setOpacity(anim.targets[0].opacity)
         },
@@ -361,7 +316,7 @@ function SlideIn({ children, from = "left" }) {
       {
         offset: 0,
         duration: 300,
-        ease: "easeOutCubic",
+        ease: "outQuad",
         onUpdate: (anim) => {
           setOffset(Math.round(anim.targets[0].offset))
         },
@@ -399,7 +354,7 @@ Hooks automatically clean up, but for core:
 
 ```typescript
 // When done with timeline
-engine.removeTimeline(timeline)
+engine.unregister(timeline)
 ```
 
 ## Gotchas

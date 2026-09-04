@@ -1,733 +1,305 @@
 # Code & Diff Components
 
-Components for displaying code with syntax highlighting and diffs in OpenTUI.
+Components for source code, line-number gutters, unified diffs, Markdown, and
+text tables.
 
 ## Code Component
 
-Display syntax-highlighted code blocks.
+`CodeRenderable` displays plain text immediately and applies asynchronous
+Tree-sitter highlighting when `filetype` and a parser are available.
 
 ### Basic Usage
 
 ```tsx
-// React
-<code
-  code={`function hello() {
-  console.log("Hello, World!");
-}`}
-  language="typescript"
-/>
-
-// Solid
-<code
-  code={sourceCode}
-  language="javascript"
-/>
+// React / Solid
+<code content={sourceCode} filetype="typescript" syntaxStyle={syntaxStyle} />
 
 // Core
-const codeBlock = new CodeRenderable(renderer, {
-  id: "code",
-  code: sourceCode,
-  language: "typescript",
+const code = new CodeRenderable(renderer, {
+  content: sourceCode,
+  filetype: "typescript",
+  syntaxStyle,
+  wrapMode: "none", // "none" | "char" | "word"
 })
 ```
 
-### Supported Languages
+OpenTUI bundles parsers for JavaScript/JSX, TypeScript/TSX, Markdown,
+Markdown-inline, and Zig. Other grammars require Tree-sitter asset
+configuration. Without `filetype`, Code renders unhighlighted text.
 
-OpenTUI uses Tree-sitter for syntax highlighting. Common languages:
-- `typescript`, `javascript`
-- `python`
-- `rust`
-- `go`
-- `json`
-- `html`, `css`
-- `markdown`
-- `bash`, `shell`
+### Highlight Hooks
 
-### Styling
+`onHighlight` can replace the syntax ranges before styling. It receives
+`SimpleHighlight[]` tuples and `{ content, filetype, syntaxStyle }`; return an
+array or `undefined`, synchronously or asynchronously.
 
 ```tsx
 <code
-  code={sourceCode}
-  language="typescript"
-  backgroundColor="#1a1a2e"
-  showLineNumbers
+  content={sourceCode}
+  filetype="typescript"
+  syntaxStyle={syntaxStyle}
+  onHighlight={(highlights, context) =>
+    highlights.filter((highlight) => highlight[2] !== "comment")
+  }
 />
 ```
 
-### onHighlight Callback
-
-Intercept and modify syntax highlights before rendering:
+`onChunks` runs afterward and can replace the resolved `TextChunk[]`. Its
+context also includes `highlights`.
 
 ```tsx
-// Core
-const codeBlock = new CodeRenderable(renderer, {
-  id: "code",
-  code: sourceCode,
-  language: "typescript",
-  onHighlight: (highlights, context) => {
-    // Add custom highlights
-    highlights.push([10, 20, "custom.error", {}])
-    return highlights
-  },
-})
-
-// React/Solid
-<code
-  code={sourceCode}
-  language="typescript"
-  onHighlight={(highlights, context) => {
-    // context: { content, filetype, syntaxStyle }
-    // Modify and return highlights array
-    return highlights.filter(h => h[2] !== "comment")
-  }}
-/>
-```
-
-**Callback signature:**
-- `highlights: SimpleHighlight[]` - Array of `[start, end, scope, metadata]`
-- `context: { content, filetype, syntaxStyle }` - Highlighting context
-- Return modified highlights array or `undefined` to use original
-
-Supports async callbacks for fetching additional highlight data.
-
-### onChunks Callback
-
-Post-process rendered text chunks after syntax highlighting. Runs after `onHighlight` and receives fully resolved chunks:
-
-```tsx
-// Core
-const codeBlock = new CodeRenderable(renderer, {
-  id: "code",
-  code: sourceCode,
-  language: "typescript",
-  onChunks: (chunks, context) => {
-    // Transform chunks (e.g., add link detection)
-    return chunks
-  },
-})
-
-// React/Solid
-<code
-  code={sourceCode}
-  language="typescript"
-  onChunks={(chunks, context) => {
-    // context: { content, filetype, syntaxStyle, highlights }
-    return chunks
-  }}
-/>
-```
-
-### Link Detection Utility
-
-Auto-detect URLs in code and add clickable hyperlinks:
-
-```typescript
 import { detectLinks } from "@opentui/core"
 
 <code
-  code={sourceCode}
-  language="typescript"
+  content={markdown}
+  filetype="markdown"
+  syntaxStyle={syntaxStyle}
   onChunks={(chunks, context) => detectLinks(chunks, context)}
 />
 ```
 
-`detectLinks` examines Tree-sitter highlights to find URL tokens and sets `chunk.link` on matching chunks. Supports async usage.
+`detectLinks` applies links for recognized Markdown/URL highlight scopes.
 
 ## TextTable Component
 
-Render data tables with borders, word wrapping, and selection support.
-
-### Basic Usage
+`TextTableRenderable` is Core-only. It displays styled chunk cells with borders,
+wrapping, width fitting, and selection.
 
 ```typescript
-// Core
-import { TextTableRenderable, type TextTableContent } from "@opentui/core"
+import {
+  TextTableRenderable,
+  bold,
+  fg,
+  type TextChunk,
+  type TextTableContent,
+} from "@opentui/core"
 
+const cell = (text: string): TextChunk[] => [{ __isChunk: true, text }]
 const content: TextTableContent = [
-  [[ { text: "Name" } ], [ { text: "Age" } ], [ { text: "Role" } ]],
-  [[ { text: "Alice" } ], [ { text: "30" } ], [ { text: "Engineer" } ]],
-  [[ { text: "Bob" } ], [ { text: "25" } ], [ { text: "Designer" } ]],
+  [[bold("Service")], [bold("Status")], [bold("Notes")]],
+  [cell("api"), [fg("#00d4aa")("OK")], cell("latency 28ms")],
 ]
 
 const table = new TextTableRenderable(renderer, {
-  id: "table",
   content,
-  wrapMode: "word",           // "none" | "char" | "word"
-  columnWidthMode: "content", // "content" | "fill"
-  cellPadding: 0,
+  wrapMode: "word",
+  columnWidthMode: "full",   // "content" | "full"
+  columnFitter: "balanced",  // "proportional" | "balanced"
+  cellPadding: 1,
   border: true,
   outerBorder: true,
-  borderStyle: "single",      // single | double | rounded | bold
-  selectable: true,           // Allow text selection
-  columnFitter: "balanced",   // "proportional" | "balanced"
+  borderStyle: "rounded",
+  selectable: true,
 })
 ```
-
-### Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `content` | `TextTableContent` | - | 2D array of cell content |
-| `wrapMode` | `"none" \| "char" \| "word"` | `"none"` | Text wrapping in cells |
-| `columnWidthMode` | `"content" \| "fill"` | `"content"` | Column sizing strategy |
-| `cellPadding` | `number` | `0` | Padding inside cells |
-| `border` | `boolean` | `true` | Show inner borders |
-| `outerBorder` | `boolean` | `true` | Show outer borders |
-| `borderStyle` | `string` | `"single"` | Border style |
-| `borderColor` | `string \| RGBA` | - | Border color |
-| `selectable` | `boolean` | `false` | Allow text selection |
-| `columnFitter` | `"proportional" \| "balanced"` | `"proportional"` | Column width distribution |
+| `content` | `TextTableContent` | - | Rows of styled chunk cells |
+| `wrapMode` | `none \| char \| word` | `none` | Cell wrapping |
+| `columnWidthMode` | `content \| full` | `full` | Natural or available-width sizing |
+| `columnFitter` | `proportional \| balanced` | `proportional` | Distribute constrained width |
+| `cellPadding` | `number` | `0` | Horizontal cell padding |
+| `border`, `outerBorder` | `boolean` | `true` | Inner and outer borders |
+| `borderStyle` | `single \| double \| rounded \| heavy` | `single` | Border glyph set |
+| `borderColor` | `ColorInput` | - | Border color |
+| `selectable` | `boolean` | `false` | Participate in text selection |
 
-### Cell Content Format
-
-Each cell is an array of styled text chunks:
-
-```typescript
-type TextTableCellContent = { text: string; fg?: RGBA; bg?: RGBA }[]
-type TextTableContent = TextTableCellContent[][]  // rows -> cells -> chunks
-```
-
-### Selection
-
-```typescript
-table.getSelectedText()  // Get selected text
-table.hasSelection()     // Check if text is selected
-```
-
-Columnar selection is supported: dragging vertically within a single column selects only that column's content.
+`TextTableCellContent` is `TextChunk[] | null | undefined`. Each literal chunk
+needs `__isChunk: true`; styled-text helpers such as `bold()` and `fg()` already
+return valid chunks. `getSelectedText()` and `hasSelection()` expose selection;
+vertical drags within one column retain columnar selection.
 
 ## Line Number Component
 
-Code display with line numbers, highlighting, and diagnostics.
-
-### Basic Usage
+`LineNumberRenderable` is a gutter for another renderable that implements
+`LineInfoProvider`; it does not accept source code itself.
 
 ```tsx
-// React
+// React (use <line_number> in Solid)
 <line-number
-  code={sourceCode}
-  language="typescript"
-/>
+  ref={lineNumbersRef}
+  fg="#6b7280"
+  bg="#161b22"
+  minWidth={3}
+  paddingRight={1}
+  lineNumberOffset={0}
+>
+  <code content={sourceCode} filetype="typescript" syntaxStyle={syntaxStyle} />
+</line-number>
+```
 
-// Solid (note underscore)
-<line_number
-  code={sourceCode}
-  language="typescript"
-/>
-
+```typescript
 // Core
-const codeView = new LineNumberRenderable(renderer, {
-  id: "code-view",
-  code: sourceCode,
-  language: "typescript",
+const code = new CodeRenderable(renderer, {
+  content: sourceCode,
+  filetype: "typescript",
+  syntaxStyle,
+})
+const lineNumbers = new LineNumberRenderable(renderer, {
+  target: code,
+  minWidth: 3,
+  paddingRight: 1,
 })
 ```
 
-### Line Number Options
+Use methods rather than nonexistent `diagnostics`, `addedLines`,
+`removedLines`, or `highlightedLines` props:
 
-```tsx
-// React
-<line-number
-  code={sourceCode}
-  language="typescript"
-  startLine={1}              // Starting line number
-  showLineNumbers={true}     // Display line numbers
-/>
-
-// Solid
-<line_number
-  code={sourceCode}
-  language="typescript"
-  startLine={1}
-  showLineNumbers={true}
-/>
+```typescript
+lineNumbers.setLineColor(4, "#1a4d1a")
+lineNumbers.setLineSign(4, { after: " +", afterColor: "#22c55e" })
+lineNumbers.highlightLines(9, 11, "#4d1a1a")
+lineNumbers.clearHighlightLines(9, 11)
 ```
 
-### Line Highlighting
-
-Highlight specific lines:
-
-```tsx
-// React
-<line-number
-  code={sourceCode}
-  language="typescript"
-  highlightedLines={[5, 10, 15]}  // Highlight these lines
-/>
-
-// Solid
-<line_number
-  code={sourceCode}
-  language="typescript"
-  highlightedLines={[5, 10, 15]}
-/>
-```
-
-### Diagnostics
-
-Show errors, warnings, and info on specific lines:
-
-```tsx
-// React
-<line-number
-  code={sourceCode}
-  language="typescript"
-  diagnostics={[
-    { line: 3, severity: "error", message: "Unexpected token" },
-    { line: 7, severity: "warning", message: "Unused variable" },
-    { line: 12, severity: "info", message: "Consider using const" },
-  ]}
-/>
-
-// Solid
-<line_number
-  code={sourceCode}
-  language="typescript"
-  diagnostics={[
-    { line: 3, severity: "error", message: "Unexpected token" },
-  ]}
-/>
-```
-
-**Diagnostic severity levels:**
-- `error` - Red indicator
-- `warning` - Yellow indicator
-- `info` - Blue indicator
-- `hint` - Gray indicator
-
-### Diff Highlighting
-
-Show added/removed lines:
-
-```tsx
-<line-number
-  code={sourceCode}
-  language="typescript"
-  addedLines={[5, 6, 7]}      // Green background
-  removedLines={[10, 11]}     // Red background
-/>
-```
+Other methods include `clearLineColor()`, `setLineColors()`,
+`clearAllLineColors()`, `clearLineSign()`, `setLineSigns()`, and
+`clearAllLineSigns()`. `lineNumberOffset` changes displayed numbering.
 
 ## Diff Component
 
-Unified or split diff viewer with syntax highlighting.
-
-### Basic Usage
+`DiffRenderable` accepts a unified diff string. It does not compute a diff from
+old and new source strings.
 
 ```tsx
-// React
+// React / Solid
 <diff
-  oldCode={originalCode}
-  newCode={modifiedCode}
-  language="typescript"
-/>
-
-// Solid
-<diff
-  oldCode={originalCode}
-  newCode={modifiedCode}
-  language="typescript"
+  diff={unifiedPatch}
+  filetype="typescript"
+  syntaxStyle={syntaxStyle}
+  view="split"
+  syncScroll
+  showLineNumbers
 />
 
 // Core
-const diffView = new DiffRenderable(renderer, {
-  id: "diff",
-  oldCode: originalCode,
-  newCode: modifiedCode,
-  language: "typescript",
+const diff = new DiffRenderable(renderer, {
+  diff: unifiedPatch,
+  filetype: "typescript",
+  syntaxStyle,
+  view: "unified",
 })
-```
-
-### Display Modes
-
-```tsx
-// Unified diff (default)
-<diff
-  oldCode={old}
-  newCode={new}
-  mode="unified"
-/>
-
-// Split/side-by-side diff
-<diff
-  oldCode={old}
-  newCode={new}
-  mode="split"
-/>
-```
-
-### Synchronized Scrolling (Split View)
-
-In split view, enable synchronized scrolling between left and right panes:
-
-```tsx
-// React/Solid
-<diff
-  oldCode={old}
-  newCode={new}
-  mode="split"
-  syncScroll              // Scrolling one pane syncs the other
-/>
-
-// Core
-const diffView = new DiffRenderable(renderer, {
-  id: "diff",
-  diff: unifiedDiff,
-  view: "split",
-  syncScroll: true,
-})
-
-// Toggle at runtime
-diffView.syncScroll = true
-diffView.syncScroll = false
 ```
 
 ### Options
 
-```tsx
-<diff
-  oldCode={originalCode}
-  newCode={modifiedCode}
-  language="typescript"
-  mode="unified"
-  showLineNumbers
-  context={3}                // Lines of context around changes
-/>
-```
+| Option | Type / Default | Description |
+|--------|----------------|-------------|
+| `diff` | `string` | Unified patch input |
+| `view` | `unified \| split` / `unified` | Display mode |
+| `syncScroll` | `boolean` / `false` | Keep split panes aligned |
+| `filetype` | `string` | Tree-sitter language |
+| `syntaxStyle` | `SyntaxStyle` | Highlight style |
+| `wrapMode` | `word \| char \| none` | Source wrapping |
+| `conceal` | `boolean` / `false` | Conceal syntax tokens |
+| `showLineNumbers` | `boolean` / `true` | Show line-number gutters |
+| `addedBg`, `removedBg`, `contextBg` | `ColorInput` | Whole-line backgrounds |
+| `addedContentBg`, `removedContentBg`, `contextContentBg` | `ColorInput` | Changed-content backgrounds |
+| `addedLineNumberBg`, `removedLineNumberBg`, `lineNumberBg` | `ColorInput` | Gutter backgrounds |
+| `addedSignColor`, `removedSignColor` | `ColorInput` | `+` and `-` colors |
 
-### Styling
+Use `view`, not `mode`; use `addedBg`/`removedBg`/`contextBg`, not
+`addedLineColor`/`removedLineColor`/`unchangedLineColor`. Context lines are
+already encoded in the patch, so there is no `context` option. For multi-file
+input, Diff currently displays only the first parsed file patch.
 
-```tsx
-<diff
-  oldCode={old}
-  newCode={new}
-  addedLineColor="#2d4f2d"   // Background for added lines
-  removedLineColor="#4f2d2d" // Background for removed lines
-  unchangedLineColor="transparent"
-/>
-```
-
-### Line Highlighting API (Core)
-
-Programmatically highlight specific lines in a diff:
+### Programmatic Line Highlighting
 
 ```typescript
-// Set a single line's color
-diffView.setLineColor(5, "#2d4f2d")
-diffView.setLineColor(5, { gutter: "#333", content: "#2d4f2d" })
-
-// Clear a single line's color
-diffView.clearLineColor(5)
-
-// Set multiple lines at once
-diffView.setLineColors(new Map([
-  [1, "#2d4f2d"],
-  [2, "#4f2d2d"],
+diff.setLineColor(10, "#FFFF0030")
+diff.clearLineColor(10)
+diff.setLineColors(new Map([
+  [5, "#FF000030"],
+  [10, { bg: "#00FF0030", fg: "#FFFFFF" }],
 ]))
-
-// Highlight a range
-diffView.highlightLines(10, 20, "#2d4f2d")
-diffView.clearHighlightLines(10, 20)
-
-// Clear all line colors
-diffView.clearAllLineColors()
+diff.highlightLines(20, 25, "#0000FF30")
+diff.clearHighlightLines(20, 25)
+diff.clearAllLineColors()
 ```
 
-The `LineNumberRenderable` also supports programmatic highlighting:
-
-```typescript
-lineNumberView.highlightLines(5, 10, "#2d4f2d")
-lineNumberView.clearHighlightLines(5, 10)
-```
-
-### Hunk Navigation (Core)
-
-`getHunkRowOffsets()` returns the visual row offset (0-based, accounting for
-wrapping and concealed lines) where each diff hunk begins, in hunk order. Works
-in both `"unified"` and `"split"` views.
-
-```typescript
-const offsets = diffView.getHunkRowOffsets()  // number[]
-
-// Jump to the next hunk below the current scroll position
-const next = offsets.find((row) => row > diffView.scrollTop)
-if (next !== undefined) diffView.scrollTop = next
-
-// Jump to the previous hunk
-const prev = [...offsets].reverse().find((row) => row < diffView.scrollTop)
-if (prev !== undefined) diffView.scrollTop = prev
-```
-
-The result is cached and invalidated when the view rebuilds, `wrapMode` changes,
-or line info changes.
+`getHunkRowOffsets()` returns display-row offsets for parsed hunks. Re-read it
+after changing the patch, view, wrapping, or dimensions.
 
 ## Markdown Component
 
-Render markdown content with syntax highlighting for code blocks.
-
-### Basic Usage
-
-```tsx
-// React
-<markdown
-  content={markdownText}
-  syntaxStyle={mySyntaxStyle}
-/>
-
-// Solid
-<markdown
-  content={markdownText}
-  syntaxStyle={mySyntaxStyle}
-/>
-
-// Core
-import { MarkdownRenderable } from "@opentui/core"
-
-const md = new MarkdownRenderable(renderer, {
-  id: "markdown",
-  content: "# Hello\n\nThis is **markdown**.",
-  syntaxStyle: mySyntaxStyle,
-})
-```
-
-### Options
+`MarkdownRenderable` parses Markdown into styled renderables. Pass a
+`SyntaxStyle` for fenced code highlighting.
 
 ```tsx
 <markdown
   content={markdownText}
-  syntaxStyle={syntaxStyle}    // Required
-  treeSitterClient={client}    // Optional: custom tree-sitter client
-  conceal={true}               // Hide markdown syntax characters (default true)
-  concealCode={false}          // Conceal code fences too (default false)
-  streaming={true}             // Enable streaming mode for incremental updates
-  internalBlockMode="coalesced" // "coalesced" (default) | "top-level"
-  tableOptions={{              // Customize markdown table rendering
-    style: "columns",          // "grid" | "columns"
-    widthMode: "full",         // "content" | "full"
-    wrapMode: "word",          // "none" | "char" | "word"
-    cellPadding: 0,
-    borders: true,
-    outerBorder: true,
-    borderStyle: "single",
-    borderColor: "#555",
-    selectable: true,          // Tables are selectable by default
-  }}
+  syntaxStyle={syntaxStyle}
+  conceal
+  concealCode={false}
+  streaming={false}
+  internalBlockMode="coalesced"
 />
 ```
 
-**`internalBlockMode`**: `"top-level"` keeps each top-level block (heading,
-paragraph, list, table, fenced code) as its own child renderable — required for
-row-by-row committing of streamed output and for stable-block tracking. The
-default `"coalesced"` folds siblings together (historical layout). When set to
-`"top-level"`, `markdown._stableBlockCount` reports how many head-of-stream
-blocks are currently stable.
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `content` | `string` | `""` | Markdown source |
+| `syntaxStyle` | `SyntaxStyle` | - | Syntax colors |
+| `treeSitterClient` | `TreeSitterClient` | shared | Parser client |
+| `conceal` | `boolean` | `true` | Hide Markdown markers |
+| `concealCode` | `boolean` | `false` | Hide fenced-code markers |
+| `streaming` | `boolean` | `false` | Optimize append-only content |
+| `internalBlockMode` | `coalesced \| top-level` | `coalesced` | Internal block grouping |
+| `tableOptions` | `MarkdownTableOptions` | - | Table layout and border options |
 
 ### Custom Node Rendering
 
-```tsx
-// Core
-const md = new MarkdownRenderable(renderer, {
-  id: "markdown",
+`renderNode` receives `(token, context)`. Return a custom renderable,
+`context.defaultRender()` for the built-in representation, or `null`/
+`undefined` as appropriate.
+
+```typescript
+const markdown = new MarkdownRenderable(renderer, {
   content: "# Custom Heading",
   syntaxStyle,
-  renderNode: (node, ctx, defaultRender) => {
-    if (node.type === "heading") {
-      // Return custom renderable for headings
-      return new TextRenderable(ctx, {
-        content: `>> ${node.content} <<`,
-      })
+  renderNode(token, context) {
+    if (token.type === "heading") {
+      return new TextRenderable(renderer, { content: `>> ${token.text} <<` })
     }
-    return null // Use default rendering
+    return context.defaultRender()
   },
 })
 ```
 
-### Custom Code Block Renderers
+For fenced-code specialization, use `createMarkdownCodeBlockRenderer()` to
+dispatch normalized filetypes to custom renderers while retaining the default
+renderer for unmatched tokens.
 
-`createMarkdownCodeBlockRenderer` builds a `renderNode` that only overrides
-fenced code blocks, keyed by the **normalized** fence info string (e.g. `tsx` →
-`typescriptreact`; custom names like `taskflow` match directly):
-
-```typescript
-import { createMarkdownCodeBlockRenderer, MarkdownRenderable } from "@opentui/core"
-
-const renderNode = createMarkdownCodeBlockRenderer({
-  mermaid: (token, ctx) => renderMermaidDiagram(ctx, token.text),
-  taskflow: (token, ctx) => renderTaskflow(ctx, token.text),
-})
-
-const md = new MarkdownRenderable(renderer, {
-  id: "markdown",
-  content,
-  syntaxStyle,
-  renderNode,  // Only the matched fences are replaced; others render normally
-})
-```
-
-Each renderer receives `(token: Tokens.Code, context: RenderNodeContext)` and
-returns a `Renderable`, or `undefined`/`null` to fall back to default rendering.
-
-### Streaming Mode
-
-For real-time content like LLM output:
+### Streaming Markdown
 
 ```tsx
-const [content, setContent] = useState("")
-
-// Append text as it arrives
-useEffect(() => {
-  llmStream.on("token", (token) => {
-    setContent(c => c + token)
-  })
-}, [])
-
 <markdown
-  content={content}
+  content={streamedContent}
   syntaxStyle={syntaxStyle}
-  streaming={true}  // Optimizes for incremental updates
+  streaming={isStreaming}
+  internalBlockMode="top-level"
 />
 ```
 
-In Core, set `markdown.streaming = true` while appending chunks (assign or `+=`
-to `markdown.content`; each change reparses incrementally). Set
-`markdown.streaming = false` when the stream completes to finalize trailing
-block parsing. Use `internalBlockMode: "top-level"` if you need per-block commit
-boundaries (`markdown._stableBlockCount`).
-
-## Use Cases
-
-### Code Editor
-
-```tsx
-function CodeEditor() {
-  const [code, setCode] = useState(`function hello() {
-  console.log("Hello!");
-}`)
-  
-  return (
-    <box flexDirection="column" height="100%">
-      <box height={1}>
-        <text>editor.ts</text>
-      </box>
-      <textarea
-        value={code}
-        onChange={setCode}
-        language="typescript"
-        showLineNumbers
-        flexGrow={1}
-        focused
-      />
-    </box>
-  )
-}
-```
-
-### Code Review
-
-```tsx
-function CodeReview({ oldCode, newCode }) {
-  return (
-    <box flexDirection="column" height="100%">
-      <box height={1} backgroundColor="#333">
-        <text>Changes in src/utils.ts</text>
-      </box>
-      <diff
-        oldCode={oldCode}
-        newCode={newCode}
-        language="typescript"
-        mode="split"
-        showLineNumbers
-      />
-    </box>
-  )
-}
-```
-
-### Syntax-Highlighted Preview
-
-```tsx
-function MarkdownPreview({ content }) {
-  // Extract code blocks from markdown
-  const codeBlocks = extractCodeBlocks(content)
-  
-  return (
-    <scrollbox height={20}>
-      {codeBlocks.map((block, i) => (
-        <box key={i} marginBottom={1}>
-          <code
-            code={block.code}
-            language={block.language}
-          />
-        </box>
-      ))}
-    </scrollbox>
-  )
-}
-```
-
-### Error Display
-
-```tsx
-function ErrorView({ errors, code }) {
-  const diagnostics = errors.map(err => ({
-    line: err.line,
-    severity: "error",
-    message: err.message,
-  }))
-  
-  return (
-    <line-number
-      code={code}
-      language="typescript"
-      diagnostics={diagnostics}
-      highlightedLines={errors.map(e => e.line)}
-    />
-  )
-}
-```
+Keep `streaming` true while appending and set it false when complete so the
+final parse can settle. `top-level` mode exposes stable top-level blocks, which
+is useful for LLM output and incremental views.
 
 ## Gotchas
 
-### Solid Uses Underscores
+- React uses `<line-number>`; Solid uses `<line_number>`.
+- Code uses `content` and `filetype`, not `code` and `language`.
+- Diff uses one unified `diff` string and `view`, not old/new strings and
+  `mode`.
+- Line Number wraps a target; it does not render source code by itself.
+- Tree-sitter loading is asynchronous. Use `OTUI_TREE_SITTER_WORKER_PATH` when
+  packaging requires a custom worker path.
+- Put large Code/Line Number views inside a height-constrained ScrollBox.
 
-```tsx
-// React
-<line-number />
+## See Also
 
-// Solid
-<line_number />
-```
-
-### Language Required for Highlighting
-
-```tsx
-// No highlighting (plain text)
-<code code={text} />
-
-// With highlighting
-<code code={text} language="typescript" />
-```
-
-### Large Files
-
-For very large files, consider:
-- Pagination or virtual scrolling
-- Loading only visible portion
-- Using `scrollbox` wrapper
-
-```tsx
-<scrollbox height={30}>
-  <line-number
-    code={largeFile}
-    language="typescript"
-  />
-</scrollbox>
-```
-
-### Tree-sitter Loading
-
-Syntax highlighting requires Tree-sitter grammars. If highlighting isn't working:
-
-1. Check the language is supported
-2. Verify grammars are installed
-3. Check `OTUI_TREE_SITTER_WORKER_PATH` if using custom path
+- [Text & Display](./text-display.md) - Styled text and image rendering
+- [Containers](./containers.md) - ScrollBox for large content
+- [Core API](../core/api.md) - Imperative renderables
+- [Testing](../testing/REFERENCE.md) - Frame and snapshot tests

@@ -142,7 +142,7 @@ const commits = t.externalOutput.take()
 `@opentui/core/testing`: `createMockKeys`, `KeyCodes`, `createMockMouse`,
 `MouseButtons`, `createSpy`, `TestRecorder`, `ManualClock`,
 `createTerminalCapabilities`, `setRendererCapabilities`,
-`createMockTreeSitterClient`.
+`MockTreeSitterClient`.
 
 ## React Testing
 
@@ -452,7 +452,7 @@ test("input receives focus", async () => {
   
   input.focus()
   
-  expect(input.isFocused()).toBe(true)
+  expect(input.focused).toBe(true)
 })
 ```
 
@@ -481,7 +481,7 @@ bun test
 bun test src/components/Button.test.tsx
 
 # Run with filter
-bun test --filter "Button"
+bun test --test-name-pattern "Button"
 
 # Watch mode
 bun test --watch

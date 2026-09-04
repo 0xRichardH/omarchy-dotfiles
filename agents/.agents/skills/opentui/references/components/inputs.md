@@ -108,20 +108,9 @@ Multi-line text input field.
 ### Basic Usage
 
 ```tsx
-// React
+// React / Solid (Textarea is imperative, not a controlled input)
 <textarea
-  value={text}
-  onChange={(newText) => setText(newText)}
-  placeholder="Enter multiple lines..."
-  width={40}
-  height={10}
-  focused
-/>
-
-// Solid
-<textarea
-  value={text()}
-  onInput={(newText) => setText(newText)}
+  initialValue="Draft text"
   placeholder="Enter multiple lines..."
   width={40}
   height={10}
@@ -141,22 +130,35 @@ const textarea = new TextareaRenderable(renderer, {
 
 ```tsx
 <textarea
-  showLineNumbers        // Display line numbers
-  wrapText              // Wrap long lines
-  readOnly              // Disable editing
-  tabSize={2}           // Tab character width
+  initialValue="Draft"
+  wrapMode="word"       // "none" | "char" | "word"
+  selectionOccupancy="boundary" // Half-open insert-style selection
+  cursorStyle={{ style: "line" }}
 />
 ```
 
-### Syntax Highlighting
+Textarea does not expose controlled `value`/`onChange`, `language`,
+`showLineNumbers`, `readOnly`, `wrapText`, or `tabSize` props. Keep a renderable
+ref, use `plainText`/`setText()`, and listen with `onContentChange`. For syntax
+highlighting, create and pass a `SyntaxStyle`; compose a
+`LineNumberRenderable` when line numbers are needed.
 
-```tsx
-<textarea
-  language="typescript"
-  value={code}
-  onChange={setCode}
-/>
+### Cursor, Selection, and Tab Width
+
+```typescript
+textarea.gotoVisualLineEnd({ select: true })
+textarea.setSelection(start, end)          // Half-open [start, end)
+textarea.setSelectionInclusive(start, end) // Includes end grapheme in cell mode
+textarea.clearSelection()
+
+textarea.editBuffer.setTabWidth(4)
+console.log(textarea.editBuffer.getTabWidth())
 ```
+
+`selectionOccupancy` is `"cell"` (default, both endpoint cells) or
+`"boundary"` (half-open insertion range). Cursor style only changes paint; use
+boundary occupancy with a line/bar cursor when insert-style selection is
+desired.
 
 ## Select Component
 
@@ -224,7 +226,6 @@ interface SelectOption {
   showSelectionIndicator={true} // Show "▶ " marker + gutter (default true)
   selectedBackgroundColor="#333"
   selectedTextColor="#fff"
-  highlightBackgroundColor="#444"
 />
 ```
 
@@ -237,6 +238,7 @@ interface SelectOption {
 Default keybindings:
 - `Up` / `k` - Move up
 - `Down` / `j` - Move down
+- `Shift+Up` / `Shift+Down` - Move by `fastScrollStep` (default 5)
 - `Enter` - Select item
 
 ### Events
@@ -433,7 +435,7 @@ function Form() {
 ```typescript
 input.focus()      // Give focus
 input.blur()       // Remove focus
-input.isFocused()  // Check focus state
+input.focused      // Check focus state
 ```
 
 ## Form Patterns

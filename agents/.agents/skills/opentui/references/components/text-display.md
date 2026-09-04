@@ -200,6 +200,9 @@ const title = new ASCIIFontRenderable(renderer, {
 | `block` | Block-style letters |
 | `slick` | Sleek modern style |
 | `shade` | Shaded 3D effect |
+| `huge` | Large font |
+| `grid` | Grid-style font |
+| `pallet` | Pallet-style font |
 
 ### Styling
 
@@ -234,6 +237,98 @@ Font: block
 █  █ █▀▀▀ █▀▀ █  █
 ▀▀▀▀ ▀    ▀▀▀ ▀  ▀
 ```
+
+## Image Component
+
+Display PNG, JPEG, WebP, GIF, or raw image data. OpenTUI chooses Kitty,
+Sixel, or Unicode block rendering based on terminal capabilities.
+
+```tsx
+// React and Solid
+<image source="./cover.webp" fit="cover" protocol="auto" width={40} height={15} />
+
+// Core
+const image = new ImageRenderable(renderer, {
+  source: "./cover.webp",
+  width: 40,
+  height: 15,
+  fit: "cover",
+  protocol: "auto",
+  onError: console.error,
+})
+renderer.root.add(image)
+await image.loadPromise
+```
+
+`source` accepts a path, supported URL, `URL`, `Blob`, `Response`,
+`Uint8Array`, `ArrayBuffer`, or `NativeImage`. Replacing `source` keeps the
+current image visible until the replacement succeeds.
+
+| Option | Values | Description |
+|--------|--------|-------------|
+| `fit` | `fit`, `cover`, `fill` | Contain (default), crop, or stretch |
+| `protocol` | `auto`, `kitty`, `sixel`, `blocks` | Requested terminal rendering protocol |
+| `onLoad` | `(image: NativeImage) => void` | Current source loaded |
+| `onError` | `(error: unknown) => void` | Current source failed |
+
+State includes `image`, `loading`, `loadError`, `loadPromise`,
+`effectiveProtocol`, and `getFittedSize()`. Set
+`OPENTUI_IMAGE_PROTOCOL=auto|kitty|sixel|blocks` for a global default;
+`OPENTUI_GRAPHICS=false` disables Kitty and Sixel detection.
+
+### NativeImage
+
+Use `NativeImage` when you need to inspect, transform, or share decoded pixels:
+
+```typescript
+import { NativeImage, imageInfo } from "@opentui/core"
+
+const source = await NativeImage.load("photo.jpg")
+const thumbnail = source.resize({ width: 320 })
+const shared = thumbnail.retain() // Independent handle, no pixel copy
+
+try {
+  console.log(imageInfo(await Bun.file("photo.jpg").arrayBuffer()))
+  const rgba = thumbnail.raw("rgba8")
+} finally {
+  shared.dispose()
+  thumbnail.dispose()
+  source.dispose()
+}
+```
+
+Creation methods are `load()`, `decode()`, and `fromRgba()`. Pixel methods are
+`raw()`, `copyTo()`, and ownership-transferring `takeRaw()`. Transform methods
+include `resize()`, `extract()`, `extend()`, `rotate()`, `flip()`, `flop()`, and
+`composite()`. `retain()` shares storage, `clone()` copies it, and every returned
+native handle must be disposed separately. `ensureEncodedPng()` prepares an
+encoded PNG for low-level native consumers. `ImageRenderable` retains a supplied
+`NativeImage`, so the caller still owns and must dispose its source reference.
+
+## Time to First Draw
+
+`TimeToFirstDrawRenderable` is a rendering diagnostic. It captures
+`performance.now()` on its first draw; this is a runtime-relative timestamp,
+not elapsed application startup time.
+
+```tsx
+// React
+<time-to-first-draw label="First draw timestamp" precision={1} />
+
+// Solid
+<time_to_first_draw label="First draw timestamp" precision={1} />
+
+// Core
+const firstDraw = new TimeToFirstDrawRenderable(renderer, {
+  label: "First draw timestamp",
+  precision: 1,
+})
+renderer.root.add(firstDraw)
+```
+
+React and Solid also export a `TimeToFirstDraw` wrapper. `runtimeMs` is `null`
+before the first draw; call `reset()` to capture again. Keep `precision` an
+integer from 0 through 100.
 
 ## QR Code Component
 

@@ -123,6 +123,8 @@ Two approaches to styling:
 - `<box>` - Container with borders and layout
 - `<scrollbox>` - Scrollable container
 - `<ascii-font>` - ASCII art text
+- `<image>` - PNG, JPEG, WebP, or GIF image
+- `<time-to-first-draw>` / `TimeToFirstDraw` - First-draw diagnostic
 
 ### Input
 - `<input>` - Single-line text input
@@ -134,6 +136,7 @@ Two approaches to styling:
 - `<code>` - Syntax-highlighted code
 - `<line-number>` - Code with line numbers
 - `<diff>` - Unified or split diff viewer
+- `<markdown>` - Markdown content
 
 ### Text Modifiers (inside `<text>`)
 - `<span>` - Inline styled text

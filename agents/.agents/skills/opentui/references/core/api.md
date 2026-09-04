@@ -10,7 +10,8 @@ Creates and initializes the CLI renderer.
 import { createCliRenderer, type CliRendererConfig } from "@opentui/core"
 
 const renderer = await createCliRenderer({
-  targetFPS: 60,              // Target frames per second
+  targetFps: 30,              // Continuous rendering target (default: 30)
+  maxFps: 60,                 // Cap immediate re-renders (default: 60)
   exitOnCtrlC: true,          // Exit process on Ctrl+C
   consoleOptions: {           // Debug console overlay
     position: ConsolePosition.BOTTOM,
@@ -34,6 +35,7 @@ const renderer = await createCliRenderer({
   width: cols,                // Fallback columns for non-TTY / custom stdout
   height: rows,               // Fallback rows for non-TTY / custom stdout
   remote: true,               // Treat output as a remote terminal (auto-detects SSH/mosh for process.stdout)
+  forwardEnvKeys: [],         // Local env names forwarded to remote capability detection
   exitOnCtrlC: false,
 })
 
@@ -51,6 +53,10 @@ await new Promise<void>((resolve) => queueMicrotask(resolve))
 Size resolution order: `stdout.columns/rows` → `config.width/height` → `80x24`.
 Env overrides: `OTUI_OVERRIDE_STDOUT` (force stdout routing),
 `OTUI_USE_ALTERNATE_SCREEN`.
+
+A feed-backed custom `stdout` defaults to `remote: true` and forwards no local
+environment values. Pass only terminal-related names that genuinely describe
+the remote terminal in `forwardEnvKeys`.
 
 ### CliRenderer Instance
 
@@ -103,7 +109,13 @@ renderer.on("memory:snapshot", (snapshot) => {})  // Memory snapshot
 renderer.on("debugOverlay:toggle", () => {})      // Debug overlay toggled
 renderer.on("frame", ({ frameId }) => {})         // A frame was committed
 renderer.on("focused_renderable", (current, previous) => {})  // Focus moved
+renderer.on("render:error", ({ error, renderable }) => {})     // Render pass threw
+renderer.on("handler:error", ({ error, event }) => {})         // Mouse handler threw
 ```
+
+If neither error event has a listener, OpenTUI logs the error. During a render
+error, `renderable` identifies the node that was executing when available.
+Mouse events expose both their original `target` and bubbling `currentTarget`.
 
 ### Scheduler & Idle
 
@@ -130,7 +142,10 @@ tmux requires `set -g allow-passthrough on`; Zellij uses OSC 99. Env overrides:
 
 ### Audio
 
-Native audio engine exported from `@opentui/core`.
+Native playback, streaming, capture, and recording exported from
+`@opentui/core`.
+
+#### Loaded Sounds
 
 ```typescript
 import { Audio } from "@opentui/core"
@@ -142,13 +157,87 @@ const sound = await audio.loadSoundFile("click.wav")
 if (sound != null && audio.start()) {
   audio.play(sound, { volume: 0.8, pan: 0, loop: false })
 }
-audio.dispose()
+
+// Keep the engine alive while playback is active. Stop/dispose it during
+// application cleanup, not immediately after play().
+// audio.stop()
+// audio.dispose()
 ```
 
 Key methods: `start()`, `stop()`, `loadSound(data)`, `loadSoundFile(path)`,
 `play(sound, options?)`, `stopVoice(voice)`, `group(name)`, `setGroupVolume()`,
 `setMasterVolume()`, `listPlaybackDevices()`, `getStats()`, `dispose()`.
 `AudioPlayOptions`: `{ volume?, pan?, loop?, groupId? }` (32 voice slots).
+
+#### Streaming MP3 or FLAC
+
+Start playback before creating a stream. Setup errors reject the entry method;
+later errors are `AudioStream` events, so attach an error listener immediately.
+
+```typescript
+import { Audio, type AudioStream } from "@opentui/core"
+
+const audio = Audio.create({ autoStart: false })
+const abortController = new AbortController()
+audio.on("error", (error, context) => console.error(context.action, error))
+if (!audio.start()) throw new Error("No playback device")
+
+const stream: AudioStream = await audio.playStreamUrl("https://example.com/radio.mp3", {
+  format: "mp3",                    // "mp3" | "flac"
+  buffer: { capacityMs: 2000, startupMs: 1000, resumeMs: 1000 },
+  reconnect: { maxRetries: 5 },
+  signal: abortController.signal,
+})
+stream.on("error", (error, context) => console.error(context.action, error))
+stream.on("metadata", (metadata) => console.log(metadata)) // ICY metadata for URL streams
+await stream.closed
+```
+
+Choose the source API by ownership:
+
+| Method | Source policy |
+|--------|---------------|
+| `playStream(source, options?)` | One `ReadableStream<Uint8Array>` or `AsyncIterable<Uint8Array>` to EOF |
+| `playStreamUrl(url, options?)` | Fetch, content-type validation, ICY metadata, optional reconnect |
+| `playStreamSource(connector, options?)` | Custom connection and per-connection demuxer |
+
+`AudioStream` exposes `state`, `closed`, `getStats()`, `getMetadata()`,
+`setVolume()`, `setPan()`, `setGroup()`, and `dispose()`. Use
+`createIcyStreamDemuxer()` for ICY framing on custom transports. Streaming does
+not support WAV, AAC, Ogg, Opus, HLS, seeking, or pause.
+
+#### Input Capture and WAV Recording
+
+Capture is independent of playback. One `Audio` engine permits one capture
+owner at a time.
+
+```typescript
+const capture = await audio.openCapture({ channels: 1, chunkFrames: 2048 })
+capture.on("error", (error, context) => console.error(context.action, error))
+const consumption = (async () => {
+  for await (const pcm of capture.readable) {
+    processFloat32Pcm(pcm, capture.channels)
+  }
+})()
+await new Promise((resolve) => setTimeout(resolve, 1000))
+capture.stop()                     // Gracefully drains unread PCM
+await consumption
+await capture.closed
+
+const recorder = await audio.recordToFile("recording.wav", { channels: 1 })
+recorder.on("error", (error, context) => console.error(context.action, error))
+await new Promise((resolve) => setTimeout(resolve, 1000))
+recorder.stop()                    // Finalizes and publishes PCM16 WAV
+await recorder.closed
+```
+
+`openCapture()` returns an `AudioCaptureStream` with `readable`, `state`,
+`getStats()`, `stop()`, `dispose()`, and `closed`. `recordToFile()` returns an
+`AudioRecorder` with the same lifecycle plus `filePath` and `format: "wav"`.
+For polling, use `startCapture()`, `readCaptureFrames()`, `getCaptureStats()`,
+and `stopCapture()`. Device APIs are `listCaptureDevices()`,
+`selectCaptureDevice()`, and `clearCaptureDeviceSelection()`. Microphone
+permissions and device availability are platform-dependent.
 
 ### Console Overlay
 
@@ -167,7 +256,7 @@ All renderables extend the base `Renderable` class and share common properties.
 
 ```typescript
 interface CommonProps {
-  id?: string                    // Unique identifier
+  id?: string                    // Identifier; duplicate IDs are allowed
   
   // Positioning
   position?: "relative" | "absolute"
@@ -209,7 +298,7 @@ interface CommonProps {
   gap?: number
   
   // Display
-  display?: "flex" | "none"
+  visible?: boolean
   overflow?: "visible" | "hidden" | "scroll"
   zIndex?: number
 }
@@ -261,6 +350,10 @@ const styled = new TextRenderable(renderer, {
 - `TextAttributes.INVERSE`
 - `TextAttributes.HIDDEN`
 - `TextAttributes.STRIKETHROUGH`
+
+`createTextAttributes({ bold, italic, underline, dim, blink, inverse, reverse,
+hidden, strikethrough })` builds the bit mask. `reverse` is an alias for
+`inverse`.
 
 ### Box, Input, Select, Tab Select, ScrollBox, ASCII Font
 
@@ -317,7 +410,11 @@ const canvas = new FrameBufferRenderable(renderer, {
 canvas.frameBuffer.fillRect(10, 5, 20, 8, RGBA.fromHex("#FF0000"))
 canvas.frameBuffer.drawText("Custom", 12, 7, RGBA.fromHex("#FFFFFF"))
 canvas.frameBuffer.setCell(x, y, char, fg, bg)
+canvas.frameBuffer.drawImage(nativeImage, x, y, width, height)
 ```
+
+See [Image Component](../components/text-display.md#image-component) for
+`NativeImage` ownership and terminal graphics protocols.
 
 ## Constructs (VNode API)
 
@@ -467,15 +564,15 @@ timeline.add(
   {
     width: 50,
     duration: 1000,
-    ease: "easeOutQuad",
+    ease: "outQuad",
     onUpdate: (anim) => {
-      box.setWidth(anim.targets[0].width)
+      box.width = anim.targets[0].width
     },
   },
 )
 
 engine.attach(renderer)
-engine.addTimeline(timeline)
+engine.register(timeline)
 ```
 
 ## Type Exports
@@ -487,6 +584,9 @@ import type {
   RenderContext,
   KeyEvent,
   Renderable,
+  WidthMethod,          // "wcwidth" | "unicode" | "unicode-wide"
+  SelectionOccupancy,  // "cell" | "boundary"
+  SelectionBehavior,   // "cell" | "word" | "line"
   // ... and more
 } from "@opentui/core"
 ```

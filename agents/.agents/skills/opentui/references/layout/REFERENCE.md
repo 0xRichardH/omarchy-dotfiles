@@ -161,9 +161,11 @@ Initial size before growing/shrinking:
 ```tsx
 <box flexDirection="row">
   <box flexBasis={20} flexGrow={1}>Starts at 20, can grow</box>
-  <box flexBasis="50%">Half of parent</box>
+  <box flexBasis="auto">Use measured content as the basis</box>
 </box>
 ```
+
+`flexBasis` accepts a cell count or `"auto"`; it does not accept percentages.
 
 ### alignSelf
 
@@ -298,10 +300,10 @@ Element positioned relative to nearest positioned ancestor:
 
 ```tsx
 // Visible (default)
-<box display="flex">Visible</box>
+<box visible>Visible</box>
 
 // Hidden (removed from layout)
-<box display="none">Hidden</box>
+<box visible={false}>Hidden</box>
 ```
 
 ## Overflow
