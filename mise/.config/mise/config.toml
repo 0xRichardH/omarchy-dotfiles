@@ -6,6 +6,9 @@ idiomatic_version_file_enable_tools = ["ruby"]
 [settings.ruby]
 compile = false
 
+[settings.upgrade]
+auto_prune = false
+
 [tools]
 bun = "latest"
 deno = "latest"
