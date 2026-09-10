@@ -10,9 +10,9 @@
     "0xdev/gpt-5.6-terra",
     "0xdev/gpt-5.6-luna",
     "0xdev/gpt-5.6-sol",
-    "0xdev/gpt-6-astra"
-    "0xdev/gemini-3.8-flash"
-    "0xdev/grok-4.6",
+    "0xdev/gpt-6-astra",
+    "0xdev/gemini-3.8-flash",
+    "0xdev/grok-4.6"
   ],
   "hideThinkingBlock": false,
   "lastChangelogVersion": "0.85.1",
