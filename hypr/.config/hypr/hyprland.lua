@@ -29,4 +29,10 @@ require("default.hypr.toggles")
 -- o.window("qemu", { workspace = "5" })
 
 -- Added by hyprmoncfg: its generated monitor rules load last, so nothing before this can override the applied layout.
-dofile((os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config") .. "/hypr/hyprmoncfg-monitors.lua")
+local hyprmoncfg_monitors = (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config")
+  .. "/hypr/hyprmoncfg-monitors.lua"
+local hyprmoncfg_file = io.open(hyprmoncfg_monitors, "r")
+if hyprmoncfg_file then
+  hyprmoncfg_file:close()
+  dofile(hyprmoncfg_monitors)
+end
