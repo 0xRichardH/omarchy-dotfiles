@@ -36,7 +36,7 @@ description = "open sesh picker"
 
 [ui]
 show_agent_labels_on_pane_borders = true
-agent_panel_sort = "priority"
+agent_panel_sort = "workspaces"
 [ui.sound]
 enabled = true
 
