@@ -32,10 +32,10 @@
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-cliproxyapi-provider"
   ],
-  "steeringMode": "one-at-a-time",
+  "steeringMode": "all",
   "terminal": {
     "showTerminalProgress": true
   },
-  "theme": "dark",
+  "theme": "omarchy-system",
   "treeFilterMode": "default"
 }
