@@ -65,6 +65,7 @@ shared_packages=(
   hypr
   mise
   nvim
+  omarchy
   opencode
   pi
   sesh

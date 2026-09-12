@@ -30,6 +30,8 @@ The host packages provide files such as terminal font size, Hyprland monitor set
 
 Use `--no-folding` through the helper script so files from shared packages and host overlays can coexist in the same target directories.
 
+The shared `omarchy` package synchronizes theme changes between the `omarchy` and `omarchy-0xdev` hosts. Each host must resolve the other through SSH with key-based authentication. The hook runs `sync-theme-to-peer` in the background, skips themes already active on the peer, and prevents synchronization loops. Run `sync-theme-to-peer` manually to push the current theme, or pass a theme slug explicitly.
+
 If a live machine still has an old folded symlink such as `~/.config/xremap -> ~/dotfiles/xremap/.config/xremap`, remove the folded symlink after confirming it points into this repo, create the real directory if needed, and rerun the simulate command.
 
 ## Install
@@ -120,6 +122,7 @@ sudo usermod -aG input "$USER"
 - `hypr`: Shared Hyprland compositor settings. Host overlays provide machine-specific monitor, binding, and autostart files.
 - `mise`: Tool version configuration.
 - `nvim`: LazyVim-based Neovim configuration with language support for Rust, Ruby, TypeScript, and Python.
+- `omarchy`: Omarchy hooks, including bidirectional theme synchronization between the desktop and laptop.
 - `opencode`: OpenCode editor configuration and agent guidelines.
 - `pi`: Pi agent configuration.
 - `sesh`: tmux session templates consumed by the `t` helper and popup picker.
