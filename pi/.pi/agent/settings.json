@@ -30,12 +30,13 @@
     "npm:pi-mcp-adapter",
     "npm:@ff-labs/pi-fff",
     "npm:@juicesharp/rpiv-todo",
-    "npm:pi-cliproxyapi-provider"
+    "npm:pi-cliproxyapi-provider",
+    "npm:@tintinweb/pi-subagents"
   ],
   "steeringMode": "all",
   "terminal": {
     "showTerminalProgress": true
   },
-  "theme": "omarchy-system",
-  "treeFilterMode": "default"
+  "treeFilterMode": "default",
+  "theme": "omarchy-system"
 }
