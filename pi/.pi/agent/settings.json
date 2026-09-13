@@ -31,7 +31,8 @@
     "npm:@ff-labs/pi-fff",
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-cliproxyapi-provider",
-    "npm:@tintinweb/pi-subagents"
+    "git:github.com/NVlabs/SoL-Pi",
+    "git:github.com/earendil-works/pi-review"
   ],
   "steeringMode": "all",
   "terminal": {
