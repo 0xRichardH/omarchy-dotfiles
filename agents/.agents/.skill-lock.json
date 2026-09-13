@@ -356,10 +356,10 @@
       "source": "modem-dev/hunk",
       "sourceType": "github",
       "sourceUrl": "https://github.com/modem-dev/hunk.git",
-      "skillPath": "skills/hunk-review/SKILL.md",
-      "skillFolderHash": "a1c5638dec5611780963bd68a347231f8baf9c62",
+      "skillPath": "packages/hunk/skills/hunk-review/SKILL.md",
+      "skillFolderHash": "6f018e1100adad770c86dfcf64a03151b51d6251",
       "installedAt": "2026-06-24T03:00:29.957Z",
-      "updatedAt": "2026-09-04T01:53:14.491Z"
+      "updatedAt": "2026-09-13T04:54:38.995Z"
     },
     "architecture-diagram": {
       "source": "cocoon-ai/architecture-diagram-generator",
@@ -461,6 +461,15 @@
       "pluginName": "mattpocock-skills",
       "installedAt": "2026-09-10T05:23:38.766Z",
       "updatedAt": "2026-09-10T05:23:38.766Z"
+    },
+    "i-have-adhd": {
+      "source": "ayghri/i-have-adhd",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ayghri/i-have-adhd.git",
+      "skillPath": "skills/i-have-adhd/SKILL.md",
+      "skillFolderHash": "72dc6e3e9d0f8d906579a235edb7b2a402d7b8e1",
+      "installedAt": "2026-09-13T04:54:02.952Z",
+      "updatedAt": "2026-09-13T04:54:02.952Z"
     }
   },
   "dismissed": {
