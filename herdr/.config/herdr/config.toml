@@ -3,12 +3,6 @@ onboarding = false
 [theme]
 name = "terminal"
 
-# [theme.custom]
-# red = "#4e82ef"     # blocked, needs input
-# teal = "#4e82ef"    # done, not seen yet
-# yellow = "#a78bfa"  # working
-# active_row_bg = "#45475a"
-
 [keys]
 prefix = "ctrl+s"
 split_horizontal = "prefix+minus"
