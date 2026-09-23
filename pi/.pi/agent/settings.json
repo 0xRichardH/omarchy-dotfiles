@@ -15,7 +15,7 @@
     "0xdev/grok-4.6"
   ],
   "hideThinkingBlock": false,
-  "lastChangelogVersion": "0.85.1",
+  "lastChangelogVersion": "0.87.1",
   "npmCommand": [
     "mise",
     "exec",
@@ -31,7 +31,6 @@
     "npm:@ff-labs/pi-fff",
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-cliproxyapi-provider",
-    "git:github.com/NVlabs/SoL-Pi",
     "git:github.com/earendil-works/pi-review"
   ],
   "steeringMode": "all",
