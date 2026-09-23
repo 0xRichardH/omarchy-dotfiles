@@ -15,6 +15,7 @@ focus_pane_down = ""
 focus_pane_right = ""
 copy_mode = "prefix+["
 rename_tab = "prefix+,"
+toggle_sidebar = "prefix+b"
 
 [[keys.command]]
 key = "prefix+g"
@@ -48,8 +49,9 @@ delivery = "system"
 row_gap = 1
 rows = [
   ["state_icon", "workspace"],
-  ["tab"],
+  ["tab", "machine"],
 ]
+
 [ui.sidebar.spaces]
 row_gap = 1
 rows = [
