@@ -8,76 +8,9 @@
     ".cursor/rules/*.md",
   ],
   "autoupdate": false,
-  "plugin": [
-    "opencode-supermemory@latest", // https://github.com/supermemoryai/opencode-supermemory
-  ],
+  "plugin": [],
   "lsp": false,
   "provider": {
-    "crs": {
-      "npm": "@ai-sdk/anthropic",
-      "options": {
-        "baseURL": "https://crs.tonob.net/api/v1",
-        "apiKey": "{file:~/.credentials/crs_auth_token}",
-      },
-      "models": {
-        "kimi-k2.5": {
-          "name": "Kimi-K2.5 [CRS]",
-          "limit": { "context": 262144, "output": 16000 },
-          "modalities": {
-            "input": ["text", "image", "video"],
-            "output": ["text"],
-          },
-          "reasoning": true,
-          "interleaved": { "field": "reasoning_content" },
-          "variants": {
-            "low": { "thinkingBudget": 8192 },
-            "max": { "thinkingBudget": 32768 },
-          },
-        },
-        "claude-opus-4-6": {
-          "name": "Claude Opus 4.6 [CRS]",
-          "limit": { "context": 1000000, "output": 128000 },
-          "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
-          "variants": {
-            "low": { "thinkingConfig": { "thinkingBudget": 8192 } },
-            "max": { "thinkingConfig": { "thinkingBudget": 32768 } },
-          },
-        },
-        "glm-5.1": {
-          "name": "GLM-5.1 [CRS]",
-          "limit": { "context": 200000, "output": 128000 },
-          "modalities": { "input": ["text"], "output": ["text"] },
-          "reasoning": true,
-        },
-        "claude-sonnet-4-6": {
-          "name": "Claude Sonnet 4.6 [CRS]",
-          "limit": { "context": 200000, "output": 64000 },
-          "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
-          "variants": {
-            "low": { "thinkingConfig": { "thinkingBudget": 8192 } },
-            "max": { "thinkingConfig": { "thinkingBudget": 32768 } },
-          },
-        },
-        "claude-haiku-4-5": {
-          "name": "Claude Haiku 4.5 [CRS]",
-          "limit": { "context": 200000, "output": 64000 },
-          "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
-          "variants": {
-            "low": { "thinkingConfig": { "thinkingBudget": 8192 } },
-            "max": { "thinkingConfig": { "thinkingBudget": 32768 } },
-          },
-        },
-      },
-    },
   },
   "mcp": {
     "exa": {
@@ -96,12 +29,6 @@
     "grep": {
       "type": "remote",
       "url": "https://mcp.grep.app",
-      "enabled": true,
-    },
-    "linear": {
-      "type": "remote",
-      "url": "https://mcp.linear.app/mcp",
-      "oauth": {},
       "enabled": true,
     },
   },
