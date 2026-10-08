@@ -2,7 +2,9 @@
   "defaultModel": "gemini-3.8-flash",
   "defaultProvider": "0xdev",
   "defaultThinkingLevel": "medium",
-  "defaultTools": ["+codemode"],
+  "defaultTools": [
+    "+codemode"
+  ],
   "enableInstallTelemetry": false,
   "enabledModels": [
     "0xdev/glm-5.2",
@@ -12,11 +14,11 @@
     "0xdev/gemini-3.8-flash",
     "0xdev/grok-4.7",
     "0xdev/gpt-6-luna",
-    "0xdev/gpt-6-1-sol"
+    "0xdev/gpt-6.1-sol"
   ],
   "hideThinkingBlock": false,
   "quietStartup": "header",
-  "lastChangelogVersion": "1.0.2",
+  "lastChangelogVersion": "1.1.0",
   "npmCommand": [
     "mise",
     "exec",
@@ -27,7 +29,6 @@
   "packages": [
     "npm:pi-web-access",
     "npm:pi-codex-goal",
-    "npm:gentle-engram",
     "npm:@ff-labs/pi-fff",
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-cliproxyapi-provider",
