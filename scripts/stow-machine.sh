@@ -90,7 +90,7 @@ fi
 
 find_package_targets() {
   local package="$1"
-  find "$package" -type f -o -type l | while IFS= read -r path; do
+  find "$package" -mindepth 1 ! -name ".stow-local-ignore" \( -type f -o -type l \) | while IFS= read -r path; do
     printf '%s\t%s\n' "${path#"$package/"}" "$package"
   done
 }
