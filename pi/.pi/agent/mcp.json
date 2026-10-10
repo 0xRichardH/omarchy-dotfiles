@@ -2,9 +2,9 @@
   "mcpServers": {
     "engram": {
       "command": "engram",
-      "args": ["mcp"]
+      "args": [
+        "mcp"
+      ]
     }
   }
 }
-
-
