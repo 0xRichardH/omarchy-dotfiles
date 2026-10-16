@@ -365,9 +365,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/emilkowalski/skills.git",
       "skillPath": "skills/animation-vocabulary/SKILL.md",
-      "skillFolderHash": "e6dc24ca1ff1e70c9677df9a1d2d1c80415cbb3c",
+      "skillFolderHash": "d49565744427887a1f719de1ceee04d941d4e681",
       "installedAt": "2026-07-02T03:12:32.404Z",
-      "updatedAt": "2026-07-02T03:12:32.404Z"
+      "updatedAt": "2026-10-16T15:05:42.393Z"
     },
     "code-review": {
       "source": "mattpocock/skills",
@@ -438,9 +438,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/humanlayer/skills.git",
       "skillPath": "plugins/show-me/skills/show-me/SKILL.md",
-      "skillFolderHash": "0bdb821a21e793a4f6f82a7078c052154447e5cc",
+      "skillFolderHash": "362200ac2fb3c17b765049444e88de73767e6d08",
       "installedAt": "2026-09-04T02:31:11.772Z",
-      "updatedAt": "2026-09-04T02:31:11.772Z"
+      "updatedAt": "2026-10-16T15:05:51.596Z"
     },
     "wait-what": {
       "source": "mattpocock/skills",
@@ -456,9 +456,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ayghri/i-have-adhd.git",
       "skillPath": "skills/i-have-adhd/SKILL.md",
-      "skillFolderHash": "72dc6e3e9d0f8d906579a235edb7b2a402d7b8e1",
+      "skillFolderHash": "759f1e56d0d2fdd3819d2a53b81e72767c08d914",
       "installedAt": "2026-09-13T04:54:02.952Z",
-      "updatedAt": "2026-09-13T04:54:02.952Z"
+      "updatedAt": "2026-10-16T15:06:02.442Z"
     },
     "typesafe-ai": {
       "source": "typesafe-ai/skills",
