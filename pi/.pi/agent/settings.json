@@ -17,8 +17,8 @@
     "0xdev/gpt-6.1-sol"
   ],
   "hideThinkingBlock": false,
-  "quietStartup": "header",
-  "lastChangelogVersion": "1.1.0",
+  "quietStartup": true,
+  "lastChangelogVersion": "1.3.0",
   "npmCommand": [
     "mise",
     "exec",
@@ -39,5 +39,6 @@
     "showTerminalProgress": true
   },
   "treeFilterMode": "default",
-  "theme": "omarchy-system"
+  "theme": "omarchy-system",
+  "tuiMode": "regular"
 }
