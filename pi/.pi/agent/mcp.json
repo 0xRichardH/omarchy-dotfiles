@@ -20,9 +20,6 @@
       "env": {
         "OD_DATA_DIR": "/home/richard/.local/share/open-design"
       }
-    },
-    "feedmob-reporting-production": {
-      "url": "https://admin.feedmob.com/mcp/reporting"
     }
   }
 }
