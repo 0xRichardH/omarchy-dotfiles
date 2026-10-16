@@ -27,6 +27,7 @@ hl.unbind("SUPER + SHIFT + S")
 -- o.bind("SUPER + SHIFT + S", nil, "omarchy-capture-screenshot")
 o.bind("SUPER + SHIFT + S", nil, "omasnap")
 
+
 -- Move Quattro's clipboard manager from SUPER + CTRL + V to SUPER + SHIFT + P.
 hl.unbind("SUPER + SHIFT + P")
 o.bind("SUPER + SHIFT + P", "Clipboard manager", "omarchy-shell shell toggle omarchy.clipboard")
