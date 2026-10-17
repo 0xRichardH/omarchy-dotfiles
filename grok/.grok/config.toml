@@ -13,7 +13,7 @@ git = "https://github.com/xai-org/plugin-marketplace.git"
 max_thoughts_width = 120
 fork_secondary_model = "grok-build"
 yolo = true
-compact_mode = true
+compact_mode = false
 permission_mode = "always-approve"
 theme = "auto"
 
@@ -25,3 +25,9 @@ acked = true
 [mcp_servers.notion]
 url = "https://mcp.notion.com/mcp"
 enabled = true
+
+[plugins]
+enabled = [
+    "chrome-devtools",
+    "pstack",
+]
