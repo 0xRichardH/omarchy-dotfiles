@@ -7,6 +7,7 @@ Each top-level directory is a GNU Stow package for a specific tool. Key paths:
 - `hypr/.config/hypr/*.lua` contains shared Hyprland settings; host overlays own machine-specific Lua files such as bindings, autostart, and monitors.
 - `nvim/.config/nvim` contains LazyVim-based setup plus custom Lua modules in `lua/config/` and `lua/plugins/`.
 - `git/.config/git` centralizes Git templates and ignores; `git/.bin` holds custom git commands.
+- `grok/.grok` tracks Grok rules, hooks, and `config.toml`. Leave auth, credentials, sessions, and memory on the machine.
 - `bash/.bin` and `bw/.bin` house utility scripts.
 - `tmux/.config/tmux/tmux.conf` manages multiplexer defaults and key bindings.
 - `sesh/.config/sesh/sesh.toml` defines reusable tmux session templates.
@@ -40,6 +41,9 @@ Follow Conventional Commits: `type(scope): description`. Types: feat, fix, docs,
 
 ### Skip ephemeral Pi model selection
 Do **not** commit `pi/.pi/agent/settings.json` when its diff only changes `defaultModel` and/or `defaultProvider`. Those fields track the currently selected model and churn constantly. Commit the file only when other keys change (thinking level, telemetry, packages, etc.).
+
+### Skip ephemeral Grok config
+Do **not** commit `grok/.grok/config.toml` when its diff only changes marketplace install flags (`official_marketplace_auto_installed`, `default_skills_installs_purged`) or the `[consent.answers.enterprise-tos-2026-08]` acknowledgement. Grok rewrites those fields. Commit the file when UI settings, MCP servers, or other durable keys change.
 
 ## Security & Secrets
 Never commit tokens, SSH keys, or Bitwarden exports. The `bw_add_sshkeys` script expects secrets in vault. Review diffs for accidental absolute paths or credentials before committing.

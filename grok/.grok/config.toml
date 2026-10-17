@@ -1,0 +1,27 @@
+[cli]
+installer = "internal"
+
+[marketplace]
+official_marketplace_auto_installed = true
+default_skills_installs_purged = true
+
+[[marketplace.sources]]
+name = "xAI Official"
+git = "https://github.com/xai-org/plugin-marketplace.git"
+
+[ui]
+max_thoughts_width = 120
+fork_secondary_model = "grok-build"
+yolo = true
+compact_mode = true
+permission_mode = "always-approve"
+theme = "auto"
+
+[consent.answers.enterprise-tos-2026-08]
+version = 1
+account = "richard@feedmob.com"
+acked = true
+
+[mcp_servers.notion]
+url = "https://mcp.notion.com/mcp"
+enabled = true

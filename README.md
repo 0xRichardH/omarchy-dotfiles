@@ -118,6 +118,7 @@ sudo usermod -aG input "$USER"
 - `fish`: Fish shell configuration.
 - `ghostty`: Ghostty terminal emulator configuration.
 - `git`: Shared Git config, ignore patterns, commit message template, and custom commands.
+- `grok`: Grok rules, hooks, and `config.toml`. Auth, credentials, sessions, and memory stay on the machine.
 - `herdr`: Herdr configuration.
 - `hypr`: Shared Hyprland compositor settings. Host overlays provide machine-specific monitor, binding, and autostart files.
 - `mise`: Tool version configuration.

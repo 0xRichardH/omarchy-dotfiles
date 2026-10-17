@@ -1,25 +1,7 @@
 {
   "mcpServers": {
-    "engram": {
-      "args": [
-        "mcp",
-        "--tools=agent"
-      ],
-      "command": "engram",
-      "directTools": false,
-      "lifecycle": "lazy"
-    },
-    "open-design": {
-      "command": "node",
-      "args": [
-        "/usr/lib/open-design/apps/daemon/dist/cli.js",
-        "mcp",
-        "--daemon-url",
-        "http://127.0.0.1:7456"
-      ],
-      "env": {
-        "OD_DATA_DIR": "/home/richard/.local/share/open-design"
-      }
+    "notion": {
+      "url": "https://mcp.notion.com/mcp"
     }
   }
 }

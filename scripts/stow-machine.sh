@@ -61,6 +61,7 @@ shared_packages=(
   fish
   ghostty
   git
+  grok
   herdr
   hypr
   mise
