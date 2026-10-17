@@ -28,12 +28,6 @@ type = "plugin_action"
 command = "third774.last-workspace.toggle"
 description = "last workspace"
 
-[[keys.command]]
-key = "prefix+o"
-type = "plugin_action"
-command = "fullerzz.sesh.open-picker"
-description = "open sesh picker"
-
 [ui]
 show_agent_labels_on_pane_borders = true
 agent_panel_sort = "priority"
@@ -61,4 +55,3 @@ rows = [
 
 [experimental]
 kitty_graphics = true
-
