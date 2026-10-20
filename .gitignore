@@ -6,3 +6,4 @@ pi/.pi/agent/npm/
 pi/.pi/agent/sessions/
 pi/.pi/agent/auth.json
 mise/.config/mise/.config.toml.*
+node_modules/

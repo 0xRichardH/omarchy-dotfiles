@@ -15,5 +15,6 @@ tmp/**/*
 .idea
 .tool-versions-e
 .tool-versions
+node_modules/
 
 **/.claude/settings.local.json
