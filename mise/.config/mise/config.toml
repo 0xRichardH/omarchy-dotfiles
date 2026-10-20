@@ -7,7 +7,6 @@ idiomatic_version_file_enable_tools = ["ruby"]
 compile = false
 
 [settings.upgrade]
-auto_prune = false
 
 [tools]
 bun = "latest"
@@ -20,7 +19,6 @@ zig = "latest"
 zls = "latest"
 atuin = "latest"
 "npm:opencode-ai" = "latest"
-"npm:@openai/codex" = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:critique" = "latest" # https://github.com/remorses/critique
 "npm:acpx" = "latest"
@@ -32,11 +30,5 @@ atuin = "latest"
 "github:ogulcancelik/herdr" = "latest"
 "go:github.com/Gentleman-Programming/engram/v2/cmd/engram" = "latest"
 cmake = "latest"
-codex = "latest"
 duckdb = "latest"
-gh = "latest"
-pi = "latest"
-opencode = "latest"
-claude = "latest"
-grok = { version = "latest", bin = "grok", url = 'https://storage.googleapis.com/grok-build-public-artifacts/cli/grok-{{ version }}-{{ os() }}-{{ arch(arm64="aarch64", x64="x86_64") }}', version_list_url = "https://x.ai/cli/stable", platforms = { windows-arm64 = { bin = "grok.exe", url = "https://storage.googleapis.com/grok-build-public-artifacts/cli/grok-{{ version }}-windows-aarch64.exe" }, windows-x64 = { bin = "grok.exe", url = "https://storage.googleapis.com/grok-build-public-artifacts/cli/grok-{{ version }}-windows-x86_64.exe" } } }
 "npm:@moonshot-ai/kimi-code" = "latest"
