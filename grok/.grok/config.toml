@@ -16,6 +16,8 @@ yolo = true
 compact_mode = false
 permission_mode = "always-approve"
 theme = "auto"
+screen_mode = "fullscreen"
+show_timeline = true
 
 [consent.answers.enterprise-tos-2026-08]
 version = 1
