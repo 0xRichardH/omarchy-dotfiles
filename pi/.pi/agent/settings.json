@@ -14,11 +14,12 @@
     "0xdev/gemini-3.8-flash",
     "0xdev/grok-4.7",
     "0xdev/gpt-6-luna",
-    "0xdev/gpt-6.1-sol"
+    "0xdev/gpt-6.1-sol",
+    "xai/grok-4.7"
   ],
   "hideThinkingBlock": false,
   "quietStartup": true,
-  "lastChangelogVersion": "1.3.0",
+  "lastChangelogVersion": "1.4.0",
   "npmCommand": [
     "mise",
     "exec",
