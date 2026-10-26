@@ -32,4 +32,5 @@ atuin = "latest"
 cmake = "latest"
 duckdb = "latest"
 "npm:@moonshot-ai/kimi-code" = "latest"
+"npm:@deepseek-ai/dsh" = "latest"
 awscli = { version = "latest", symlink_bins = "true" }
