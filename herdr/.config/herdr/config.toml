@@ -43,7 +43,7 @@ delivery = "system"
 row_gap = 1
 rows = [
   ["state_icon", "workspace"],
-  ["tab", "machine"],
+  ["tab", "machine", "agent"],
 ]
 
 [ui.sidebar.spaces]
