@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Pin the version: an unpinned "skills" spec makes bunx resolve the
+# ~/.bin/skills wrapper on PATH, which recurses into this script.
 if command -v bunx >/dev/null 2>&1; then
-  exec env -u XDG_STATE_HOME bunx skills "$@"
+  exec env -u XDG_STATE_HOME bunx skills@latest "$@"
 else
-  exec env -u XDG_STATE_HOME npx --yes skills "$@"
+  exec env -u XDG_STATE_HOME npx --yes skills@latest "$@"
 fi
