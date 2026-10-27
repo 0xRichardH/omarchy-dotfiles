@@ -8,6 +8,7 @@ abbr cl clear
 abbr claer clear
 abbr clera clear
 abbr code nvim
+abbr claude "claude --dangerously-skip-permissions"
 
 abbr dc "docker compose"
 abbr dcp "docker compose -f ~/docker-compose.yaml" # Shorthand, customise docker-compose.yaml location as needed
