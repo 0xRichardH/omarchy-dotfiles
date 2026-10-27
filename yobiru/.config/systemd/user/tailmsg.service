@@ -1,0 +1,11 @@
+[Unit]
+Description=tailmsg receiver (Yobiru)
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python3 %h/.tailmsg/tailmsg.py serve
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

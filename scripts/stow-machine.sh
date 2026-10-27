@@ -75,6 +75,7 @@ shared_packages=(
   tmux
   xremap
   yazi
+  yobiru
   zed
 )
 

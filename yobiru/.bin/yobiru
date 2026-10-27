@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+shopt -s nullglob
+launchers=("$HOME"/.codex/plugins/cache/yobiru/yobiru/*/scripts/yobiru)
+if ((${#launchers[@]} == 0)); then
+  printf 'yobiru: install the Yobiru Codex plugin first\n' >&2
+  exit 127
+fi
+
+launcher=$(printf '%s\n' "${launchers[@]}" | sort -V | tail -n 1)
+exec sh "$launcher" "$@"
