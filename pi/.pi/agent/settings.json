@@ -1,21 +1,15 @@
 {
-  "defaultModel": "gemini-3.8-flash",
-  "defaultProvider": "0xdev",
+  "defaultModel": "auto/minimax-m3.1-flash",
+  "defaultProvider": "magpie",
   "defaultThinkingLevel": "medium",
   "defaultTools": [
     "+codemode"
   ],
   "enableInstallTelemetry": false,
   "enabledModels": [
-    "0xdev/glm-5.2",
-    "0xdev/minimax-m3",
-    "0xdev/openrouter/free",
-    "0xdev/gpt-6-astra",
-    "0xdev/gemini-3.8-flash",
-    "0xdev/grok-4.7",
-    "0xdev/gpt-6-luna",
-    "0xdev/gpt-6.1-sol",
-    "xai/grok-4.7"
+    "xai/grok-4.7",
+    "magpie/auto/gemini-3.8-flash",
+    "magpie/auto/minimax-m3.1-flash"
   ],
   "hideThinkingBlock": false,
   "quietStartup": true,
@@ -28,11 +22,9 @@
     "npm"
   ],
   "packages": [
-    "npm:pi-web-access",
     "npm:pi-codex-goal",
     "npm:@ff-labs/pi-fff",
     "npm:@juicesharp/rpiv-todo",
-    "npm:pi-cliproxyapi-provider",
     "git:github.com/earendil-works/pi-review"
   ],
   "steeringMode": "all",
