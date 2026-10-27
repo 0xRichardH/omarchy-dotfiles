@@ -1,7 +1,30 @@
 {
   "mcpServers": {
+    "magpie-image": {
+      "command": "/usr/bin/magpie",
+      "args": [
+        "mcp",
+        "image"
+      ]
+    },
+    "deepwiki": {
+      "url": "https://mcp.deepwiki.com/mcp"
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ]
+    },
+    "exa": {
+      "url": "https://mcp.exa.ai/mcp"
+    },
+    "context7": {
+      "url": "https://mcp.context7.com/mcp"
+    },
     "notion": {
-      "url": "https://mcp.notion.com/mcp"
+      "url": "http://127.0.0.1:3425/mcp/notion"
     }
   }
 }
