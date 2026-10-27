@@ -58,10 +58,31 @@
     },
   },
   "context_servers": {
-    "context7": {
+    "notion": {
+      "url": "http://127.0.0.1:3425/mcp/notion"
+    },
+    "magpie-image": {
+      "command": "/usr/bin/magpie",
+      "args": [
+        "mcp",
+        "image"
+      ]
+    },
+    "deepwiki": {
+      "url": "https://mcp.deepwiki.com/mcp"
+    },
+    "chrome-devtools": {
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp@latest"],
-      "env": null,
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ]
+    },
+    "exa": {
+      "url": "https://mcp.exa.ai/mcp"
+    },
+    "context7": {
+      "url": "https://mcp.context7.com/mcp"
     },
   },
   "ssh_connections": [
