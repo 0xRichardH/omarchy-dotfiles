@@ -53,3 +53,9 @@
 -- Find its class with: hyprctl clients
 -- o.transparent_window("my-app")
 -- o.transparent_window("my-app", "0.9 0.85") -- Custom active/inactive opacity.
+
+-- Keep Ghostty from being raised and focused when it asks for attention.
+-- A terminal bell (Grok rings one when a turn completes) makes Ghostty commit
+-- an xdg-activation token, and with misc.focus_on_activate on, that pulls the
+-- terminal to the front. The bell still beeps and the title is still marked.
+o.window("com\\.mitchellh\\.ghostty", { focus_on_activate = false })
