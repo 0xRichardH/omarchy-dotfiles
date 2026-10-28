@@ -22,6 +22,8 @@ show_timeline = true
 tool_call_density = "detailed"
 render_mermaid = "on"
 combine_queued_prompts = false
+auto_dark_theme = "oscura-midnight"
+hunk_tracker_mode = "agent_only"
 
 [consent.answers.enterprise-tos-2026-08]
 version = 1
@@ -65,8 +67,11 @@ enabled = [
 campaigns = false
 
 [models]
-default = "magpie/auto/minimax-m3.1-flash"
+default = "magpie/auto/deepseek-v4.1-flash"
 default_reasoning_effort = "high"
+
+[keys]
+vim = "off"
 
 [model."magpie/auto/minimax-m3"]
 model = "auto/minimax-m3"
@@ -83,13 +88,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1000000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/auto/kimi-for-coding"]
 model = "auto/kimi-for-coding"
@@ -98,12 +97,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "none",
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["none", "low", "high", "max"]
 
 [model."magpie/auto/kimi-for-coding-highspeed"]
 model = "auto/kimi-for-coding-highspeed"
@@ -120,12 +114,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 262144
-reasoning_efforts = [
-    "none",
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["none", "low", "high", "max"]
 
 [model."magpie/auto/claude-sonnet-4-6"]
 model = "auto/claude-sonnet-4-6"
@@ -134,12 +123,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1000000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "max"]
 
 [model."magpie/auto/claude-opus-4-6-thinking"]
 model = "auto/claude-opus-4-6-thinking"
@@ -148,12 +132,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 250000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "max"]
 
 [model."magpie/auto/gpt-6.1-sol"]
 model = "auto/gpt-6.1-sol"
@@ -162,13 +141,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 922000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/auto/gemini-3.8-flash"]
 model = "auto/gemini-3.8-flash"
@@ -177,11 +150,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/auto/kimi-k3"]
 model = "auto/kimi-k3"
@@ -190,11 +159,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "high", "max"]
 
 [model."magpie/auto/gpt-oss-120b-medium"]
 model = "auto/gpt-oss-120b-medium"
@@ -203,11 +168,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 131072
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/auto/gpt-6-astra"]
 model = "auto/gpt-6-astra"
@@ -216,13 +177,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 922000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/auto/gpt-6-sol"]
 model = "auto/gpt-6-sol"
@@ -231,13 +186,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 922000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/auto/gpt-6-luna"]
 model = "auto/gpt-6-luna"
@@ -246,13 +195,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 922000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/auto/deepseek-v4.1-flash"]
 model = "auto/deepseek-v4.1-flash"
@@ -261,11 +204,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1000000
-reasoning_efforts = [
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "high", "max"]
 
 [model."magpie/auto/glyph-cluster:free"]
 model = "auto/glyph-cluster:free"
@@ -274,12 +213,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 256000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh"]
 
 [model."magpie/auto/beam:free"]
 model = "auto/beam:free"
@@ -288,13 +222,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/auto/laguna-s-2.1-free"]
 model = "auto/laguna-s-2.1-free"
@@ -303,11 +231,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 256000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/auto/gpt-5.6-sol"]
 model = "auto/gpt-5.6-sol"
@@ -316,13 +240,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 272000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/auto/gpt-5.6-terra"]
 model = "auto/gpt-5.6-terra"
@@ -331,13 +249,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 272000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/auto/gpt-5.6-luna"]
 model = "auto/gpt-5.6-luna"
@@ -346,13 +258,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 272000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/auto/grok-4.7@500k"]
 model = "auto/grok-4.7@500k"
@@ -361,12 +267,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 500000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh"]
 
 [model."magpie/auto/grok-4.6"]
 model = "auto/grok-4.6"
@@ -375,12 +276,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 256000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh"]
 
 [model."magpie/auto/grok-4.5"]
 model = "auto/grok-4.5"
@@ -389,11 +285,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 256000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/feedmob-clark-litellm/minimax/minimax-m3"]
 model = "feedmob-clark-litellm/minimax/minimax-m3"
@@ -410,13 +302,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1000000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/ken-team-litellm/minimax-m3"]
 model = "ken-team-litellm/minimax-m3"
@@ -433,11 +319,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 131072
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/ken-team-litellm/nemotron-3-super"]
 model = "ken-team-litellm/nemotron-3-super"
@@ -454,13 +336,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1000000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/kimi-code/kimi-for-coding"]
 model = "kimi-code/kimi-for-coding"
@@ -469,12 +345,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "none",
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["none", "low", "high", "max"]
 
 [model."magpie/kimi-code/kimi-for-coding-highspeed"]
 model = "kimi-code/kimi-for-coding-highspeed"
@@ -491,12 +362,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "none",
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["none", "low", "high", "max"]
 
 [model."magpie/kimi-code/k3-256k"]
 model = "kimi-code/k3-256k"
@@ -505,12 +371,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 262144
-reasoning_efforts = [
-    "none",
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["none", "low", "high", "max"]
 
 [model."magpie/kimi-code/k3.1-pro"]
 model = "kimi-code/k3.1-pro"
@@ -519,11 +380,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "high", "max"]
 
 [model."magpie/0xdev/gpt-oss-120b"]
 model = "0xdev/gpt-oss-120b"
@@ -532,11 +389,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 131072
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/0xdev/claude-sonnet-4-6"]
 model = "0xdev/claude-sonnet-4-6"
@@ -545,12 +398,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1000000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "max"]
 
 [model."magpie/0xdev/minimax-m3"]
 model = "0xdev/minimax-m3"
@@ -575,12 +423,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 262144
-reasoning_efforts = [
-    "none",
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["none", "low", "high", "max"]
 
 [model."magpie/0xdev/claude-opus-4-6-thinking"]
 model = "0xdev/claude-opus-4-6-thinking"
@@ -588,12 +431,7 @@ name = "claude-opus-4-6-thinking · 0xdev"
 base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "max"]
 
 [model."magpie/0xdev/grok-composer-2.5-fast"]
 model = "0xdev/grok-composer-2.5-fast"
@@ -609,11 +447,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 131072
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/0xdev/nousresearch/hermes-3-llama-3.1-405b:free"]
 model = "0xdev/nousresearch/hermes-3-llama-3.1-405b:free"
@@ -630,11 +464,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1000000
-reasoning_efforts = [
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "high", "max"]
 
 [model."magpie/0xdev/qwen/qwen3-next-80b-a3b-instruct:free"]
 model = "0xdev/qwen/qwen3-next-80b-a3b-instruct:free"
@@ -651,11 +481,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 256000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/0xdev/deepseek-v4-pro"]
 model = "0xdev/deepseek-v4-pro"
@@ -664,11 +490,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1000000
-reasoning_efforts = [
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "high", "max"]
 
 [model."magpie/0xdev/kimi-k2.7-code"]
 model = "0xdev/kimi-k2.7-code"
@@ -685,13 +507,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 922000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/0xdev/kimi-k2.6"]
 model = "0xdev/kimi-k2.6"
@@ -708,11 +524,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 131072
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/0xdev/gemini-3.5-flash-lite"]
 model = "0xdev/gemini-3.5-flash-lite"
@@ -721,12 +533,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "minimal",
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["minimal", "low", "medium", "high"]
 
 [model."magpie/0xdev/gemini-3.1-flash-lite"]
 model = "0xdev/gemini-3.1-flash-lite"
@@ -735,12 +542,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "minimal",
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["minimal", "low", "medium", "high"]
 
 [model."magpie/0xdev/glm-5.2"]
 model = "0xdev/glm-5.2"
@@ -749,10 +551,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1000000
-reasoning_efforts = [
-    "high",
-    "max",
-]
+reasoning_efforts = ["high", "max"]
 
 [model."magpie/0xdev/gemini-3.8-flash"]
 model = "0xdev/gemini-3.8-flash"
@@ -761,11 +560,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/0xdev/tencent/hy3:free"]
 model = "0xdev/tencent/hy3:free"
@@ -774,11 +569,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 192000
-reasoning_efforts = [
-    "none",
-    "low",
-    "high",
-]
+reasoning_efforts = ["none", "low", "high"]
 
 [model."magpie/0xdev/kimi-k3"]
 model = "0xdev/kimi-k3"
@@ -787,11 +578,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "high", "max"]
 
 [model."magpie/0xdev/minimax-m2.7"]
 model = "0xdev/minimax-m2.7"
@@ -807,11 +594,7 @@ name = "gemini-3.8-flash-high · 0xdev"
 base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/0xdev/gpt-oss-120b-medium"]
 model = "0xdev/gpt-oss-120b-medium"
@@ -819,11 +602,7 @@ name = "gpt-oss-120b-medium · 0xdev"
 base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/0xdev/grok-4.20-0309-reasoning"]
 model = "0xdev/grok-4.20-0309-reasoning"
@@ -832,12 +611,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1000000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh"]
 
 [model."magpie/0xdev/openai/gpt-oss-120b"]
 model = "0xdev/openai/gpt-oss-120b"
@@ -846,11 +620,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 131072
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/0xdev/openrouter/free"]
 model = "0xdev/openrouter/free"
@@ -867,11 +637,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 131072
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/0xdev/step-3.5-flash"]
 model = "0xdev/step-3.5-flash"
@@ -880,10 +646,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 256000
-reasoning_efforts = [
-    "low",
-    "high",
-]
+reasoning_efforts = ["low", "high"]
 
 [model."magpie/0xdev/kimi-for-coding"]
 model = "0xdev/kimi-for-coding"
@@ -892,12 +655,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "none",
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["none", "low", "high", "max"]
 
 [model."magpie/0xdev/gpt-6-astra"]
 model = "0xdev/gpt-6-astra"
@@ -906,13 +664,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 922000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/0xdev/gpt-6-sol"]
 model = "0xdev/gpt-6-sol"
@@ -921,14 +673,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 922000
-reasoning_efforts = [
-    "none",
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["none", "low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/0xdev/deepseek-flash"]
 model = "0xdev/deepseek-flash"
@@ -937,11 +682,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1000000
-reasoning_efforts = [
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "high", "max"]
 
 [model."magpie/0xdev/gpt-6-luna"]
 model = "0xdev/gpt-6-luna"
@@ -950,14 +691,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 922000
-reasoning_efforts = [
-    "none",
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["none", "low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/0xdev/grok-3-mini-fast"]
 model = "0xdev/grok-3-mini-fast"
@@ -965,11 +699,7 @@ name = "grok-3-mini-fast · 0xdev"
 base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/0xdev/kimi-for-coding-highspeed"]
 model = "0xdev/kimi-for-coding-highspeed"
@@ -986,11 +716,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1000000
-reasoning_efforts = [
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "high", "max"]
 
 [model."magpie/zai/glm-5.3"]
 model = "zai/glm-5.3"
@@ -999,11 +725,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1000000
-reasoning_efforts = [
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "high", "max"]
 
 [model."magpie/codex/gpt-6.1-sol"]
 model = "codex/gpt-6.1-sol"
@@ -1012,13 +734,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 500000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/codex/gpt-6-astra"]
 model = "codex/gpt-6-astra"
@@ -1027,13 +743,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 272000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/codex/gpt-6.1-terra"]
 model = "codex/gpt-6.1-terra"
@@ -1042,13 +752,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 500000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/codex/gpt-6-sol"]
 model = "codex/gpt-6-sol"
@@ -1057,13 +761,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 272000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/codex/gpt-6-luna"]
 model = "codex/gpt-6-luna"
@@ -1072,13 +770,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 272000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/codex/gpt-5.6-sol"]
 model = "codex/gpt-5.6-sol"
@@ -1087,13 +779,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 272000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/codex/gpt-5.6-terra"]
 model = "codex/gpt-5.6-terra"
@@ -1102,13 +788,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 272000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/codex/gpt-5.6-luna"]
 model = "codex/gpt-5.6-luna"
@@ -1117,13 +797,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 272000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/grok/grok-4.7"]
 model = "grok/grok-4.7"
@@ -1132,12 +806,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 256000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh"]
 
 [model."magpie/grok/grok-4.7@500k"]
 model = "grok/grok-4.7@500k"
@@ -1146,12 +815,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 500000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh"]
 
 [model."magpie/grok/grok-4.7-build-fast"]
 model = "grok/grok-4.7-build-fast"
@@ -1160,12 +824,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 256000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh"]
 
 [model."magpie/grok/grok-4.7-build-fast@500k"]
 model = "grok/grok-4.7-build-fast@500k"
@@ -1174,12 +833,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 500000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh"]
 
 [model."magpie/grok/grok-4.6"]
 model = "grok/grok-4.6"
@@ -1188,12 +842,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 256000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh"]
 
 [model."magpie/grok/grok-4.6@500k"]
 model = "grok/grok-4.6@500k"
@@ -1202,12 +851,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 500000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh"]
 
 [model."magpie/grok/grok-4.5"]
 model = "grok/grok-4.5"
@@ -1216,11 +860,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 256000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/grok/grok-4.5@500k"]
 model = "grok/grok-4.5@500k"
@@ -1229,11 +869,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 500000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/commandcode-plan/deepseek/deepseek-v4.1-flash"]
 model = "commandcode-plan/deepseek/deepseek-v4.1-flash"
@@ -1242,11 +878,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1000000
-reasoning_efforts = [
-    "low",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "high", "max"]
 
 [model."magpie/commandcode-plan/stealth/glyph-cluster:free"]
 model = "commandcode-plan/stealth/glyph-cluster:free"
@@ -1255,12 +887,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 256000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh"]
 
 [model."magpie/commandcode-plan/reflection/beam:free"]
 model = "commandcode-plan/reflection/beam:free"
@@ -1269,13 +896,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "xhigh",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "xhigh", "max"]
 
 [model."magpie/commandcode-plan/poolside/laguna-s-2.1-free"]
 model = "commandcode-plan/poolside/laguna-s-2.1-free"
@@ -1284,11 +905,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 256000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/antigravity/gemini-3.8-flash"]
 model = "antigravity/gemini-3.8-flash"
@@ -1297,11 +914,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/antigravity/claude-sonnet-4-6"]
 model = "antigravity/claude-sonnet-4-6"
@@ -1310,12 +923,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 250000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "max"]
 
 [model."magpie/antigravity/claude-opus-4-6-thinking"]
 model = "antigravity/claude-opus-4-6-thinking"
@@ -1324,12 +932,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 250000
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-    "max",
-]
+reasoning_efforts = ["low", "medium", "high", "max"]
 
 [model."magpie/antigravity/gpt-oss-120b-medium"]
 model = "antigravity/gpt-oss-120b-medium"
@@ -1338,11 +941,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 131072
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
 
 [model."magpie/antigravity/gemini-3.1-flash-image"]
 model = "antigravity/gemini-3.1-flash-image"
@@ -1351,10 +950,7 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 65536
-reasoning_efforts = [
-    "minimal",
-    "high",
-]
+reasoning_efforts = ["minimal", "high"]
 
 [model."magpie/antigravity/gemini-3.8-flash-tiered"]
 model = "antigravity/gemini-3.8-flash-tiered"
@@ -1363,8 +959,4 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 1048576
-reasoning_efforts = [
-    "low",
-    "medium",
-    "high",
-]
+reasoning_efforts = ["low", "medium", "high"]
