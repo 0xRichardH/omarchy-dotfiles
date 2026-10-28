@@ -999,6 +999,176 @@
             }
           }
         },
+        "antigravity/claude-opus-4-6-thinking": {
+          "limit": {
+            "context": 250000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "Claude Opus 4.6 (Thinking) · Antigravity",
+          "reasoning": true,
+          "variants": {
+            "low": {
+              "reasoningEffort": "low"
+            },
+            "medium": {
+              "reasoningEffort": "medium"
+            },
+            "high": {
+              "reasoningEffort": "high"
+            },
+            "max": {
+              "reasoningEffort": "max"
+            }
+          }
+        },
+        "antigravity/claude-sonnet-4-6": {
+          "limit": {
+            "context": 250000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "Claude Sonnet 4.6 (Thinking) · Antigravity",
+          "reasoning": true,
+          "variants": {
+            "low": {
+              "reasoningEffort": "low"
+            },
+            "medium": {
+              "reasoningEffort": "medium"
+            },
+            "high": {
+              "reasoningEffort": "high"
+            },
+            "max": {
+              "reasoningEffort": "max"
+            }
+          }
+        },
+        "antigravity/gemini-3.1-flash-image": {
+          "limit": {
+            "context": 65536,
+            "output": 65536
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "Gemini 3.1 Flash Image · Antigravity",
+          "variants": {
+            "minimal": {
+              "reasoningEffort": "minimal"
+            },
+            "high": {
+              "reasoningEffort": "high"
+            }
+          }
+        },
+        "antigravity/gemini-3.8-flash": {
+          "limit": {
+            "context": 1048576,
+            "output": 65536
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "Gemini 3.8 Flash · Antigravity",
+          "reasoning": true,
+          "variants": {
+            "low": {
+              "reasoningEffort": "low"
+            },
+            "medium": {
+              "reasoningEffort": "medium"
+            },
+            "high": {
+              "reasoningEffort": "high"
+            }
+          }
+        },
+        "antigravity/gemini-3.8-flash-tiered": {
+          "limit": {
+            "context": 1048576,
+            "output": 65536
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "Gemini 3.8 Flash (Tiered) · Antigravity",
+          "reasoning": true,
+          "variants": {
+            "low": {
+              "reasoningEffort": "low"
+            },
+            "medium": {
+              "reasoningEffort": "medium"
+            },
+            "high": {
+              "reasoningEffort": "high"
+            }
+          }
+        },
+        "antigravity/gpt-oss-120b-medium": {
+          "limit": {
+            "context": 131072,
+            "output": 32768
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "GPT-OSS 120B (Medium) · Antigravity",
+          "reasoning": true,
+          "variants": {
+            "low": {
+              "reasoningEffort": "low"
+            },
+            "medium": {
+              "reasoningEffort": "medium"
+            },
+            "high": {
+              "reasoningEffort": "high"
+            }
+          }
+        },
         "auto/beam:free": {
           "limit": {
             "context": 1048576,
@@ -1034,6 +1204,10 @@
           }
         },
         "auto/claude-opus-4-6-thinking": {
+          "limit": {
+            "context": 250000,
+            "output": 64000
+          },
           "modalities": {
             "input": [
               "text",
@@ -1115,68 +1289,6 @@
             },
             "max": {
               "reasoningEffort": "max"
-            }
-          }
-        },
-        "auto/gemini-3.1-flash-lite": {
-          "limit": {
-            "context": 1048576,
-            "output": 65536
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "name": "Gemini 3.1 Flash Lite · routing group",
-          "reasoning": true,
-          "variants": {
-            "minimal": {
-              "reasoningEffort": "minimal"
-            },
-            "low": {
-              "reasoningEffort": "low"
-            },
-            "medium": {
-              "reasoningEffort": "medium"
-            },
-            "high": {
-              "reasoningEffort": "high"
-            }
-          }
-        },
-        "auto/gemini-3.5-flash-lite": {
-          "limit": {
-            "context": 1048576,
-            "output": 65536
-          },
-          "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "name": "Gemini 3.5 Flash Lite · routing group",
-          "reasoning": true,
-          "variants": {
-            "minimal": {
-              "reasoningEffort": "minimal"
-            },
-            "low": {
-              "reasoningEffort": "low"
-            },
-            "medium": {
-              "reasoningEffort": "medium"
-            },
-            "high": {
-              "reasoningEffort": "high"
             }
           }
         },
@@ -1493,6 +1605,10 @@
           }
         },
         "auto/gpt-oss-120b-medium": {
+          "limit": {
+            "context": 131072,
+            "output": 32768
+          },
           "modalities": {
             "input": [
               "text",
