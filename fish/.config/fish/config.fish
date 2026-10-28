@@ -25,6 +25,5 @@ if test -f "$HOME/.openclaw/completions/openclaw.fish"
     source "$HOME/.openclaw/completions/openclaw.fish"
 end
 
-# >>> grok installer >>>
-fish_add_path $HOME/.grok/bin
-# <<< grok installer <<<
+# grok is installed by mise; the x.ai installer copy in ~/.grok/bin is not on PATH.
+# ~/.grok/bin/grok stays a symlink to the mise install for the magpie grok-auth plugin.
