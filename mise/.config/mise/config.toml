@@ -34,5 +34,5 @@ duckdb = "latest"
 "npm:@moonshot-ai/kimi-code" = "latest"
 "npm:@deepseek-ai/dsh" = "latest"
 awscli = { version = "latest", symlink_bins = "true" }
-"go:github.com/openclaw/gogcli/cmd/gog" = "0.47.1"
+"go:github.com/openclaw/gogcli/cmd/gog" = "latest"
 grok = { version = "latest", lazy = true, auto_update = "4h", minimum_release_age = "0s" }
