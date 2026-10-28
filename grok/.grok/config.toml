@@ -1,5 +1,6 @@
 [cli]
 installer = "internal"
+auto_update = false
 
 [marketplace]
 official_marketplace_auto_installed = true
@@ -19,6 +20,8 @@ theme = "auto"
 screen_mode = "fullscreen"
 show_timeline = true
 tool_call_density = "detailed"
+render_mermaid = "on"
+combine_queued_prompts = false
 
 [consent.answers.enterprise-tos-2026-08]
 version = 1
@@ -62,8 +65,8 @@ enabled = [
 campaigns = false
 
 [models]
-default = "magpie/auto/grok-4.7@500k"
-default_reasoning_effort = "medium"
+default = "magpie/auto/minimax-m3.1-flash"
+default_reasoning_effort = "high"
 
 [model."magpie/auto/minimax-m3"]
 model = "auto/minimax-m3"
@@ -144,6 +147,7 @@ name = "Claude Opus 4.6 (Thinking) · routing group"
 base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
+context_window = 250000
 reasoning_efforts = [
     "low",
     "medium",
@@ -164,34 +168,6 @@ reasoning_efforts = [
     "high",
     "xhigh",
     "max",
-]
-
-[model."magpie/auto/gemini-3.5-flash-lite"]
-model = "auto/gemini-3.5-flash-lite"
-name = "Gemini 3.5 Flash Lite · routing group"
-base_url = "http://127.0.0.1:3425/v1"
-api_key = "magpie"
-api_backend = "chat_completions"
-context_window = 1048576
-reasoning_efforts = [
-    "minimal",
-    "low",
-    "medium",
-    "high",
-]
-
-[model."magpie/auto/gemini-3.1-flash-lite"]
-model = "auto/gemini-3.1-flash-lite"
-name = "Gemini 3.1 Flash Lite · routing group"
-base_url = "http://127.0.0.1:3425/v1"
-api_key = "magpie"
-api_backend = "chat_completions"
-context_window = 1048576
-reasoning_efforts = [
-    "minimal",
-    "low",
-    "medium",
-    "high",
 ]
 
 [model."magpie/auto/gemini-3.8-flash"]
@@ -226,6 +202,7 @@ name = "GPT-OSS 120B (Medium) · routing group"
 base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
+context_window = 131072
 reasoning_efforts = [
     "low",
     "medium",
@@ -1043,13 +1020,13 @@ reasoning_efforts = [
     "max",
 ]
 
-[model."magpie/codex/gpt-6.1-terra"]
-model = "codex/gpt-6.1-terra"
-name = "GPT-6.1 Terra · Codex"
+[model."magpie/codex/gpt-6-astra"]
+model = "codex/gpt-6-astra"
+name = "GPT-6-Astra · Codex"
 base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
-context_window = 500000
+context_window = 272000
 reasoning_efforts = [
     "low",
     "medium",
@@ -1058,13 +1035,13 @@ reasoning_efforts = [
     "max",
 ]
 
-[model."magpie/codex/gpt-6-astra"]
-model = "codex/gpt-6-astra"
-name = "GPT-6-Astra · Codex"
+[model."magpie/codex/gpt-6.1-terra"]
+model = "codex/gpt-6.1-terra"
+name = "GPT-6.1 Terra · Codex"
 base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
-context_window = 272000
+context_window = 500000
 reasoning_efforts = [
     "low",
     "medium",
@@ -1307,6 +1284,85 @@ base_url = "http://127.0.0.1:3425/v1"
 api_key = "magpie"
 api_backend = "chat_completions"
 context_window = 256000
+reasoning_efforts = [
+    "low",
+    "medium",
+    "high",
+]
+
+[model."magpie/antigravity/gemini-3.8-flash"]
+model = "antigravity/gemini-3.8-flash"
+name = "Gemini 3.8 Flash · Antigravity"
+base_url = "http://127.0.0.1:3425/v1"
+api_key = "magpie"
+api_backend = "chat_completions"
+context_window = 1048576
+reasoning_efforts = [
+    "low",
+    "medium",
+    "high",
+]
+
+[model."magpie/antigravity/claude-sonnet-4-6"]
+model = "antigravity/claude-sonnet-4-6"
+name = "Claude Sonnet 4.6 (Thinking) · Antigravity"
+base_url = "http://127.0.0.1:3425/v1"
+api_key = "magpie"
+api_backend = "chat_completions"
+context_window = 250000
+reasoning_efforts = [
+    "low",
+    "medium",
+    "high",
+    "max",
+]
+
+[model."magpie/antigravity/claude-opus-4-6-thinking"]
+model = "antigravity/claude-opus-4-6-thinking"
+name = "Claude Opus 4.6 (Thinking) · Antigravity"
+base_url = "http://127.0.0.1:3425/v1"
+api_key = "magpie"
+api_backend = "chat_completions"
+context_window = 250000
+reasoning_efforts = [
+    "low",
+    "medium",
+    "high",
+    "max",
+]
+
+[model."magpie/antigravity/gpt-oss-120b-medium"]
+model = "antigravity/gpt-oss-120b-medium"
+name = "GPT-OSS 120B (Medium) · Antigravity"
+base_url = "http://127.0.0.1:3425/v1"
+api_key = "magpie"
+api_backend = "chat_completions"
+context_window = 131072
+reasoning_efforts = [
+    "low",
+    "medium",
+    "high",
+]
+
+[model."magpie/antigravity/gemini-3.1-flash-image"]
+model = "antigravity/gemini-3.1-flash-image"
+name = "Gemini 3.1 Flash Image · Antigravity"
+base_url = "http://127.0.0.1:3425/v1"
+api_key = "magpie"
+api_backend = "chat_completions"
+context_window = 65536
+reasoning_efforts = [
+    "minimal",
+    "high",
+]
+
+[model."magpie/antigravity/gemini-3.8-flash-tiered"]
+model = "antigravity/gemini-3.8-flash-tiered"
+name = "Gemini 3.8 Flash (Tiered) · Antigravity"
+base_url = "http://127.0.0.1:3425/v1"
+api_key = "magpie"
+api_backend = "chat_completions"
+context_window = 1048576
 reasoning_efforts = [
     "low",
     "medium",
