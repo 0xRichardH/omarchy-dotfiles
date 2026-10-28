@@ -34,3 +34,4 @@ duckdb = "latest"
 "npm:@moonshot-ai/kimi-code" = "latest"
 "npm:@deepseek-ai/dsh" = "latest"
 awscli = { version = "latest", symlink_bins = "true" }
+"go:github.com/openclaw/gogcli/cmd/gog" = "0.47.1"
